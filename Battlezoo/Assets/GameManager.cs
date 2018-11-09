@@ -13,6 +13,8 @@ public class GameManager : MonoBehaviour {
     public Text AmmoText;
     public Text HealthText;
 
+    public GameObject lines;
+
 	#endregion
 
 	void Start ()
@@ -26,6 +28,24 @@ public class GameManager : MonoBehaviour {
 	{
         HealthText.text = "Health: " + Health;
         AmmoText.text = "Ammunition: " + Ammo;
+
+        //RandomLines();
 	}
+
+    void RandomLines()
+    {
+        int x = 10;
+        if (x > 0)
+        {
+            float width = Random.Range(5f, 35f);
+            float stroke = Random.Range(0.1f, 0.3f);
+            float LinePosY = Random.Range(4, -1);
+            Vector2 linePosition = new Vector2(-6, LinePosY);
+            GameObject newLine = Instantiate(lines, linePosition, this.transform.rotation);
+            newLine.transform.localScale = new Vector3(width, stroke, 1);
+            x++;
+        }
+
+    }
 
 }

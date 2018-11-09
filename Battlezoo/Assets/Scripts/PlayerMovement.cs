@@ -11,6 +11,7 @@ public class PlayerMovement : MonoBehaviour {
 
     public GameObject bullet;
 
+    private Animator anim;
 
 
     #endregion
@@ -18,6 +19,7 @@ public class PlayerMovement : MonoBehaviour {
     void Start ()
 	{
         rBody = this.GetComponent<Rigidbody2D>();
+        anim = this.GetComponent<Animator>();
         
     }
 
@@ -26,9 +28,32 @@ public class PlayerMovement : MonoBehaviour {
         float moveHorizontal = Input.GetAxis("Horizontal");
         float moveVertical = Input.GetAxis("Vertical");
 
-        Vector2 movement = new Vector2(moveHorizontal, moveVertical);
-        rBody.velocity = movement * speed;
+        if (moveHorizontal > 0.0f)
+        {
+            Vector2 movement = new Vector2(moveHorizontal, moveVertical);
+            rBody.velocity = movement * speed;
 
+            Debug.Log("moveHorizontal : " + movement);
+
+            anim.SetBool("IsMovingRight", true);
+
+        }
+        if(moveHorizontal < 0.0f)
+        {
+            Vector2 movement = new Vector2(moveHorizontal, moveVertical);
+            rBody.velocity = movement * speed;
+
+            Debug.Log("moveHorizontal : " + movement);
+
+            anim.SetBool("IsMovingLeft", true);
+        }
+        else
+        {
+            anim.SetBool("IsMovingRight", false);
+            anim.SetBool("IsMovingLeft", false);
+
+
+        }
 
         if ((Input.GetKeyDown(KeyCode.Space)) || (Input.GetButtonDown("Fire1")))
         {
@@ -38,14 +63,9 @@ public class PlayerMovement : MonoBehaviour {
                 Instantiate(bullet, this.transform.position, this.transform.rotation);
                 GameManager.Ammo--;
             }
-
-               
-
-
+           
         }
             
-
-
-	}
+   	}
 
 }
