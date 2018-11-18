@@ -20,6 +20,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4550496953384904}
   - component: {fileID: 212802235344281654}
+  - component: {fileID: 114503520585734522}
+  - component: {fileID: 114189116075665480}
   m_Layer: 0
   m_Name: barrel
   m_TagString: Untagged
@@ -100,6 +102,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4899097892441348}
   - component: {fileID: 95614708848142408}
+  - component: {fileID: 114456877670836374}
   m_Layer: 0
   m_Name: Camel
   m_TagString: Untagged
@@ -185,7 +188,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1597774486907014}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.0912163, y: 1.07, z: 0}
+  m_LocalPosition: {x: 4.5, y: 1.66, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4550496953384904}
@@ -197,8 +200,8 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1024444956566708}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.5417835, y: 2.78, z: -1.297343}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.67, y: 1.95, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4245762689803024}
@@ -268,6 +271,46 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &114189116075665480
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1024444956566708}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebdfe58148f940547a2910019492ee47, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  travelMode: 0
+  fireBarrel: {fileID: 4245762689803024}
+  bullet: {fileID: 1359049200021862, guid: 7673acd67bde0be4facc7fef3558f04d, type: 2}
+--- !u!114 &114456877670836374
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1510925449236270}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 482d46f7280a37c4b8392876d73610e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHp: 100
+  currentHp: 0
+--- !u!114 &114503520585734522
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1024444956566708}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a7a91afce9cd574c9d4fed3e7067f4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minAngle: 0
+  maxAngle: 150
 --- !u!212 &212044095869149734
 SpriteRenderer:
   m_ObjectHideFlags: 1

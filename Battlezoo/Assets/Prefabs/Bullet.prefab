@@ -22,8 +22,8 @@ GameObject:
   - component: {fileID: 212014965732314246}
   - component: {fileID: 50971123557036758}
   - component: {fileID: 61522989473048220}
-  - component: {fileID: 114806799643158476}
   - component: {fileID: 96806480671967672}
+  - component: {fileID: 114657753217089570}
   m_Layer: 0
   m_Name: Bullet
   m_TagString: Untagged
@@ -190,7 +190,7 @@ TrailRenderer:
   m_MinVertexDistance: 0.1
   m_Autodestruct: 1
   m_Emitting: 1
---- !u!114 &114806799643158476
+--- !u!114 &114657753217089570
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -198,10 +198,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1359049200021862}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 74e95ebfdccaf3846880e84e151cba4d, type: 3}
+  m_Script: {fileID: 11500000, guid: 691aef0cbccc5b246b2dfb058bdcbc94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
+  damage: 10
+  maxTravelDistance: 10
+  speed: 5
 --- !u!212 &212014965732314246
 SpriteRenderer:
   m_ObjectHideFlags: 1
