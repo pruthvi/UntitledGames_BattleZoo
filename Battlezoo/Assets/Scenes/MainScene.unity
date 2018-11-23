@@ -6156,6 +6156,12 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 114324838282517218, guid: 64ed0da9eac2f8c4aa889a2d5df552d8,
+        type: 2}
+      propertyPath: bulletPrefab
+      value: 
+      objectReference: {fileID: 1359049200021862, guid: 7673acd67bde0be4facc7fef3558f04d,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 64ed0da9eac2f8c4aa889a2d5df552d8, type: 2}
   m_IsPrefabAsset: 0
@@ -6364,7 +6370,7 @@ GameObject:
   - component: {fileID: 1769817505}
   m_Layer: 9
   m_Name: Platforms
-  m_TagString: Untagged
+  m_TagString: Platform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
