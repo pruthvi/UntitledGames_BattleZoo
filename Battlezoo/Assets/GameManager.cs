@@ -12,8 +12,11 @@ public class GameManager : MonoBehaviour {
 
     public Text AmmoText;
     public Text HealthText;
+    public Text PlayerNameText;
 
     public GameObject lines;
+
+    public string playerName;
 
 	#endregion
 
@@ -28,9 +31,10 @@ public class GameManager : MonoBehaviour {
 	{
         HealthText.text = "Health: " + Health;
         AmmoText.text = "Ammunition: " + Ammo;
-
+        playerName =  PlayerPrefs.GetString("Player Name", "No Name");
+        PlayerNameText.text = playerName;
         //RandomLines();
-	}
+    }
 
     void RandomLines()
     {

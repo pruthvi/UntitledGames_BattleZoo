@@ -67,6 +67,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4552350879307066}
+  - component: {fileID: 95483293596761586}
   m_Layer: 0
   m_Name: Turtle
   m_TagString: Untagged
@@ -98,7 +99,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1118458473424050}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.1614625, y: 4.1936398, z: 0.048319977}
+  m_LocalPosition: {x: -1.161463, y: 2.7, z: 0.04831998}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4552350879307066}
@@ -111,7 +112,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1735175040454204}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3.3932452, y: -2.875794, z: 0.048319977}
+  m_LocalPosition: {x: -4.17, y: -2.875794, z: 0.048319977}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4552350879307066}
@@ -124,7 +125,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1706973877925294}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.2267547, y: 0.8726493, z: -0.048319977}
+  m_LocalPosition: {x: -1.226755, y: 0.8726493, z: -0.04831998}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4687396782282048}
@@ -141,7 +142,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1030580302366224}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.19196379, y: 0, z: 0.048319977}
+  m_LocalPosition: {x: 0.1919638, y: 0, z: 0.04831998}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4552350879307066}
@@ -154,7 +155,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1393939551355102}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.047635555, y: -2.875794, z: 0.048319977}
+  m_LocalPosition: {x: -0.047635555, y: -2.875794, z: 0.04831998}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4552350879307066}
@@ -169,7 +170,25 @@ Animator:
   m_GameObject: {fileID: 1735175040454204}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 5e63e707eda84094eae31e769fc2fc48, type: 2}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!95 &95483293596761586
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1706973877925294}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 5f9ca150076e2d94d8e60828bf00dfc1, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
