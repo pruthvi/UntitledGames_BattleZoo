@@ -4,15 +4,19 @@ using UnityEngine;
 
 public class CameraFollow : MonoBehaviour {
 
-    public Transform target;
-	
-	// Update is called once per frame
-	void Update () {
+    // Public Varibles
+    public GameObject player;
 
+    // Private Variables
+    private Vector3 offset;         // To store the offset distance between the player and camera
 
-		if(target)
-        {
-            transform.position = Vector3.Lerp(transform.position, target.position, 0.1f) + new Vector3(0, 0, -10);
-        }
-	}
+    private void Start()
+    {
+        offset = transform.position - player.transform.position;
+    }
+
+    void LateUpdate()
+    {
+        transform.position = player.transform.position + offset;
+    }
 }
