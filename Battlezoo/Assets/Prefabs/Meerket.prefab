@@ -83,7 +83,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4071710809825092}
-  - component: {fileID: 95112808211250658}
+  - component: {fileID: 95115948388771924}
+  - component: {fileID: 114072297645889634}
   m_Layer: 0
   m_Name: Meerket
   m_TagString: Untagged
@@ -145,7 +146,7 @@ Transform:
   m_GameObject: {fileID: 1228431491071070}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.5392659, y: 2.3387127, z: -0.19115132}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.27491, y: 0.27491, z: 0.27491}
   m_Children:
   - {fileID: 4604201962215186}
   - {fileID: 4017176023476786}
@@ -220,7 +221,7 @@ Transform:
   m_Father: {fileID: 4071710809825092}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &95112808211250658
+--- !u!95 &95115948388771924
 Animator:
   serializedVersion: 3
   m_ObjectHideFlags: 1
@@ -238,6 +239,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &114072297645889634
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1228431491071070}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a7a91afce9cd574c9d4fed3e7067f4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minAngle: 0
+  maxAngle: 0
 --- !u!212 &212071947933147184
 SpriteRenderer:
   m_ObjectHideFlags: 1
