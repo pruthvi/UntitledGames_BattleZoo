@@ -110,6 +110,7 @@ GameObject:
   - component: {fileID: 50846312750915386}
   - component: {fileID: 114324838282517218}
   - component: {fileID: 114456877670836374}
+  - component: {fileID: 114246316395682880}
   m_Layer: 8
   m_Name: Camel
   m_TagString: Player
@@ -128,7 +129,7 @@ GameObject:
   m_Layer: 8
   m_Name: GroundCheck
   m_TagString: Untagged
-  m_Icon: {fileID: -1412012063857583412, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -760,6 +761,18 @@ MonoBehaviour:
   travelMode: 0
   fireBarrel: {fileID: 4245762689803024}
   bullet: {fileID: 1359049200021862, guid: 7673acd67bde0be4facc7fef3558f04d, type: 2}
+--- !u!114 &114246316395682880
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1510925449236270}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34ab445f4ef038a47a3439fc083290a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameCamera: {fileID: 0}
 --- !u!114 &114324838282517218
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -776,7 +789,7 @@ MonoBehaviour:
     m_Bits: 512
   groundCheck: {fileID: 4169489895014182}
   isGrounded: 0
-  jumpForce: 8
+  jumpForce: 10
   jumpFall: 2.5
   jumpLowFall: 2
   speed: 10

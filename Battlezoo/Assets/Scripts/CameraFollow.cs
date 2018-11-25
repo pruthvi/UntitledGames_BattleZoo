@@ -1,18 +1,24 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class CameraFollow : MonoBehaviour {
 
-    public Transform target;
-	
-	// Update is called once per frame
-	void Update () {
+    // private Varibles
+    private GameObject gameCamera;       // Get the Game camera
 
+    private Vector3 offset;         // To store the offset distance between the player and camera
 
-		if(target)
-        {
-            transform.position = Vector3.Lerp(transform.position, target.position, 0.1f) + new Vector3(0, 0, -10);
-        }
-	}
+    private void Start()
+    {
+        gameCamera = GameObject.FindGameObjectWithTag("MainCamera");    // Assigning MainCamera
+
+        // Focusing the Camera on current Player
+        gameCamera.transform.position = new Vector3(transform.position.x, transform.position.y, gameCamera.transform.position.z);
+
+        offset = gameCamera.transform.position - transform.position;
+    }
+
+    void LateUpdate()
+    {
+        gameCamera.transform.position = transform.position + offset;
+    }
 }

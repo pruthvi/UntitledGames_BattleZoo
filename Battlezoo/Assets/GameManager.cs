@@ -27,6 +27,8 @@ public class GameManager : MonoBehaviour {
 
     public Transform spawnPoint1;
 
+    CameraFollow cameraFollow;         // Getting Instance of CamerFollow Script
+
     #endregion
 
     void Start ()
@@ -72,6 +74,7 @@ public class GameManager : MonoBehaviour {
             case 1:
                 Instantiate(camel, spawnPoint1.transform.position, spawnPoint1.transform.rotation);
 
+                
                 break;
             case 2:
                 Instantiate(chicken, spawnPoint1.transform.position, spawnPoint1.transform.rotation);

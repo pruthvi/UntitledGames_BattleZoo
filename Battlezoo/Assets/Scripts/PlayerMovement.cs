@@ -90,7 +90,7 @@ public class PlayerMovement : MonoBehaviour {
 
 
         // Jump will only work if the Player is on Ground
-        if (Input.GetKeyDown(KeyCode.K) && isGrounded)
+        if (Input.GetKeyDown(KeyCode.W) && isGrounded)
         {
             rBody.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
             isGrounded = false;
