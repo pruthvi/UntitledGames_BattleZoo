@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4550496953384904}
   - component: {fileID: 212802235344281654}
+  - component: {fileID: 95110686288355572}
   - component: {fileID: 114503520585734522}
   - component: {fileID: 114189116075665480}
   - component: {fileID: 60164414078920706}
@@ -729,6 +730,24 @@ PolygonCollider2D:
       - {x: 0.91999996, y: -2.095}
       - {x: 0.91999996, y: -1.685}
       - {x: 0.85999995, y: -1.515}
+--- !u!95 &95110686288355572
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1024444956566708}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: c25c8eb8fbae959478de6c5f1c674422, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!95 &95614708848142408
 Animator:
   serializedVersion: 3
@@ -1039,8 +1058,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -457370767
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300002, guid: e0801e52e9d4202478f5f55cf75fa56b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

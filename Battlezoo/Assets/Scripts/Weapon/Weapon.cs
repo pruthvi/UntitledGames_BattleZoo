@@ -14,9 +14,12 @@ public class Weapon : MonoBehaviour {
     [Header("Bullet Info")]
     public GameObject bullet;
 
+    // Private Variable
+    private Animator anim;
+
 	// Use this for initialization
 	void Start () {
-		
+        anim = gameObject.GetComponent<Animator>();
 	}
 	
 	// Update is called once per frame
@@ -36,6 +39,11 @@ public class Weapon : MonoBehaviour {
                 //    bulletController.ApplyForce(direction * bulletController.speed, 3);
                     break;
             }
+            anim.SetBool("IsFiring", true);
+        }
+        else
+        {
+            anim.SetBool("IsFiring", false);
         }
 	}
 }

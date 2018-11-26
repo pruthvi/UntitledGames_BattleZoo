@@ -30,7 +30,8 @@ public class PlayerMovement : MonoBehaviour {
     private bool isJump;
     private bool isFacingRight;
 
-    public BarrelRotator barrelRotator; // Getting Refernce of BarrekRotator Script
+    [SerializeField]
+    private BarrelRotator barrelRotator; // Getting Refernce of BarrekRotator Script
     #endregion
 
     void Start ()
