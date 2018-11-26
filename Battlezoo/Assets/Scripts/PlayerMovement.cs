@@ -28,14 +28,16 @@ public class PlayerMovement : MonoBehaviour {
     private Rigidbody2D rBody;
     private Animator anim;
     private bool isJump;
+    private bool isFacingRight;
 
-
+    public BarrelRotator barrelRotator; // Getting Refernce of BarrekRotator Script
     #endregion
 
     void Start ()
 	{
         rBody = this.GetComponent<Rigidbody2D>();
         anim = this.GetComponent<Animator>();
+        //barrelRotator = gameObject.GetComponent<BarrelRotator>();
 
     }
 
@@ -87,6 +89,20 @@ public class PlayerMovement : MonoBehaviour {
         Vector3 move = new Vector3(x * speed, rBody.velocity.y, 0.0f);
         rBody.velocity = move;
 
+        Flip(x);    // flipping the Character
+
+
+        // Play the Walking animation if player is moving
+        if(Mathf.Abs(x) > 0.0f)
+        {
+            anim.SetFloat("MovingSpeed", Mathf.Abs(x));
+            
+        }
+        else
+        {
+            anim.SetFloat("MovingSpeed", Mathf.Abs(x));          
+        }
+
 
 
         // Jump will only work if the Player is on Ground
@@ -102,17 +118,17 @@ public class PlayerMovement : MonoBehaviour {
             //Shoot();
         }
 
-       
+
 
         //Flip Side
         //if (x < 0)
         //{
-        //    transform.localRotation = Quaternion.Euler(0, 180, 0);
+        //    //transform.localRotation = Quaternion.Euler(0, 180, 0);
         //}
 
         //else
         //{
-        //    transform.localRotation = Quaternion.Euler(0, 0, 0);
+        //    //transform.localRotation = Quaternion.Euler(0, 0, 0);
         //}
     }
 
@@ -128,6 +144,21 @@ public class PlayerMovement : MonoBehaviour {
         else if (rBody.velocity.y > 0 && !Input.GetKey(KeyCode.K))
         {
             rBody.velocity += Vector2.up * Physics2D.gravity.y * (jumpLowFall - 1) * Time.deltaTime;
+        }
+    }
+
+    // flipping the Character
+    private void Flip(float horizontal)
+    {
+        if(horizontal > 0 & isFacingRight || horizontal < 0 && !isFacingRight)
+        {
+            isFacingRight = !isFacingRight;
+            
+
+            Vector3 theScale = transform.localScale;
+            theScale.x *= -1;
+            transform.localScale = theScale;
+            barrelRotator.isCharacterFlipped = !barrelRotator.isCharacterFlipped;   // flip the Barrel Rotator
         }
     }
 

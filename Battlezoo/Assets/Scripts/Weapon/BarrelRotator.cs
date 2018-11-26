@@ -6,10 +6,21 @@ public class BarrelRotator : MonoBehaviour {
     
     public float minAngle;
     public float maxAngle;
+
+    // Private Variables
+    public bool isCharacterFlipped = true;    // check if Character is Flipped
 	
 	// Update is called once per frame
 	void Update () {
+        //Vector2 direction = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
         Vector2 direction = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+
+        // if Character is Flipped, change the Direction of Barrel rotation
+        if (isCharacterFlipped)
+        {
+            direction = -direction;
+        }
+        
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         Quaternion rotation = Quaternion.AngleAxis(angle, Vector3.forward);
         rotation.eulerAngles = new Vector3(0, 0, Mathf.Clamp(rotation.eulerAngles.z, minAngle, maxAngle));

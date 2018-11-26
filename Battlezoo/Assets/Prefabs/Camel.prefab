@@ -772,7 +772,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34ab445f4ef038a47a3439fc083290a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameCamera: {fileID: 0}
 --- !u!114 &114324838282517218
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -796,6 +795,7 @@ MonoBehaviour:
   bulletPrefab: {fileID: 0}
   _bulletSpeed: 10
   bulletSpawnPoint: {fileID: 0}
+  barrelRotator: {fileID: 114503520585734522}
 --- !u!114 &114456877670836374
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -820,8 +820,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a7a91afce9cd574c9d4fed3e7067f4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minAngle: 0
-  maxAngle: 150
+  minAngle: -20
+  maxAngle: 200
+  isCharacterFlipped: 0
 --- !u!212 &212044095869149734
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -994,7 +995,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -457370767
   m_SortingLayer: 2
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300006, guid: e0801e52e9d4202478f5f55cf75fa56b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
