@@ -108,8 +108,9 @@ GameObject:
   - component: {fileID: 4899097892441348}
   - component: {fileID: 95614708848142408}
   - component: {fileID: 50846312750915386}
-  - component: {fileID: 114324838282517218}
   - component: {fileID: 114456877670836374}
+  - component: {fileID: 114158066531339646}
+  - component: {fileID: 114209195573672090}
   m_Layer: 8
   m_Name: Camel
   m_TagString: Player
@@ -746,6 +747,38 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &114158066531339646
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1510925449236270}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 100
+    i1: 237
+    i2: 13
+    i3: 169
+    i4: 234
+    i5: 194
+    i6: 248
+    i7: 196
+    i8: 170
+    i9: 136
+    i10: 154
+    i11: 45
+    i12: 93
+    i13: 245
+    i14: 82
+    i15: 216
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 0
 --- !u!114 &114189116075665480
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -760,7 +793,7 @@ MonoBehaviour:
   travelMode: 0
   fireBarrel: {fileID: 4245762689803024}
   bullet: {fileID: 1359049200021862, guid: 7673acd67bde0be4facc7fef3558f04d, type: 2}
---- !u!114 &114324838282517218
+--- !u!114 &114209195573672090
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -771,16 +804,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27996aa5c80a18944892e61980483bf7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isFlipped: 0
   whatIsGround:
     serializedVersion: 2
     m_Bits: 512
   groundCheck: {fileID: 4169489895014182}
   isGrounded: 0
-  jumpForce: 8
-  jumpFall: 2.5
-  jumpLowFall: 2
-  speed: 10
-  bulletPrefab: {fileID: 0}
+  jumpForce: 0
+  jumpFall: 0
+  jumpLowFall: 0
+  speed: 2
+  bulletPrefab: {fileID: 1359049200021862, guid: 7673acd67bde0be4facc7fef3558f04d,
+    type: 2}
   _bulletSpeed: 10
   bulletSpawnPoint: {fileID: 0}
 --- !u!114 &114456877670836374
@@ -807,6 +842,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a7a91afce9cd574c9d4fed3e7067f4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerMovement: {fileID: 114209195573672090}
   minAngle: -20
   maxAngle: 200
 --- !u!212 &212044095869149734

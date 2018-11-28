@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 namespace UntitledGames.Lobby
 {
-    public class LobbyMainMenu
+    public class LobbyMainMenu : MonoBehaviour
     {
         public LobbyManager lobbyManager;
 
@@ -24,6 +24,11 @@ namespace UntitledGames.Lobby
             //lobbyManager.DisplayIsConnecting();
 
             //lobbyManager.SetServerInfo("Connecting...", lobbyManager.networkAddress);
+        }
+
+        public void OnClickHost()
+        {
+            lobbyManager.StartHost();
         }
     }
 }

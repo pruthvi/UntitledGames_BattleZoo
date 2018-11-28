@@ -44,9 +44,6 @@ public class BarrelRotator : MonoBehaviour {
             }
         }
 
-        Debug.Log(direction);
-        Debug.Log(angle);
-
         if (playerMovement.isFlipped)
         {
             rotation = Quaternion.Inverse(rotation);
