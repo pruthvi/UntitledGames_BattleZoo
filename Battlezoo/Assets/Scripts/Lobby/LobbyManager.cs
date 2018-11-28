@@ -127,7 +127,10 @@ namespace UntitledGames.Lobby
             {
                 newPanel.gameObject.SetActive(true);
             }
-
+            else
+            {
+                newPanel.gameObject.SetActive(false);
+            }
             currentPanel = newPanel;
         }
 

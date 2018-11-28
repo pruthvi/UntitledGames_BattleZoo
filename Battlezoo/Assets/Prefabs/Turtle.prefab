@@ -68,6 +68,10 @@ GameObject:
   m_Component:
   - component: {fileID: 4552350879307066}
   - component: {fileID: 95483293596761586}
+  - component: {fileID: 114490230012577516}
+  - component: {fileID: 50353239557569694}
+  - component: {fileID: 114046292399189596}
+  - component: {fileID: 114220220802948180}
   m_Layer: 0
   m_Name: Turtle
   m_TagString: Untagged
@@ -161,6 +165,26 @@ Transform:
   m_Father: {fileID: 4552350879307066}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!50 &50353239557569694
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1706973877925294}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!95 &95451769653285294
 Animator:
   serializedVersion: 3
@@ -197,6 +221,75 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &114046292399189596
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1706973877925294}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27996aa5c80a18944892e61980483bf7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isFlipped: 0
+  whatIsGround:
+    serializedVersion: 2
+    m_Bits: 0
+  groundCheck: {fileID: 0}
+  isGrounded: 0
+  jumpForce: 0
+  jumpFall: 0
+  jumpLowFall: 0
+  speed: 2
+  bulletPrefab: {fileID: 0}
+  _bulletSpeed: 10
+  bulletSpawnPoint: {fileID: 0}
+--- !u!114 &114220220802948180
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1706973877925294}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 482d46f7280a37c4b8392876d73610e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHp: 100
+  currentHp: 0
+--- !u!114 &114490230012577516
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1706973877925294}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 58
+    i1: 245
+    i2: 151
+    i3: 160
+    i4: 226
+    i5: 118
+    i6: 234
+    i7: 228
+    i8: 249
+    i9: 37
+    i10: 29
+    i11: 10
+    i12: 217
+    i13: 55
+    i14: 93
+    i15: 40
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 1
 --- !u!212 &212179301427027278
 SpriteRenderer:
   m_ObjectHideFlags: 1

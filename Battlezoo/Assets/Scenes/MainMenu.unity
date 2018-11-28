@@ -655,10 +655,10 @@ RectTransform:
   m_Father: {fileID: 1288573132}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 170, y: -50}
+  m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &244346489
 MonoBehaviour:
@@ -751,7 +751,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterName: Chicken
   description: 
-  playerListIcon: {fileID: 0}
+  playerListIcon: {fileID: 21300000, guid: d8ba52d066453154f87e1045df443f22, type: 3}
   characterSelectionIcon: {fileID: 21300000, guid: d8ba52d066453154f87e1045df443f22,
     type: 3}
   gamePrefab: {fileID: 1800719584108512, guid: 8f55232e59f62f2488a122a3089b7c18, type: 2}
@@ -825,10 +825,10 @@ RectTransform:
   m_Father: {fileID: 1288573132}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 410, y: -50}
+  m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &273577608
 MonoBehaviour:
@@ -921,7 +921,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterName: Turtle
   description: 
-  playerListIcon: {fileID: 0}
+  playerListIcon: {fileID: 21300004, guid: 24c1dc49df025ad4ea9b11436c4983ea, type: 3}
   characterSelectionIcon: {fileID: 21300004, guid: 24c1dc49df025ad4ea9b11436c4983ea,
     type: 3}
   gamePrefab: {fileID: 1706973877925294, guid: 3af597a0e276eae4f9251d0ad9375d28, type: 2}
@@ -1421,10 +1421,10 @@ RectTransform:
   m_Father: {fileID: 1288573132}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 50, y: -50}
+  m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &418601371
 MonoBehaviour:
@@ -1517,7 +1517,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterName: Camel
   description: 
-  playerListIcon: {fileID: 0}
+  playerListIcon: {fileID: 21300000, guid: e0801e52e9d4202478f5f55cf75fa56b, type: 3}
   characterSelectionIcon: {fileID: 21300000, guid: e0801e52e9d4202478f5f55cf75fa56b,
     type: 3}
   gamePrefab: {fileID: 1510925449236270, guid: 64ed0da9eac2f8c4aa889a2d5df552d8, type: 2}
@@ -2042,7 +2042,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_TargetDisplay: 0
 --- !u!224 &787297141
 RectTransform:
@@ -3623,10 +3623,10 @@ RectTransform:
   m_Father: {fileID: 1288573132}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 290, y: -50}
+  m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1436493571
 MonoBehaviour:
@@ -3719,7 +3719,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterName: Meerkat
   description: 
-  playerListIcon: {fileID: 0}
+  playerListIcon: {fileID: 21300000, guid: b1d8ec654e817ce46abbb7150feef8dc, type: 3}
   characterSelectionIcon: {fileID: 21300000, guid: b1d8ec654e817ce46abbb7150feef8dc,
     type: 3}
   gamePrefab: {fileID: 1228431491071070, guid: 37fca3908c9386445babcc1e784af80c, type: 2}

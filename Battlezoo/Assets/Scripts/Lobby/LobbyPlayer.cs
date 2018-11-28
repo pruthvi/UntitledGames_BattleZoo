@@ -7,10 +7,8 @@ namespace UntitledGames.Lobby
 {
     public class LobbyPlayer : NetworkLobbyPlayer
     {
-        static string[] Name = new string[] { "Camel", "Turtle", "Chicken", "Meerkat" };
-
         public InputField inputPlayerName;
-
+        
         public Image playerAvatar;
         public Text playerNameText;
         public Text playerStatusText;
@@ -20,14 +18,15 @@ namespace UntitledGames.Lobby
         //OnMyName function will be invoked on clients when server change the value of playerName
         [SyncVar(hook = "OnMyName")]
         public string playerName = "";
-
         public string defaultName = "";
+        [SyncVar(hook = "OnMyCharacter")]
+        public int characterIndex;
 
         void Start()
         {
             // Get the player list panel and set the ready button
-            btnReady = transform.parent.parent.GetChild(1).GetComponent<Button>();
-      //      playerNameText.text = LobbyManager.instance.
+            
+            //      playerNameText.text = LobbyManager.instance.
         }
 
         public override void OnClientEnterLobby()
@@ -48,11 +47,18 @@ namespace UntitledGames.Lobby
             {
                 SetupOtherPlayer();
             }
+        }
 
-            //setup the player data on UI. The value are SyncVar so the player
-            //will be created with the right value currently on server
-           // OnMyName(playerName);
-           // OnMyColor(playerColor);
+        void SetUpCharacterSelection()
+        {
+            for (int i = 0; i < CharacterSelectionList.instance.characterButtons.Length; i++)
+            {
+                //Prevent from i being changed inside lambda expression
+                int characterIndex = i;
+                Button b = CharacterSelectionList.instance.characterButtons[i];
+                b.onClick.RemoveAllListeners();
+                b.onClick.AddListener(delegate { OnCharacterChanged(characterIndex); });
+            }
         }
 
         public override void OnStartAuthority()
@@ -60,21 +66,16 @@ namespace UntitledGames.Lobby
             base.OnStartAuthority();
 
             //if we return from a game, color of text can still be the one for "Ready"
-            //readyButton.transform.GetChild(0).GetComponent<Text>().color = Color.white;
-
+            //TODO 
+            SetUpCharacterSelection();
             SetupLocalPlayer();
         }
 
         void SetupOtherPlayer()
         {
-            //   nameInput.interactable = false;
-            //    removePlayerButton.interactable = NetworkServer.active;
-
-            //   ChangeReadyButtonColor(NotReadyColor);
-
             //    readyButton.transform.GetChild(0).GetComponent<Text>().text = "...";
             //     readyButton.interactable = false;
-            btnReady = transform.parent.parent.GetChild(1).GetComponent<Button>();
+            btnReady = LobbyManager.instance.playerInfoPanel.readyButton;
             btnReady.onClick.RemoveAllListeners();
             btnReady.onClick.AddListener(OnReadyClicked);
             OnClientReady(false);
@@ -82,8 +83,6 @@ namespace UntitledGames.Lobby
 
         void SetupLocalPlayer()
         {
-            ////     nameInput.interactable = true;
-            //     remoteIcone.gameObject.SetActive(false);
             //     localIcone.gameObject.SetActive(true);
 
             //     CheckRemoveButton();
@@ -111,13 +110,6 @@ namespace UntitledGames.Lobby
             inputPlayerName.onEndEdit.RemoveAllListeners();
             inputPlayerName.onEndEdit.AddListener(OnNameChanged);
 
-            for(int i = 0; i < CharacterSelectionList.instance.characterButtons.Length; i++)
-            {
-                Button b = CharacterSelectionList.instance.characterButtons[i];
-                b.onClick.RemoveAllListeners();
-                b.onClick.AddListener(delegate { OnCharacterChanged(i); });
-            }
-
             //     colorButton.onClick.RemoveAllListeners();
             //     colorButton.onClick.AddListener(OnColorClicked);
 
@@ -130,19 +122,7 @@ namespace UntitledGames.Lobby
         {
             SendReadyToBeginMessage();
         }
-        // ///===== callback from sync var
-
-        // public void OnMyName(string newName)
-        // {
-        //     playerName = newName;
-        //     nameInput.text = playerName;
-        // }
-
-        // public void OnMyColor(Color newColor)
-        // {
-        //     playerColor = newColor;
-        //     colorButton.GetComponent<Image>().color = newColor;
-        // }
+        
 
         // //===== UI Handler
 
@@ -197,11 +177,9 @@ namespace UntitledGames.Lobby
         //====== Server Command
 
         [Command]
-        public void CmdCharacterChange(int characterIndex)
+        public void CmdCharacterChange(int index)
         {
-            Debug.Log(characterIndex);
-         //   CharacterSelectionInfo info = CharacterSelectionList.instance.characters[characterIndex];
-         //   playerAvatar.sprite = info.playerListIcon;
+            characterIndex = index;
         }
 
         [Command]
@@ -217,6 +195,15 @@ namespace UntitledGames.Lobby
             playerName = newName;
             playerNameText.text = playerName;
           //  LobbyManager.instance.playerInfoPanel.playerNameInput.text = playerName;
+        }
+
+        public void OnMyCharacter(int newCharacterIndex)
+        {
+            characterIndex = newCharacterIndex;
+            CharacterSelectionInfo info = CharacterSelectionList.instance.characters[characterIndex];
+            playerAvatar.sprite = info.playerListIcon;
+            LobbyManager.instance.gamePlayerPrefab = info.gamePrefab;
+            //  LobbyManager.instance.playerInfoPanel.playerNameInput.text = playerName;
         }
 
         // ========================

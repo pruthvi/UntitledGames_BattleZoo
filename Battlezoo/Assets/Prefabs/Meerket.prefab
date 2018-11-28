@@ -85,6 +85,10 @@ GameObject:
   - component: {fileID: 4071710809825092}
   - component: {fileID: 95115948388771924}
   - component: {fileID: 114072297645889634}
+  - component: {fileID: 114671617261517004}
+  - component: {fileID: 114432887473014592}
+  - component: {fileID: 50248563654752026}
+  - component: {fileID: 114422181464509508}
   m_Layer: 0
   m_Name: Meerket
   m_TagString: Untagged
@@ -221,6 +225,26 @@ Transform:
   m_Father: {fileID: 4071710809825092}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!50 &50248563654752026
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1228431491071070}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!95 &95115948388771924
 Animator:
   serializedVersion: 3
@@ -250,8 +274,78 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a7a91afce9cd574c9d4fed3e7067f4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerMovement: {fileID: 0}
   minAngle: 0
   maxAngle: 0
+--- !u!114 &114422181464509508
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1228431491071070}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27996aa5c80a18944892e61980483bf7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isFlipped: 0
+  whatIsGround:
+    serializedVersion: 2
+    m_Bits: 0
+  groundCheck: {fileID: 0}
+  isGrounded: 0
+  jumpForce: 0
+  jumpFall: 0
+  jumpLowFall: 0
+  speed: 2
+  bulletPrefab: {fileID: 0}
+  _bulletSpeed: 10
+  bulletSpawnPoint: {fileID: 0}
+--- !u!114 &114432887473014592
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1228431491071070}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 55
+    i1: 252
+    i2: 163
+    i3: 144
+    i4: 140
+    i5: 147
+    i6: 134
+    i7: 68
+    i8: 91
+    i9: 171
+    i10: 204
+    i11: 30
+    i12: 120
+    i13: 74
+    i14: 248
+    i15: 12
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 1
+--- !u!114 &114671617261517004
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1228431491071070}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 482d46f7280a37c4b8392876d73610e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHp: 100
+  currentHp: 0
 --- !u!212 &212071947933147184
 SpriteRenderer:
   m_ObjectHideFlags: 1
