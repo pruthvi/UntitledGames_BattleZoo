@@ -31,6 +31,8 @@ public class GenerateClouds : MonoBehaviour
     public float maxX = 20;
     public float minX= -15;
 
+    public Color col;
+
     #endregion
 
     void Start()
@@ -54,14 +56,12 @@ public class GenerateClouds : MonoBehaviour
             Vector2 position = new Vector2(Random.Range(minX, maxX), Random.Range(minY, maxY));
 
             float scale = Random.Range(minScale, maxScale);
-            // Debug.Log("Random Scale:" + scale);
             GameObject gb = Instantiate(cloud, position, Quaternion.identity);
             gb.transform.localScale = new Vector2(scale, scale);
             gb.AddComponent<FlyingClouds>();
             gb.GetComponent<FlyingClouds>().speed = Random.Range(minSpeed, maxSpeed);
+            gb.GetComponent<FlyingClouds>().col = col;
 
-
-            // Debug.Log("Randomly Scale!");
         }
     }
 

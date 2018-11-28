@@ -573,6 +573,7 @@ MonoBehaviour:
   minY: 0
   maxX: 20
   minX: -15
+  col: {r: 1, g: 1, b: 1, a: 0}
 --- !u!4 &1569675159
 Transform:
   m_ObjectHideFlags: 0
