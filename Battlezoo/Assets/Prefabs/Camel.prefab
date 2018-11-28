@@ -807,8 +807,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a7a91afce9cd574c9d4fed3e7067f4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minAngle: 0
-  maxAngle: 150
+  minAngle: -20
+  maxAngle: 200
 --- !u!212 &212044095869149734
 SpriteRenderer:
   m_ObjectHideFlags: 1

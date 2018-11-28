@@ -603,7 +603,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34ab445f4ef038a47a3439fc083290a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
+  target: {fileID: 724279893}
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
@@ -1024,6 +1024,39 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!1 &724279888 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1510925449236270, guid: 64ed0da9eac2f8c4aa889a2d5df552d8,
+    type: 2}
+  m_PrefabInternal: {fileID: 1417704588}
+--- !u!114 &724279889
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 724279888}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27996aa5c80a18944892e61980483bf7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  whatIsGround:
+    serializedVersion: 2
+    m_Bits: 0
+  groundCheck: {fileID: 0}
+  isGrounded: 0
+  jumpForce: 0
+  jumpFall: 0
+  jumpLowFall: 0
+  speed: 2
+  bulletPrefab: {fileID: 0}
+  _bulletSpeed: 10
+  bulletSpawnPoint: {fileID: 0}
+--- !u!4 &724279893 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4899097892441348, guid: 64ed0da9eac2f8c4aa889a2d5df552d8,
+    type: 2}
+  m_PrefabInternal: {fileID: 1417704588}
 --- !u!1 &738025027
 GameObject:
   m_ObjectHideFlags: 0
@@ -6154,6 +6187,79 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!1001 &1417704588
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4899097892441348, guid: 64ed0da9eac2f8c4aa889a2d5df552d8, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -3.47
+      objectReference: {fileID: 0}
+    - target: {fileID: 4899097892441348, guid: 64ed0da9eac2f8c4aa889a2d5df552d8, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 1.274
+      objectReference: {fileID: 0}
+    - target: {fileID: 4899097892441348, guid: 64ed0da9eac2f8c4aa889a2d5df552d8, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0.19571
+      objectReference: {fileID: 0}
+    - target: {fileID: 4899097892441348, guid: 64ed0da9eac2f8c4aa889a2d5df552d8, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4899097892441348, guid: 64ed0da9eac2f8c4aa889a2d5df552d8, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4899097892441348, guid: 64ed0da9eac2f8c4aa889a2d5df552d8, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4899097892441348, guid: 64ed0da9eac2f8c4aa889a2d5df552d8, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4899097892441348, guid: 64ed0da9eac2f8c4aa889a2d5df552d8, type: 2}
+      propertyPath: m_RootOrder
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 114324838282517218, guid: 64ed0da9eac2f8c4aa889a2d5df552d8,
+        type: 2}
+      propertyPath: whatIsGround.m_Bits
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114324838282517218, guid: 64ed0da9eac2f8c4aa889a2d5df552d8,
+        type: 2}
+      propertyPath: groundCheck
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 114324838282517218, guid: 64ed0da9eac2f8c4aa889a2d5df552d8,
+        type: 2}
+      propertyPath: jumpForce
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114324838282517218, guid: 64ed0da9eac2f8c4aa889a2d5df552d8,
+        type: 2}
+      propertyPath: jumpFall
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114324838282517218, guid: 64ed0da9eac2f8c4aa889a2d5df552d8,
+        type: 2}
+      propertyPath: jumpLowFall
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114324838282517218, guid: 64ed0da9eac2f8c4aa889a2d5df552d8,
+        type: 2}
+      propertyPath: speed
+      value: 2
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 114324838282517218, guid: 64ed0da9eac2f8c4aa889a2d5df552d8, type: 2}
+  m_SourcePrefab: {fileID: 100100000, guid: 64ed0da9eac2f8c4aa889a2d5df552d8, type: 2}
+  m_IsPrefabAsset: 0
 --- !u!1 &1434915395
 GameObject:
   m_ObjectHideFlags: 0

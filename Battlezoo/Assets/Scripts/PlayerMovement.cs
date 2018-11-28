@@ -7,6 +7,7 @@ public class PlayerMovement : MonoBehaviour {
 
     #region Variables
 
+    public bool isFlipped;
     // Public Variables
     [Header("Player")]
     public LayerMask whatIsGround;
@@ -87,7 +88,20 @@ public class PlayerMovement : MonoBehaviour {
         Vector3 move = new Vector3(x * speed, rBody.velocity.y, 0.0f);
         rBody.velocity = move;
 
-
+        if (Input.GetKeyUp(KeyCode.A))
+        {
+            isFlipped = true;
+            Vector3 dir = transform.localScale;
+            dir.x = -Mathf.Abs(transform.localScale.x);
+            transform.localScale = dir;
+        }
+        else if (Input.GetKeyUp(KeyCode.D))
+        {
+            isFlipped = false;
+            Vector3 dir = transform.localScale;
+            dir.x = Mathf.Abs(transform.localScale.x);
+            transform.localScale = dir;
+        }
 
         // Jump will only work if the Player is on Ground
         if (Input.GetKeyDown(KeyCode.K) && isGrounded)
