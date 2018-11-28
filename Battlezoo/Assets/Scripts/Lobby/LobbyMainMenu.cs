@@ -16,7 +16,7 @@ namespace UntitledGames.Lobby
         public void OnClickJoin()
         {
             lobbyManager.SwitchPanel(lobbyPanel);
-
+            
             lobbyManager.networkAddress = ipInput.text;
             lobbyManager.StartClient();
 

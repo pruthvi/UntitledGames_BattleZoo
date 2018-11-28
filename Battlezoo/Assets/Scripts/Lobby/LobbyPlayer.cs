@@ -9,6 +9,8 @@ namespace UntitledGames.Lobby
     {
         static string[] Name = new string[] { "Camel", "Turtle", "Chicken", "Meerkat" };
 
+        public InputField inputPlayerName;
+
         public Image playerAvatar;
         public Text playerNameText;
         public Text playerStatusText;
@@ -16,13 +18,14 @@ namespace UntitledGames.Lobby
         public Button btnReady;
 
         //OnMyName function will be invoked on clients when server change the value of playerName
-      //  [SyncVar(hook = "OnMyName")]
+        [SyncVar(hook = "OnMyName")]
         public string playerName = "";
 
         void Start()
         {
             // Get the player list panel and set the ready button
             btnReady = transform.parent.parent.GetChild(1).GetComponent<Button>();
+      //      playerNameText.text = LobbyManager.instance.
         }
 
         public override void OnClientEnterLobby()
@@ -48,6 +51,16 @@ namespace UntitledGames.Lobby
             //will be created with the right value currently on server
            // OnMyName(playerName);
            // OnMyColor(playerColor);
+        }
+
+        public override void OnStartAuthority()
+        {
+            base.OnStartAuthority();
+
+            //if we return from a game, color of text can still be the one for "Ready"
+            //readyButton.transform.GetChild(0).GetComponent<Text>().color = Color.white;
+
+            SetupLocalPlayer();
         }
 
         void SetupOtherPlayer()
@@ -82,22 +95,22 @@ namespace UntitledGames.Lobby
             //     readyButton.interactable = true;
 
             //     //have to use child count of player prefab already setup as "this.slot" is not set yet
-            //     if (playerName == "")
-            //         CmdNameChanged("Player" + (LobbyPlayerList._instance.playerListContentTransform.childCount - 1));
+            if (playerName == "")
+                CmdNameChanged("Player" + (LobbyPlayerList._instance.playerListContentTransform.childCount - 1));
 
             //     //we switch from simple name display to name input
             //     colorButton.interactable = true;
             //     nameInput.interactable = true;
-
-            //     nameInput.onEndEdit.RemoveAllListeners();
-            //     nameInput.onEndEdit.AddListener(OnNameChanged);
+            inputPlayerName = LobbyManager.instance.playerInfoPanel.playerNameInput;
+            inputPlayerName.onEndEdit.RemoveAllListeners();
+            inputPlayerName.onEndEdit.AddListener(OnNameChanged);
 
             //     colorButton.onClick.RemoveAllListeners();
             //     colorButton.onClick.AddListener(OnColorClicked);
 
-       //     //when OnClientEnterLobby is called, the loval PlayerController is not yet created, so we need to redo that here to disable
-       //     //the add button if we reach maxLocalPlayer. We pass 0, as it was already counted on OnClientEnterLobby
-       //     if (LobbyManager.s_Singleton != null) LobbyManager.s_Singleton.OnPlayersNumberModified(0);
+            //     //when OnClientEnterLobby is called, the loval PlayerController is not yet created, so we need to redo that here to disable
+            //     //the add button if we reach maxLocalPlayer. We pass 0, as it was already counted on OnClientEnterLobby
+            //     if (LobbyManager.s_Singleton != null) LobbyManager.s_Singleton.OnPlayersNumberModified(0);
         }
        
         public void OnReadyClicked()
@@ -166,52 +179,75 @@ namespace UntitledGames.Lobby
         //     CheckRemoveButton();
         // }
 
-        // //====== Server Command
+        public void OnNameChanged(string str)
+        {
+            CmdNameChanged(str);
+        }
 
-        // [Command]
-        // public void CmdColorChange()
-        // {
-        //     int idx = System.Array.IndexOf(Colors, playerColor);
+        //====== Server Command
 
-        //     int inUseIdx = _colorInUse.IndexOf(idx);
+        [Command]
+        public void CmdCharacterChange()
+        {
+            //TODO
+            //int idx = System.Array.IndexOf(Colors, playerColor);
 
-        //     if (idx < 0) idx = 0;
+            //int inUseIdx = _colorInUse.IndexOf(idx);
 
-        //     idx = (idx + 1) % Colors.Length;
+            //if (idx < 0) idx = 0;
 
-        //     bool alreadyInUse = false;
+            //idx = (idx + 1) % Colors.Length;
 
-        //     do
-        //     {
-        //         alreadyInUse = false;
-        //         for (int i = 0; i < _colorInUse.Count; ++i)
-        //         {
-        //             if (_colorInUse[i] == idx)
-        //             {//that color is already in use
-        //                 alreadyInUse = true;
-        //                 idx = (idx + 1) % Colors.Length;
-        //             }
-        //         }
-        //     }
-        //     while (alreadyInUse);
+            //bool alreadyInUse = false;
 
-        //     if (inUseIdx >= 0)
-        //     {//if we already add an entry in the colorTabs, we change it
-        //         _colorInUse[inUseIdx] = idx;
-        //     }
-        //     else
-        //     {//else we add it
-        //         _colorInUse.Add(idx);
-        //     }
+            //do
+            //{
+            //    alreadyInUse = false;
+            //    for (int i = 0; i < _colorInUse.Count; ++i)
+            //    {
+            //        if (_colorInUse[i] == idx)
+            //        {//that color is already in use
+            //            alreadyInUse = true;
+            //            idx = (idx + 1) % Colors.Length;
+            //        }
+            //    }
+            //}
+            //while (alreadyInUse);
 
-        //     playerColor = Colors[idx];
-        // }
+            //if (inUseIdx >= 0)
+            //{//if we already add an entry in the colorTabs, we change it
+            //    _colorInUse[inUseIdx] = idx;
+            //}
+            //else
+            //{//else we add it
+            //    _colorInUse.Add(idx);
+            //}
 
-        // [Command]
-        // public void CmdNameChanged(string name)
-        // {
-        //     playerName = name;
-        // }
+            //playerColor = Colors[idx];
+        }
+
+        [Command]
+        public void CmdNameChanged(string name)
+        {
+            playerName = name;
+        }
+
+        //===== callback from sync var
+
+        public void OnMyName(string newName)
+        {
+            playerName = newName;
+            playerNameText.text = playerName;
+          //  LobbyManager.instance.playerInfoPanel.playerNameInput.text = playerName;
+        }
+
+        //public void OnMyColor(Color newColor)
+        //{
+        //    playerColor = newColor;
+        //    colorButton.GetComponent<Image>().color = newColor;
+        //}
+
+        // ========================
 
         // //Cleanup thing when get destroy (which happen when client kick or disconnect)
         // public void OnDestroy()

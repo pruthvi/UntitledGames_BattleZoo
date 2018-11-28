@@ -17,6 +17,8 @@ namespace UntitledGames.Lobby
         public RectTransform lobbyPanel;
         public CountdownPanel countdownPanel;
 
+        public PlayerInfoPanel playerInfoPanel;
+
         protected RectTransform currentPanel;
 
 
