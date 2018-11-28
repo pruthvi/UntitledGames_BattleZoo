@@ -401,7 +401,8 @@ MonoBehaviour:
   travelMode: 0
   fireBarrel: {fileID: 4005055332126306}
   bullet: {fileID: 1359049200021862, guid: 7673acd67bde0be4facc7fef3558f04d, type: 2}
-  bulletController: {fileID: 0}
+  bulletController: {fileID: 114908760875609908, guid: f0f2d830f95316a4a8a655ac4da13824,
+    type: 2}
 --- !u!114 &114234493557495362
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -441,7 +442,7 @@ MonoBehaviour:
   travelMode: 0
   fireBarrel: {fileID: 4005055332126306}
   bullet: {fileID: 1359049200021862, guid: 7673acd67bde0be4facc7fef3558f04d, type: 2}
-  bulletController: {fileID: 114284516834205804, guid: 7673acd67bde0be4facc7fef3558f04d,
+  bulletController: {fileID: 114908760875609908, guid: f0f2d830f95316a4a8a655ac4da13824,
     type: 2}
 --- !u!114 &114858149505442858
 MonoBehaviour:
