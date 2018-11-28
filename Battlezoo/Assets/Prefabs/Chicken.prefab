@@ -55,7 +55,7 @@ GameObject:
   m_Layer: 0
   m_Name: GroundCheck
   m_TagString: Untagged
-  m_Icon: {fileID: -1412012063857583412, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -122,7 +122,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4007944616802260}
   - component: {fileID: 212143625760260968}
-  - component: {fileID: 60927312455484280}
   - component: {fileID: 114509761575018816}
   - component: {fileID: 114439831412089102}
   m_Layer: 0
@@ -152,7 +151,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1835356614047590}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.67, y: -0.007453918, z: 0.0570273}
+  m_LocalPosition: {x: 0.6700003, y: -0.007453859, z: 0.057027303}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4005055332126306}
@@ -166,7 +165,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1661236427544030}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.1342322, y: 0.5143113, z: 0.0570273}
+  m_LocalPosition: {x: -0.13423204, y: 0.5143112, z: 0.057027303}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4800836000741798}
@@ -179,7 +178,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1676358981569692}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.33930886, y: -0.9764465, z: 0.0570273}
+  m_LocalPosition: {x: -0.33930898, y: -0.97644657, z: 0.057027303}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4800836000741798}
@@ -192,7 +191,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1159361420515056}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.215, y: -0.9764465, z: 0.0570273}
+  m_LocalPosition: {x: 0.21499991, y: -0.97644657, z: 0.057027303}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4800836000741798}
@@ -204,8 +203,8 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1238402278475768}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -1.6, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: -1.6000001, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4800836000741798}
@@ -317,55 +316,6 @@ PolygonCollider2D:
       - {x: 0.42, y: -0.315}
       - {x: 0.42, y: -0.145}
       - {x: 0.39, y: -0.105}
---- !u!60 &60927312455484280
-PolygonCollider2D:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1835356614047590}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.0757553, y: 0.7008208}
-    oldSize: {x: 2.86, y: 0.51}
-    newSize: {x: 2.86, y: 0.51}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: 2.2933397, y: -0.22741851}
-      - {x: 2.6433399, y: -0.22741851}
-      - {x: 2.6433399, y: 0.04258148}
-      - {x: 2.63334, y: 0.07258148}
-      - {x: 2.5233397, y: 0.05258148}
-      - {x: 2.4633398, y: 0.032581482}
-      - {x: 2.13334, y: -0.057418518}
-      - {x: 1.8533398, y: 0.09258148}
-      - {x: 1.5933398, y: 0.14258148}
-      - {x: 1.2833399, y: 0.15258148}
-      - {x: -0.09666015, y: 0.15258148}
-      - {x: -0.116660155, y: 0.14258148}
-      - {x: -0.21666016, y: -0.047418516}
-      - {x: -0.21666016, y: -0.12741852}
-      - {x: 0.033339843, y: -0.14741851}
-      - {x: -0.006660156, y: -0.22741851}
-      - {x: -0.006660156, y: -0.2574185}
-      - {x: 0.013339844, y: -0.27741852}
-      - {x: 0.20333984, y: -0.30741853}
-      - {x: 0.31333983, y: -0.15741852}
-      - {x: 0.37333983, y: -0.3574185}
-      - {x: 0.80333984, y: -0.3574185}
-      - {x: 0.86333984, y: -0.22741851}
-      - {x: 1.2433398, y: -0.22741851}
-      - {x: 1.7333398, y: -0.19741851}
 --- !u!60 &60964054326318472
 PolygonCollider2D:
   m_ObjectHideFlags: 1
@@ -451,6 +401,7 @@ MonoBehaviour:
   travelMode: 0
   fireBarrel: {fileID: 4005055332126306}
   bullet: {fileID: 1359049200021862, guid: 7673acd67bde0be4facc7fef3558f04d, type: 2}
+  bulletController: {fileID: 0}
 --- !u!114 &114234493557495362
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -473,8 +424,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a7a91afce9cd574c9d4fed3e7067f4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minAngle: -10
-  maxAngle: 30
+  minAngle: -50
+  maxAngle: 60
   isCharacterFlipped: 0
 --- !u!114 &114509761575018816
 MonoBehaviour:
@@ -490,6 +441,8 @@ MonoBehaviour:
   travelMode: 0
   fireBarrel: {fileID: 4005055332126306}
   bullet: {fileID: 1359049200021862, guid: 7673acd67bde0be4facc7fef3558f04d, type: 2}
+  bulletController: {fileID: 114284516834205804, guid: 7673acd67bde0be4facc7fef3558f04d,
+    type: 2}
 --- !u!114 &114858149505442858
 MonoBehaviour:
   m_ObjectHideFlags: 1

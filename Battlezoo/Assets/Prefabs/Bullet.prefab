@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 50971123557036758}
   - component: {fileID: 61522989473048220}
   - component: {fileID: 96806480671967672}
-  - component: {fileID: 114657753217089570}
+  - component: {fileID: 114284516834205804}
   m_Layer: 0
   m_Name: Bullet
   m_TagString: Untagged
@@ -190,7 +190,7 @@ TrailRenderer:
   m_MinVertexDistance: 0.1
   m_Autodestruct: 1
   m_Emitting: 1
---- !u!114 &114657753217089570
+--- !u!114 &114284516834205804
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -202,8 +202,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 10
-  maxTravelDistance: 10
-  speed: 5
+  maxTravelDistance: 15
+  speed: 15
+  _bulletCount: 0
+  _maxAmmo: 6
+  _canShootBullet: 1
+  _bulletReloadTime: 3
 --- !u!212 &212014965732314246
 SpriteRenderer:
   m_ObjectHideFlags: 1
