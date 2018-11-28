@@ -21,6 +21,8 @@ namespace UntitledGames.Lobby
         [SyncVar(hook = "OnMyName")]
         public string playerName = "";
 
+        public string defaultName = "";
+
         void Start()
         {
             // Get the player list panel and set the ready button
@@ -96,7 +98,11 @@ namespace UntitledGames.Lobby
 
             //     //have to use child count of player prefab already setup as "this.slot" is not set yet
             if (playerName == "")
-                CmdNameChanged("Player" + (LobbyPlayerList._instance.playerListContentTransform.childCount - 1));
+            {
+                defaultName = "Player " + (LobbyPlayerList._instance.playerListContentTransform.childCount);
+                CmdNameChanged(defaultName);
+            }
+                
 
             //     //we switch from simple name display to name input
             //     colorButton.interactable = true;
@@ -104,6 +110,13 @@ namespace UntitledGames.Lobby
             inputPlayerName = LobbyManager.instance.playerInfoPanel.playerNameInput;
             inputPlayerName.onEndEdit.RemoveAllListeners();
             inputPlayerName.onEndEdit.AddListener(OnNameChanged);
+
+            for(int i = 0; i < CharacterSelectionList.instance.characterButtons.Length; i++)
+            {
+                Button b = CharacterSelectionList.instance.characterButtons[i];
+                b.onClick.RemoveAllListeners();
+                b.onClick.AddListener(delegate { OnCharacterChanged(i); });
+            }
 
             //     colorButton.onClick.RemoveAllListeners();
             //     colorButton.onClick.AddListener(OnColorClicked);
@@ -135,19 +148,21 @@ namespace UntitledGames.Lobby
 
         // //Note that those handler use Command function, as we need to change the value on the server not locally
         // //so that all client get the new value throught syncvar
-        // public void OnColorClicked()
-        // {
-        //     CmdColorChange();
-        // }
+        public void OnCharacterChanged(int characterIndex)
+        {
+            CmdCharacterChange(characterIndex);
+        }
+        
+        public void OnNameChanged(string str)
+        {
+            if (str.Equals(""))
+                str = defaultName;
+            CmdNameChanged(str);
+        }
 
         // public void OnReadyClicked()
         // {
         //     SendReadyToBeginMessage();
-        // }
-
-        // public void OnNameChanged(string str)
-        // {
-        //     CmdNameChanged(str);
         // }
 
         public override void OnClientReady(bool readyState)
@@ -179,51 +194,14 @@ namespace UntitledGames.Lobby
         //     CheckRemoveButton();
         // }
 
-        public void OnNameChanged(string str)
-        {
-            CmdNameChanged(str);
-        }
-
         //====== Server Command
 
         [Command]
-        public void CmdCharacterChange()
+        public void CmdCharacterChange(int characterIndex)
         {
-            //TODO
-            //int idx = System.Array.IndexOf(Colors, playerColor);
-
-            //int inUseIdx = _colorInUse.IndexOf(idx);
-
-            //if (idx < 0) idx = 0;
-
-            //idx = (idx + 1) % Colors.Length;
-
-            //bool alreadyInUse = false;
-
-            //do
-            //{
-            //    alreadyInUse = false;
-            //    for (int i = 0; i < _colorInUse.Count; ++i)
-            //    {
-            //        if (_colorInUse[i] == idx)
-            //        {//that color is already in use
-            //            alreadyInUse = true;
-            //            idx = (idx + 1) % Colors.Length;
-            //        }
-            //    }
-            //}
-            //while (alreadyInUse);
-
-            //if (inUseIdx >= 0)
-            //{//if we already add an entry in the colorTabs, we change it
-            //    _colorInUse[inUseIdx] = idx;
-            //}
-            //else
-            //{//else we add it
-            //    _colorInUse.Add(idx);
-            //}
-
-            //playerColor = Colors[idx];
+            Debug.Log(characterIndex);
+         //   CharacterSelectionInfo info = CharacterSelectionList.instance.characters[characterIndex];
+         //   playerAvatar.sprite = info.playerListIcon;
         }
 
         [Command]
@@ -241,12 +219,6 @@ namespace UntitledGames.Lobby
           //  LobbyManager.instance.playerInfoPanel.playerNameInput.text = playerName;
         }
 
-        //public void OnMyColor(Color newColor)
-        //{
-        //    playerColor = newColor;
-        //    colorButton.GetComponent<Image>().color = newColor;
-        //}
-
         // ========================
 
         // //Cleanup thing when get destroy (which happen when client kick or disconnect)
@@ -254,7 +226,6 @@ namespace UntitledGames.Lobby
         // {
         //     LobbyPlayerList._instance.RemovePlayer(this);
         //     if (LobbyManager.s_Singleton != null) LobbyManager.s_Singleton.OnPlayersNumberModified(-1);
-
         //     int idx = System.Array.IndexOf(Colors, playerColor);
 
         //     if (idx < 0)

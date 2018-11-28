@@ -632,6 +632,7 @@ GameObject:
   - component: {fileID: 244346491}
   - component: {fileID: 244346490}
   - component: {fileID: 244346489}
+  - component: {fileID: 244346492}
   m_Layer: 5
   m_Name: Chicken
   m_TagString: Untagged
@@ -654,10 +655,10 @@ RectTransform:
   m_Father: {fileID: 1288573132}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 170, y: -50}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &244346489
 MonoBehaviour:
@@ -721,7 +722,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: d8ba52d066453154f87e1045df443f22, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -737,6 +738,23 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 244346487}
   m_CullTransparentMesh: 0
+--- !u!114 &244346492
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 244346487}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 857793eac69701747abe7e047df6abdb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterName: Chicken
+  description: 
+  playerListIcon: {fileID: 0}
+  characterSelectionIcon: {fileID: 21300000, guid: d8ba52d066453154f87e1045df443f22,
+    type: 3}
+  gamePrefab: {fileID: 1800719584108512, guid: 8f55232e59f62f2488a122a3089b7c18, type: 2}
 --- !u!1 &267094012
 GameObject:
   m_ObjectHideFlags: 0
@@ -784,6 +802,7 @@ GameObject:
   - component: {fileID: 273577610}
   - component: {fileID: 273577609}
   - component: {fileID: 273577608}
+  - component: {fileID: 273577611}
   m_Layer: 5
   m_Name: Turtle
   m_TagString: Untagged
@@ -806,10 +825,10 @@ RectTransform:
   m_Father: {fileID: 1288573132}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 410, y: -50}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &273577608
 MonoBehaviour:
@@ -873,7 +892,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300004, guid: 24c1dc49df025ad4ea9b11436c4983ea, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -889,6 +908,23 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 273577606}
   m_CullTransparentMesh: 0
+--- !u!114 &273577611
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 273577606}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 857793eac69701747abe7e047df6abdb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterName: Turtle
+  description: 
+  playerListIcon: {fileID: 0}
+  characterSelectionIcon: {fileID: 21300004, guid: 24c1dc49df025ad4ea9b11436c4983ea,
+    type: 3}
+  gamePrefab: {fileID: 1706973877925294, guid: 3af597a0e276eae4f9251d0ad9375d28, type: 2}
 --- !u!1 &310240141
 GameObject:
   m_ObjectHideFlags: 0
@@ -1362,6 +1398,7 @@ GameObject:
   - component: {fileID: 418601373}
   - component: {fileID: 418601372}
   - component: {fileID: 418601371}
+  - component: {fileID: 418601374}
   m_Layer: 5
   m_Name: Camel
   m_TagString: Untagged
@@ -1384,10 +1421,10 @@ RectTransform:
   m_Father: {fileID: 1288573132}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 50, y: -50}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &418601371
 MonoBehaviour:
@@ -1451,7 +1488,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: e0801e52e9d4202478f5f55cf75fa56b, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1467,6 +1504,23 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 418601369}
   m_CullTransparentMesh: 0
+--- !u!114 &418601374
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 418601369}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 857793eac69701747abe7e047df6abdb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterName: Camel
+  description: 
+  playerListIcon: {fileID: 0}
+  characterSelectionIcon: {fileID: 21300000, guid: e0801e52e9d4202478f5f55cf75fa56b,
+    type: 3}
+  gamePrefab: {fileID: 1510925449236270, guid: 64ed0da9eac2f8c4aa889a2d5df552d8, type: 2}
 --- !u!1 &495062418
 GameObject:
   m_ObjectHideFlags: 0
@@ -1901,7 +1955,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Chicken
+  m_Text: 
 --- !u!222 &750081940
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2985,9 +3039,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Meerkat
-
-'
+  m_Text: 
 --- !u!222 &1192471416
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3233,6 +3285,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1288573132}
   - component: {fileID: 1288573133}
+  - component: {fileID: 1288573134}
   m_Layer: 5
   m_Name: CharacterList
   m_TagString: Untagged
@@ -3287,6 +3340,19 @@ MonoBehaviour:
   m_Spacing: {x: 20, y: 20}
   m_Constraint: 0
   m_ConstraintCount: 2
+--- !u!114 &1288573134
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1288573131}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61390f512fba15646a3030cad213c97a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterButtons: []
+  characters: []
 --- !u!1 &1338713412
 GameObject:
   m_ObjectHideFlags: 0
@@ -3534,6 +3600,7 @@ GameObject:
   - component: {fileID: 1436493573}
   - component: {fileID: 1436493572}
   - component: {fileID: 1436493571}
+  - component: {fileID: 1436493574}
   m_Layer: 5
   m_Name: Meerkat
   m_TagString: Untagged
@@ -3556,10 +3623,10 @@ RectTransform:
   m_Father: {fileID: 1288573132}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 290, y: -50}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1436493571
 MonoBehaviour:
@@ -3623,7 +3690,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: b1d8ec654e817ce46abbb7150feef8dc, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3639,6 +3706,23 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1436493569}
   m_CullTransparentMesh: 0
+--- !u!114 &1436493574
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1436493569}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 857793eac69701747abe7e047df6abdb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterName: Meerkat
+  description: 
+  playerListIcon: {fileID: 0}
+  characterSelectionIcon: {fileID: 21300000, guid: b1d8ec654e817ce46abbb7150feef8dc,
+    type: 3}
+  gamePrefab: {fileID: 1228431491071070, guid: 37fca3908c9386445babcc1e784af80c, type: 2}
 --- !u!1 &1446911097
 GameObject:
   m_ObjectHideFlags: 0
@@ -4454,7 +4538,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Turtle
+  m_Text: 
 --- !u!222 &1952028570
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4606,7 +4690,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Camel
+  m_Text: 
 --- !u!222 &2051870836
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4789,7 +4873,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2146941144
 RectTransform:
   m_ObjectHideFlags: 0
