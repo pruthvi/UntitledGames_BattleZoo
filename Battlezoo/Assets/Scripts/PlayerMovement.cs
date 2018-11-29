@@ -1,13 +1,13 @@
 ﻿/*  Copyright (c) Pruthvi  |  http://pruthv.com  */
 
 using UnityEngine;
+using UnityEngine.Networking;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class PlayerMovement : MonoBehaviour {
+public class PlayerMovement : NetworkBehaviour {
 
     #region Variables
 
-    public bool isFlipped;
     // Public Variables
     [Header("Player")]
     public LayerMask whatIsGround;
@@ -29,14 +29,17 @@ public class PlayerMovement : MonoBehaviour {
     private Rigidbody2D rBody;
     private Animator anim;
     private bool isJump;
+    private bool isFacingRight;
 
-
+    [SerializeField]
+    private BarrelRotator barrelRotator; // Getting Refernce of BarrekRotator Script
     #endregion
 
     void Start ()
 	{
         rBody = this.GetComponent<Rigidbody2D>();
         anim = this.GetComponent<Animator>();
+        //barrelRotator = gameObject.GetComponent<BarrelRotator>();
 
     }
 
@@ -83,28 +86,34 @@ public class PlayerMovement : MonoBehaviour {
 
         //}
 
+        if (!isLocalPlayer)
+        {
+            return;
+        }
+
         // Movement
         float x = Input.GetAxis("Horizontal");
         Vector3 move = new Vector3(x * speed, rBody.velocity.y, 0.0f);
         rBody.velocity = move;
 
-        if (Input.GetKeyUp(KeyCode.A))
+        Flip(x);    // flipping the Character
+
+
+        // Play the Walking animation if player is moving
+        if(Mathf.Abs(x) > 0.0f)
         {
-            isFlipped = true;
-            Vector3 dir = transform.localScale;
-            dir.x = -Mathf.Abs(transform.localScale.x);
-            transform.localScale = dir;
+            anim.SetFloat("MovingSpeed", Mathf.Abs(x));
+            
         }
-        else if (Input.GetKeyUp(KeyCode.D))
+        else
         {
-            isFlipped = false;
-            Vector3 dir = transform.localScale;
-            dir.x = Mathf.Abs(transform.localScale.x);
-            transform.localScale = dir;
+            anim.SetFloat("MovingSpeed", Mathf.Abs(x));          
         }
 
+
+
         // Jump will only work if the Player is on Ground
-        if (Input.GetKeyDown(KeyCode.K) && isGrounded)
+        if (Input.GetKeyDown(KeyCode.W) && isGrounded)
         {
             rBody.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
             isGrounded = false;
@@ -116,17 +125,17 @@ public class PlayerMovement : MonoBehaviour {
             //Shoot();
         }
 
-       
+
 
         //Flip Side
         //if (x < 0)
         //{
-        //    transform.localRotation = Quaternion.Euler(0, 180, 0);
+        //    //transform.localRotation = Quaternion.Euler(0, 180, 0);
         //}
 
         //else
         //{
-        //    transform.localRotation = Quaternion.Euler(0, 0, 0);
+        //    //transform.localRotation = Quaternion.Euler(0, 0, 0);
         //}
     }
 
@@ -142,6 +151,21 @@ public class PlayerMovement : MonoBehaviour {
         else if (rBody.velocity.y > 0 && !Input.GetKey(KeyCode.K))
         {
             rBody.velocity += Vector2.up * Physics2D.gravity.y * (jumpLowFall - 1) * Time.deltaTime;
+        }
+    }
+
+    // flipping the Character
+    private void Flip(float horizontal)
+    {
+        if(horizontal > 0 & isFacingRight || horizontal < 0 && !isFacingRight)
+        {
+            isFacingRight = !isFacingRight;
+            
+
+            Vector3 theScale = transform.localScale;
+            theScale.x *= -1;
+            transform.localScale = theScale;
+            barrelRotator.isCharacterFlipped = !barrelRotator.isCharacterFlipped;   // flip the Barrel Rotator
         }
     }
 

@@ -12,7 +12,7 @@ namespace UntitledGames.Lobby
         static public LobbyManager instance;
 
         [Header("UI Reference")]
-        //public LobbyTopPanel topPanel;
+        public RectTransform background;
         public RectTransform mainMenuPanel;
         public RectTransform lobbyPanel;
         public CountdownPanel countdownPanel;
@@ -133,7 +133,7 @@ namespace UntitledGames.Lobby
             }
             else
             {
-                newPanel.gameObject.SetActive(false);
+                currentPanel.gameObject.SetActive(false);
             }
             currentPanel = newPanel;
         }
@@ -228,6 +228,7 @@ namespace UntitledGames.Lobby
             }
             else
             {
+                background.gameObject.SetActive(false);
                 ServerChangeScene(playScene);
             }
         }

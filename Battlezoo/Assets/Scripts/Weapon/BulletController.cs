@@ -6,18 +6,25 @@ public class BulletController : MonoBehaviour {
 
     public float damage;
     public float maxTravelDistance;
-    public float speed = 1;
+    public float speed = 15;
     private Vector3 startPoint;
 
     private Rigidbody2D rb;
-
     private bool isAddingForce;
     private Vector2 forceToAdd;
+
+    // Bullet
+    [Header("Bullet Reloading")]
+    public int _bulletCount = 0;        // Storing the number of Fire Shoot
+    public int _maxAmmo = 6;           // Total amount of bullets in Magazine
+    public bool _canShootBullet = true;       // Can player shoot the Bullet
+    public float _bulletReloadTime = 5;  // total Time takes to reload the magazine
 
     void Start()
     {
         startPoint = transform.position;
         rb = GetComponent<Rigidbody2D>();
+        _bulletCount = 0;
     }
 
     void Update()
@@ -26,6 +33,8 @@ public class BulletController : MonoBehaviour {
         {
             Destroy(gameObject);
         }
+
+
     }
 
     void FixedUpdate()
@@ -58,4 +67,6 @@ public class BulletController : MonoBehaviour {
         yield return new WaitForSeconds(time);
         isAddingForce = false;
     }
+
+    
 }

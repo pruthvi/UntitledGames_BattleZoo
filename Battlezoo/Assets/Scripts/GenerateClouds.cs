@@ -8,15 +8,12 @@ public class GenerateClouds : MonoBehaviour
     #region Variables
 
     public GameObject cloud;
-
-    
     
     #endregion
 
     void Start()
     {
         CreateCloud();
-
     }
 
     void Update()
@@ -33,6 +30,7 @@ public class GenerateClouds : MonoBehaviour
             float scale = Random.Range(5.0f, 20.0f);
             // Debug.Log("Random Scale:" + scale);
             GameObject gb = Instantiate(cloud, position, Quaternion.identity);
+            gb.transform.SetParent(transform);
             gb.transform.localScale = new Vector2(scale, scale);
             // Debug.Log("Randomly Scale!");
         }

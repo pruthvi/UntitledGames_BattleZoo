@@ -3,29 +3,28 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class BarrelRotator : MonoBehaviour {
-
-    public PlayerMovement playerMovement;
+    
     public float minAngle;
     public float maxAngle;
 
-    private void Start()
-    {
-        
-    }
+    // Private Variables
+    public bool isCharacterFlipped = true;    // check if Character is Flipped
+	
+	// Update is called once per frame
+	void Update () {
 
-    // Update is called once per frame
-    void Update () {
-        if (playerMovement.isFlipped)
+        if (!isCharacterFlipped)
         {
-            RotateBarrel(-1);
+            BarrelRotation(1);
         }
-        else
+
+        if (isCharacterFlipped)
         {
-            RotateBarrel(1);
+            BarrelRotation(-1);
         }
 	}
 
-    private void RotateBarrel(int dir)
+    void BarrelRotation(int dir)
     {
         Vector2 direction = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
         float angle = Mathf.Atan2(direction.y, (dir) * direction.x) * Mathf.Rad2Deg;
@@ -36,19 +35,18 @@ public class BarrelRotator : MonoBehaviour {
         {
             if (direction.x > 0)// if in 4th quadrant
             {
-                rotation.eulerAngles = new Vector3(0, 0, playerMovement.isFlipped ? maxAngle : minAngle);
+                rotation.eulerAngles = new Vector3(0, 0, isCharacterFlipped ? maxAngle : minAngle);
             }
             else if (direction.x < 0)// if in 3rd quadrant
             {
-                rotation.eulerAngles = new Vector3(0, 0, playerMovement.isFlipped ? minAngle : maxAngle);
+                rotation.eulerAngles = new Vector3(0, 0, isCharacterFlipped ? minAngle : maxAngle);
             }
         }
-
-        if (playerMovement.isFlipped)
+        if(dir == -1)
         {
             rotation = Quaternion.Inverse(rotation);
         }
-
         transform.rotation = rotation;
     }
+
 }
