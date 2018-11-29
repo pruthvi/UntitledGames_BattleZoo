@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 0a8ad4b6719ac5b4d9350416aadf16ac
+guid: e0801e52e9d4202478f5f55cf75fa56b
 TextureImporter:
   fileIDToRecycleName:
     21300000: camel
@@ -157,6 +157,7 @@ TextureImporter:
         height: 256
       alignment: 9
       pivot: {x: 0.061613142, y: 0.15817857}
+
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []

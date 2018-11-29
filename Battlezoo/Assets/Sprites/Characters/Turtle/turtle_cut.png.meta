@@ -1,11 +1,10 @@
 fileFormatVersion: 2
-guid: 0a8ad4b6719ac5b4d9350416aadf16ac
+guid: 24c1dc49df025ad4ea9b11436c4983ea
 TextureImporter:
   fileIDToRecycleName:
-    21300000: camel
-    21300002: camel_firebarrel
-    21300004: camel_leg
-    21300006: camel_barrel
+    21300000: turtle_leg
+    21300002: turtle_gun
+    21300004: turtle_body
   externalObjects: {}
   serializedVersion: 7
   mipmaps:
@@ -88,53 +87,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: camel
-      rect:
-        serializedVersion: 2
-        x: 280
-        y: 0
-        width: 1065
-        height: 781
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 4de29f8e75c882f4db9ff0ec2c55d42b
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: camel_firebarrel
-      rect:
-        serializedVersion: 2
-        x: 1578
-        y: 281
-        width: 171
-        height: 105
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 05ea8a7a4332f344c966d08ab34c55f8
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: camel_leg
+      name: turtle_leg
       rect:
         serializedVersion: 2
         x: 0
-        y: 98
-        width: 184
-        height: 441
+        y: 129
+        width: 286
+        height: 215
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -142,27 +101,47 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 43a3412e37597b94c8b4d38590749431
+      spriteID: 2de588ccee64861429c5def37a0a4be1
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: camel_barrel
+      name: turtle_gun
       rect:
         serializedVersion: 2
-        x: 1385
-        y: 524
-        width: 528
-        height: 256
+        x: 415
+        y: 95
+        width: 128
+        height: 420
       alignment: 9
-      pivot: {x: 0.061613142, y: 0.15817857}
+      pivot: {x: 0.49017262, y: 0.0687094}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f866adb7e7deb7d4b823e2ced461d5bd
+      spriteID: c1305219c8fba8d4bb9675d40696b609
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: turtle_body
+      rect:
+        serializedVersion: 2
+        x: 670
+        y: 0
+        width: 1035
+        height: 646
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 18f5b0cc3e86a7249973289f2f7df12c
       vertices: []
       indices: 
       edges: []
@@ -170,7 +149,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 3e4d73c395512e04abebe25115658603
+    spriteID: 6ca49bf2b352fcf4abdbc99aebeda3a8
     vertices: []
     indices: 
     edges: []

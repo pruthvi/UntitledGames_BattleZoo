@@ -1,11 +1,13 @@
 fileFormatVersion: 2
-guid: 0a8ad4b6719ac5b4d9350416aadf16ac
+guid: d8ba52d066453154f87e1045df443f22
 TextureImporter:
   fileIDToRecycleName:
-    21300000: camel
-    21300002: camel_firebarrel
-    21300004: camel_leg
-    21300006: camel_barrel
+    21300000: chicken_body
+    21300002: Chicken_gun_body
+    21300004: chicken_gun_front
+    21300006: Chicken_Gun_redbody
+    21300008: chicken_gun_front_red
+    21300010: Chicken_leg
   externalObjects: {}
   serializedVersion: 7
   mipmaps:
@@ -88,53 +90,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: camel
-      rect:
-        serializedVersion: 2
-        x: 280
-        y: 0
-        width: 1065
-        height: 781
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 4de29f8e75c882f4db9ff0ec2c55d42b
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: camel_firebarrel
-      rect:
-        serializedVersion: 2
-        x: 1578
-        y: 281
-        width: 171
-        height: 105
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 05ea8a7a4332f344c966d08ab34c55f8
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: camel_leg
+      name: chicken_body
       rect:
         serializedVersion: 2
         x: 0
-        y: 98
-        width: 184
-        height: 441
+        y: 26
+        width: 295
+        height: 242
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -142,27 +104,107 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 43a3412e37597b94c8b4d38590749431
+      spriteID: 824bc1f0437a4c442ab1ee82337c17db
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: camel_barrel
+      name: Chicken_gun_body
       rect:
         serializedVersion: 2
-        x: 1385
-        y: 524
-        width: 528
-        height: 256
+        x: 340
+        y: 168
+        width: 286
+        height: 51
       alignment: 9
-      pivot: {x: 0.061613142, y: 0.15817857}
+      pivot: {x: 0.0757553, y: 0.7008208}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f866adb7e7deb7d4b823e2ced461d5bd
+      spriteID: bbb7c013597640e459185f168c632142
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chicken_gun_front
+      rect:
+        serializedVersion: 2
+        x: 632
+        y: 177
+        width: 42
+        height: 20
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 06b33f588f910c543b9de67a82aaa907
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Chicken_Gun_redbody
+      rect:
+        serializedVersion: 2
+        x: 340
+        y: 90
+        width: 286
+        height: 52
+      alignment: 9
+      pivot: {x: 0.0757553, y: 0.7008208}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fb87b3ffdb9da724ea47fd06dc17c28d
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chicken_gun_front_red
+      rect:
+        serializedVersion: 2
+        x: 632
+        y: 99
+        width: 42
+        height: 20
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: de2d82d67499d214a8abb8d263ce778b
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Chicken_leg
+      rect:
+        serializedVersion: 2
+        x: 380
+        y: 0
+        width: 84
+        height: 63
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cc1a3a166441ee345a4ef459f4c04e60
       vertices: []
       indices: 
       edges: []
@@ -170,7 +212,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 3e4d73c395512e04abebe25115658603
+    spriteID: d8a8cbf061fdb7a468f549f3a17e7033
     vertices: []
     indices: 
     edges: []

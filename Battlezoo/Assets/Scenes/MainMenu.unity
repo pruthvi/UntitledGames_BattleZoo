@@ -630,9 +630,9 @@ GameObject:
   m_Component:
   - component: {fileID: 244346488}
   - component: {fileID: 244346491}
+  - component: {fileID: 244346492}
   - component: {fileID: 244346490}
   - component: {fileID: 244346489}
-  - component: {fileID: 244346492}
   m_Layer: 5
   m_Name: Chicken
   m_TagString: Untagged
@@ -655,10 +655,10 @@ RectTransform:
   m_Father: {fileID: 1288573132}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 170, y: -50}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &244346489
 MonoBehaviour:
@@ -751,8 +751,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterName: Chicken
   description: 
-  playerListIcon: {fileID: 21300000, guid: d8ba52d066453154f87e1045df443f22, type: 3}
-  characterSelectionIcon: {fileID: 21300000, guid: d8ba52d066453154f87e1045df443f22,
+  playerListIcon: {fileID: 21300000, guid: 8b55e70e9de2c7b48a46190ad713d83c, type: 3}
+  characterSelectionIcon: {fileID: 21300000, guid: 8b55e70e9de2c7b48a46190ad713d83c,
     type: 3}
   gamePrefab: {fileID: 1800719584108512, guid: 8f55232e59f62f2488a122a3089b7c18, type: 2}
 --- !u!1 &267094012
@@ -800,9 +800,9 @@ GameObject:
   m_Component:
   - component: {fileID: 273577607}
   - component: {fileID: 273577610}
+  - component: {fileID: 273577611}
   - component: {fileID: 273577609}
   - component: {fileID: 273577608}
-  - component: {fileID: 273577611}
   m_Layer: 5
   m_Name: Turtle
   m_TagString: Untagged
@@ -825,10 +825,10 @@ RectTransform:
   m_Father: {fileID: 1288573132}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 410, y: -50}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &273577608
 MonoBehaviour:
@@ -921,8 +921,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterName: Turtle
   description: 
-  playerListIcon: {fileID: 21300004, guid: 24c1dc49df025ad4ea9b11436c4983ea, type: 3}
-  characterSelectionIcon: {fileID: 21300004, guid: 24c1dc49df025ad4ea9b11436c4983ea,
+  playerListIcon: {fileID: 21300000, guid: dea7751879c012145bb6525b2c59c94c, type: 3}
+  characterSelectionIcon: {fileID: 21300000, guid: dea7751879c012145bb6525b2c59c94c,
     type: 3}
   gamePrefab: {fileID: 1706973877925294, guid: 3af597a0e276eae4f9251d0ad9375d28, type: 2}
 --- !u!1 &310240141
@@ -1396,9 +1396,9 @@ GameObject:
   m_Component:
   - component: {fileID: 418601370}
   - component: {fileID: 418601373}
+  - component: {fileID: 418601374}
   - component: {fileID: 418601372}
   - component: {fileID: 418601371}
-  - component: {fileID: 418601374}
   m_Layer: 5
   m_Name: Camel
   m_TagString: Untagged
@@ -1421,10 +1421,10 @@ RectTransform:
   m_Father: {fileID: 1288573132}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 50, y: -50}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &418601371
 MonoBehaviour:
@@ -1517,8 +1517,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterName: Camel
   description: 
-  playerListIcon: {fileID: 21300000, guid: e0801e52e9d4202478f5f55cf75fa56b, type: 3}
-  characterSelectionIcon: {fileID: 21300000, guid: e0801e52e9d4202478f5f55cf75fa56b,
+  playerListIcon: {fileID: 21300000, guid: aae24181333671b45aa2a9e3c3ebcf42, type: 3}
+  characterSelectionIcon: {fileID: 21300000, guid: aae24181333671b45aa2a9e3c3ebcf42,
     type: 3}
   gamePrefab: {fileID: 1510925449236270, guid: 64ed0da9eac2f8c4aa889a2d5df552d8, type: 2}
 --- !u!1 &495062418
@@ -2160,7 +2160,7 @@ MonoBehaviour:
   m_GamePlayerPrefab: {fileID: 1510925449236270, guid: 64ed0da9eac2f8c4aa889a2d5df552d8,
     type: 2}
   m_LobbyScene: MainMenu
-  m_PlayScene: MainScene
+  m_PlayScene: Test
   lobbySlots: []
   mainMenuPanel: {fileID: 407530058}
   lobbyPanel: {fileID: 2146941144}
@@ -3598,9 +3598,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1436493570}
   - component: {fileID: 1436493573}
+  - component: {fileID: 1436493574}
   - component: {fileID: 1436493572}
   - component: {fileID: 1436493571}
-  - component: {fileID: 1436493574}
   m_Layer: 5
   m_Name: Meerkat
   m_TagString: Untagged
@@ -3623,10 +3623,10 @@ RectTransform:
   m_Father: {fileID: 1288573132}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 290, y: -50}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1436493571
 MonoBehaviour:
@@ -3719,8 +3719,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterName: Meerkat
   description: 
-  playerListIcon: {fileID: 21300000, guid: b1d8ec654e817ce46abbb7150feef8dc, type: 3}
-  characterSelectionIcon: {fileID: 21300000, guid: b1d8ec654e817ce46abbb7150feef8dc,
+  playerListIcon: {fileID: 21300000, guid: 17d195650e2be654cb17001e972e8b0f, type: 3}
+  characterSelectionIcon: {fileID: 21300000, guid: 17d195650e2be654cb17001e972e8b0f,
     type: 3}
   gamePrefab: {fileID: 1228431491071070, guid: 37fca3908c9386445babcc1e784af80c, type: 2}
 --- !u!1 &1446911097

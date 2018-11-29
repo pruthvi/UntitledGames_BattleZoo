@@ -1,11 +1,12 @@
 fileFormatVersion: 2
-guid: 0a8ad4b6719ac5b4d9350416aadf16ac
+guid: b1d8ec654e817ce46abbb7150feef8dc
 TextureImporter:
   fileIDToRecycleName:
-    21300000: camel
-    21300002: camel_firebarrel
-    21300004: camel_leg
-    21300006: camel_barrel
+    21300000: meerket_body
+    21300002: meerket_hand
+    21300004: meerket_gun
+    21300006: meerket_leg
+    21300008: meerket_gun_barrel
   externalObjects: {}
   serializedVersion: 7
   mipmaps:
@@ -88,53 +89,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: camel
-      rect:
-        serializedVersion: 2
-        x: 280
-        y: 0
-        width: 1065
-        height: 781
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 4de29f8e75c882f4db9ff0ec2c55d42b
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: camel_firebarrel
-      rect:
-        serializedVersion: 2
-        x: 1578
-        y: 281
-        width: 171
-        height: 105
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 05ea8a7a4332f344c966d08ab34c55f8
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: camel_leg
+      name: meerket_body
       rect:
         serializedVersion: 2
         x: 0
-        y: 98
-        width: 184
-        height: 441
+        y: 0
+        width: 690
+        height: 1234
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -142,27 +103,87 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 43a3412e37597b94c8b4d38590749431
+      spriteID: 476d610c5f9c0fc498b731b486c6007c
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: camel_barrel
+      name: meerket_hand
       rect:
         serializedVersion: 2
-        x: 1385
-        y: 524
-        width: 528
-        height: 256
-      alignment: 9
-      pivot: {x: 0.061613142, y: 0.15817857}
+        x: 875
+        y: 768
+        width: 230
+        height: 353
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f866adb7e7deb7d4b823e2ced461d5bd
+      spriteID: 06616534596ef314b8b9d607f94c440e
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: meerket_gun
+      rect:
+        serializedVersion: 2
+        x: 1238
+        y: 818
+        width: 167
+        height: 298
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 38d1d4524f439524c89bedc8728e47cf
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: meerket_leg
+      rect:
+        serializedVersion: 2
+        x: 860
+        y: 131
+        width: 215
+        height: 534
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 051abc04ebcbc3b4c8602aaa14df0c6e
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: meerket_gun_barrel
+      rect:
+        serializedVersion: 2
+        x: 1234
+        y: 485
+        width: 199
+        height: 93
+      alignment: 9
+      pivot: {x: 0.12633602, y: 0.48049894}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 17a231c1acced5a4fb6f9f924b90abc1
       vertices: []
       indices: 
       edges: []
@@ -170,7 +191,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 3e4d73c395512e04abebe25115658603
+    spriteID: 246489b7f57893847aea6fe8ce034090
     vertices: []
     indices: 
     edges: []
