@@ -11,17 +11,16 @@ namespace UntitledGames.Lobby
         public RectTransform lobbyPanel;
 
         public InputField ipInput;
-        public InputField matchNameInput;
-
-        public Button readyButton;
 
         public void OnClickJoin()
         {
-            lobbyManager.SwitchPanel(lobbyPanel);
+            
             
             lobbyManager.networkAddress = ipInput.text;
+
             lobbyManager.StartClient();
 
+            lobbyManager.SwitchPanel(lobbyPanel);
             //lobbyManager.backDelegate = lobbyManager.StopClientClbk;
             //lobbyManager.DisplayIsConnecting();
 

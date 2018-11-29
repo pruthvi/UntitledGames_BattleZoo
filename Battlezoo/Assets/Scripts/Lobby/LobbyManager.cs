@@ -108,6 +108,7 @@ namespace UntitledGames.Lobby
         public void OnPlayersNumberModified(int count)
         {
             //TODO add this function
+            _playerNumber += count;
         }
 
         public override void OnStartHost()
@@ -137,13 +138,14 @@ namespace UntitledGames.Lobby
             currentPanel = newPanel;
         }
 
-        //we want to disable the button JOIN if we don't have enough player
+        //we want to disable the button Ready if we don't have enough player
         //But OnLobbyClientConnect isn't called on hosting player. So we override the lobbyPlayer creation
         public override GameObject OnLobbyServerCreateLobbyPlayer(NetworkConnection conn, short playerControllerId)
         {
             GameObject obj = Instantiate(lobbyPlayerPrefab.gameObject) as GameObject;
 
             LobbyPlayer newPlayer = obj.GetComponent<LobbyPlayer>();
+            newPlayer.ToggleReadyButton(numPlayers + 1 >= minPlayers);
 
 
             for (int i = 0; i < lobbySlots.Length; ++i)
@@ -152,8 +154,7 @@ namespace UntitledGames.Lobby
 
                 if (p != null)
                 {
-             //       p.RpcUpdateRemoveButton();
-            //        p.ToggleJoinButton(numPlayers + 1 >= minPlayers);
+                    p.ToggleReadyButton(numPlayers + 1 >= minPlayers);
                 }
             }
 
@@ -172,7 +173,11 @@ namespace UntitledGames.Lobby
             }
 
             if (allready)
+            {
+                requestCancelMatch = false;
                 StartCoroutine(ServerCountdownCoroutine());
+            }
+               
         }
 
         public IEnumerator ServerCountdownCoroutine()
@@ -217,15 +222,13 @@ namespace UntitledGames.Lobby
                     (lobbySlots[i] as LobbyPlayer).RpcUpdateCountdown(0);
                 }
             }
-
-            // If cancel match reset isMatchCancelled
-            if (!requestCancelMatch)
+            if (requestCancelMatch)
             {
-                ServerChangeScene(playScene);
+                requestCancelMatch = false;
             }
             else
             {
-                requestCancelMatch = false;
+                ServerChangeScene(playScene);
             }
         }
 

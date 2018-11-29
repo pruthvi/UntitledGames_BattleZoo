@@ -29,6 +29,14 @@ namespace UntitledGames.Lobby
             }
         }
 
+        public void EnableCharacterSelection(bool enable)
+        {
+            for (int i = 0; i < characterButtons.Length; i++)
+            {
+                characterButtons[i].interactable = enable;
+            }
+            LobbyManager.instance.playerInfoPanel.playerNameInput.interactable = enable;
+        }
 
     }
 }

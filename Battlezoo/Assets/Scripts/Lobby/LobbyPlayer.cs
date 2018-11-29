@@ -12,6 +12,7 @@ namespace UntitledGames.Lobby
         public Image playerAvatar;
         public Text playerNameText;
         public Text playerStatusText;
+        public Image localPlayerBackground;
 
         public Button btnReady;
 
@@ -25,8 +26,7 @@ namespace UntitledGames.Lobby
         void Start()
         {
             // Get the player list panel and set the ready button
-            
-            //      playerNameText.text = LobbyManager.instance.
+
         }
 
         public override void OnClientEnterLobby()
@@ -47,6 +47,9 @@ namespace UntitledGames.Lobby
             {
                 SetupOtherPlayer();
             }
+            
+            OnMyName(playerName);
+            OnMyCharacter(0);
         }
 
         void SetUpCharacterSelection()
@@ -66,7 +69,8 @@ namespace UntitledGames.Lobby
             base.OnStartAuthority();
 
             //if we return from a game, color of text can still be the one for "Ready"
-            //TODO 
+            //TODO
+
             SetUpCharacterSelection();
             SetupLocalPlayer();
         }
@@ -75,15 +79,12 @@ namespace UntitledGames.Lobby
         {
             //    readyButton.transform.GetChild(0).GetComponent<Text>().text = "...";
             //     readyButton.interactable = false;
-            btnReady = LobbyManager.instance.playerInfoPanel.readyButton;
-            btnReady.onClick.RemoveAllListeners();
-            btnReady.onClick.AddListener(OnReadyClicked);
             OnClientReady(false);
         }
 
         void SetupLocalPlayer()
         {
-            //     localIcone.gameObject.SetActive(true);
+            localPlayerBackground.gameObject.SetActive(true);
 
             //     CheckRemoveButton();
 
@@ -110,8 +111,15 @@ namespace UntitledGames.Lobby
             inputPlayerName.onEndEdit.RemoveAllListeners();
             inputPlayerName.onEndEdit.AddListener(OnNameChanged);
 
-            //     colorButton.onClick.RemoveAllListeners();
-            //     colorButton.onClick.AddListener(OnColorClicked);
+
+            btnReady = LobbyManager.instance.playerInfoPanel.readyButton;
+            btnReady.onClick.RemoveAllListeners();
+            btnReady.onClick.AddListener(OnReadyClicked);
+
+            //if (LobbyManager.instance.numPlayers + 1 >= LobbyManager.instance.minPlayers)
+            //{
+            //    btnReady.gameObject.SetActive(false);
+            //}
 
             //     //when OnClientEnterLobby is called, the loval PlayerController is not yet created, so we need to redo that here to disable
             //     //the add button if we reach maxLocalPlayer. We pass 0, as it was already counted on OnClientEnterLobby
@@ -120,9 +128,33 @@ namespace UntitledGames.Lobby
        
         public void OnReadyClicked()
         {
-            SendReadyToBeginMessage();
+            // if ready set it to cancel, vice versa
+            if (readyToBegin)
+            {
+                SendNotReadyToBeginMessage();
+                
+                btnReady.transform.GetChild(0).GetComponent<Text>().text = "Ready";
+
+                //Enable character select
+                CharacterSelectionList.instance.EnableCharacterSelection(true);
+            }
+            else
+            {
+                SendReadyToBeginMessage();
+                
+                btnReady.transform.GetChild(0).GetComponent<Text>().text = "Cancel";
+
+                //Disable character select
+                CharacterSelectionList.instance.EnableCharacterSelection(false);
+            }
+            
         }
-        
+
+        public void ToggleReadyButton(bool enabled)
+        {
+            if(btnReady != null)
+                btnReady.gameObject.SetActive(enabled);
+        }
 
         // //===== UI Handler
 
@@ -140,24 +172,18 @@ namespace UntitledGames.Lobby
             CmdNameChanged(str);
         }
 
-        // public void OnReadyClicked()
-        // {
-        //     SendReadyToBeginMessage();
-        // }
-
         public override void OnClientReady(bool readyState)
         {
             if (readyState)
             {
-                Text textComponent = btnReady.transform.GetChild(0).GetComponent<Text>();
                 playerStatusText.text = "Ready";
                 playerStatusText.color = Color.green;
             }
             else
             {
-                Text textComponent = btnReady.transform.GetChild(0).GetComponent<Text>();
                 playerStatusText.text = "Not Ready";
                 playerStatusText.color = Color.red;
+                LobbyManager.instance.requestCancelMatch = true;
             }
         }
 
@@ -167,12 +193,6 @@ namespace UntitledGames.Lobby
             LobbyManager.instance.countdownPanel.UIText.text = "Match Starting in " + countdown;
             LobbyManager.instance.countdownPanel.gameObject.SetActive(countdown != 0);
         }
-
-        // [ClientRpc]
-        // public void RpcUpdateRemoveButton()
-        // {
-        //     CheckRemoveButton();
-        // }
 
         //====== Server Command
 
@@ -194,7 +214,6 @@ namespace UntitledGames.Lobby
         {
             playerName = newName;
             playerNameText.text = playerName;
-          //  LobbyManager.instance.playerInfoPanel.playerNameInput.text = playerName;
         }
 
         public void OnMyCharacter(int newCharacterIndex)
@@ -203,7 +222,6 @@ namespace UntitledGames.Lobby
             CharacterSelectionInfo info = CharacterSelectionList.instance.characters[characterIndex];
             playerAvatar.sprite = info.playerListIcon;
             LobbyManager.instance.gamePlayerPrefab = info.gamePrefab;
-            //  LobbyManager.instance.playerInfoPanel.playerNameInput.text = playerName;
         }
 
         // ========================

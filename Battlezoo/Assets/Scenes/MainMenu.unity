@@ -4982,5 +4982,3 @@ MonoBehaviour:
   lobbyManager: {fileID: 787297142}
   lobbyPanel: {fileID: 2146941144}
   ipInput: {fileID: 839468436}
-  matchNameInput: {fileID: 0}
-  readyButton: {fileID: 0}
