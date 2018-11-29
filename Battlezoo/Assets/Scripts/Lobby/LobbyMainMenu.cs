@@ -13,6 +13,8 @@ namespace UntitledGames.Lobby
         public InputField ipInput;
         public InputField matchNameInput;
 
+        public Button readyButton;
+
         public void OnClickJoin()
         {
             lobbyManager.SwitchPanel(lobbyPanel);

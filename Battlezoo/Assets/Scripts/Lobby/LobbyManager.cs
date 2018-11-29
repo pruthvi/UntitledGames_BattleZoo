@@ -43,6 +43,9 @@ namespace UntitledGames.Lobby
 
         protected LobbyHook _lobbyHooks;
 
+        [HideInInspector]
+        public bool requestCancelMatch;
+
         void Start()
         {
             instance = this;
@@ -179,6 +182,12 @@ namespace UntitledGames.Lobby
 
             while (remainingTime > 0)
             {
+                // Exit
+                if (requestCancelMatch)
+                {
+                    // Break the loop allow the RpcUpdateCountdown to be called, which hide the countdown panel
+                    break;
+                }
                 yield return null;
 
                 remainingTime -= Time.deltaTime;
@@ -195,7 +204,10 @@ namespace UntitledGames.Lobby
                             (lobbySlots[i] as LobbyPlayer).RpcUpdateCountdown(floorTime);
                         }
                     }
+                    
                 }
+
+                
             }
 
             for (int i = 0; i < lobbySlots.Length; ++i)
@@ -206,7 +218,15 @@ namespace UntitledGames.Lobby
                 }
             }
 
-            ServerChangeScene(playScene);
+            // If cancel match reset isMatchCancelled
+            if (!requestCancelMatch)
+            {
+                ServerChangeScene(playScene);
+            }
+            else
+            {
+                requestCancelMatch = false;
+            }
         }
 
     }
