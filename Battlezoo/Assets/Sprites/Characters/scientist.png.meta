@@ -1,9 +1,12 @@
 fileFormatVersion: 2
-guid: 7618d1e1e6e314342a141f2500a0e983
+guid: 61f930aae25b0cb43bd0056a8ab4a0ec
 TextureImporter:
   fileIDToRecycleName:
-    21300000: camel_0
-    21300002: camel_1
+    21300000: scientist_body
+    21300002: scientist_back_hand
+    21300004: scientist_front_hand
+    21300006: scientist_leg
+    21300008: scientist_chemical
   externalObjects: {}
   serializedVersion: 7
   mipmaps:
@@ -86,13 +89,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: camel_0
+      name: scientist_body
       rect:
         serializedVersion: 2
-        x: 21
-        y: 4
-        width: 1069
-        height: 1039
+        x: 0
+        y: 227
+        width: 449
+        height: 1142
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -100,19 +103,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 40e32499abe1ad849981e7cbef89aabe
+      spriteID: 100570f9cf6b71445867eb7cf36eaf5d
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: camel_1
+      name: scientist_back_hand
       rect:
         serializedVersion: 2
-        x: 1110
-        y: 0
-        width: 1069
-        height: 1050
+        x: 576
+        y: 1017
+        width: 351
+        height: 296
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -120,7 +123,67 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: eb802ff571037e94c96b749a5b560306
+      spriteID: e91855c7983f74e4195d829632381f8e
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: scientist_front_hand
+      rect:
+        serializedVersion: 2
+        x: 604
+        y: 580
+        width: 433
+        height: 322
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 30ae7c440312a524291db5ce47af2875
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: scientist_leg
+      rect:
+        serializedVersion: 2
+        x: 585
+        y: 0
+        width: 257
+        height: 507
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0424b498cd8af9a419d03d5033735144
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: scientist_chemical
+      rect:
+        serializedVersion: 2
+        x: 926
+        y: 224
+        width: 150
+        height: 242
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2a03e49727037ad4b8b26e528c860cb8
       vertices: []
       indices: 
       edges: []
@@ -128,7 +191,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 445328a68c5825e409406ef77ca3f692
+    spriteID: f35b4ac90d4ee824f884bccfe65f72bd
     vertices: []
     indices: 
     edges: []
