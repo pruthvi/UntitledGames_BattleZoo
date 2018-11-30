@@ -50,8 +50,15 @@ public class BulletController : MonoBehaviour {
         {
             Stat stat = other.gameObject.GetComponent<Stat>();
             stat.TakeDamage(damage);
+            Destroy(gameObject);
         }
-        Destroy(gameObject);
+        
+
+        if (other.gameObject.tag == "Scientist")
+        {
+            Destroy(this.gameObject);
+            Debug.Log("Scientist Hit");
+        }
     }
 
     public void ApplyForce(Vector2 force, float time)
@@ -67,5 +74,5 @@ public class BulletController : MonoBehaviour {
         isAddingForce = false;
     }
 
-    
+
 }

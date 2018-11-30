@@ -206,7 +206,7 @@ MonoBehaviour:
   speed: 15
   _bulletCount: 0
   _maxAmmo: 6
-  _canShootBullet: 1
+  _canShootBullet: 0
   _bulletReloadTime: 3
 --- !u!212 &212014965732314246
 SpriteRenderer:
