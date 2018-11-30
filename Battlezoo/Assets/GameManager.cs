@@ -26,10 +26,8 @@ public class GameManager : MonoBehaviour {
     public GameObject turtle;
 
     public Transform spawnPoint1;
-
-    CameraFollow cameraFollow;         // Getting Instance of CamerFollow Script
-
     #endregion
+
 
     void Start ()
 	{

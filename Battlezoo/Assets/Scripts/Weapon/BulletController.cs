@@ -13,6 +13,7 @@ public class BulletController : MonoBehaviour {
     private bool isAddingForce;
     private Vector2 forceToAdd;
 
+
     // Bullet
     [Header("Bullet Reloading")]
     public int _bulletCount = 0;        // Storing the number of Fire Shoot
@@ -33,8 +34,6 @@ public class BulletController : MonoBehaviour {
         {
             Destroy(gameObject);
         }
-
-
     }
 
     void FixedUpdate()
