@@ -19,12 +19,14 @@ public class PlayerController : NetworkBehaviour {
     private Rigidbody2D rBody;
     private Animator anim;
     private bool isJump;
-    [SyncVar(hook= "OnCharacterFacing")]
+    
     private bool isFacingRight;
 
     private BarrelRotator barrelRotator;
 
     public Transform character;
+    [SyncVar(hook = "OnCharacterChangeDirection")]
+    private int faceDirection;
 
     // Use this for initialization
     void Start () {
@@ -47,7 +49,16 @@ public class PlayerController : NetworkBehaviour {
         Vector3 move = new Vector3(x * speed, rBody.velocity.y, 0.0f);
         rBody.velocity = move;
 
-        Flip(x);    // flipping the Character
+        if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A))
+        {
+            ChangeDirection(-1);
+        }
+        else if(Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D))
+        {
+            ChangeDirection(1);
+        }
+        
+    //    Flip(x);    // flipping the Character
 
         // Play the Walking animation if player is moving
         if (Mathf.Abs(x) > 0.0f)
@@ -96,7 +107,9 @@ public class PlayerController : NetworkBehaviour {
 
     private void Flip(float horizontal)
     {
+        Debug.Log(isFacingRight);
         bool currentFacingRight = isFacingRight;
+        Debug.Log(currentFacingRight);
         if (currentFacingRight != horizontal < 0)
         {
             OnFacingChanged(horizontal < 0);
@@ -111,29 +124,34 @@ public class PlayerController : NetworkBehaviour {
         //}
     }
 
+    private void ChangeDirection(int dir)
+    {
+        CmdChangeDirection(dir);
+    }
+
     // Local player changed direction, send request to server
     public void OnFacingChanged(bool facingRight)
     {
-        CmdChangeFacing(facingRight);
+ //       CmdChangeFacing(facingRight);
     }
 
     // Server change the value and sync the new facing
     [Command]
-    void CmdChangeFacing(bool newFacing)
+    void CmdChangeDirection(int newDir)
     {
-        isFacingRight = newFacing;
+        faceDirection = newDir;
     }
 
     // Client gets the new facing and update
     /* Call back */
-    public void OnCharacterFacing(bool newFacing)
+    public void OnCharacterChangeDirection(int newDir)
     {
-        isFacingRight = newFacing;
+        faceDirection = newDir;
 
         Vector3 theScale = transform.localScale;
-        theScale.x *= isFacingRight ? -1 : 1;
+        theScale.x = faceDirection * Mathf.Abs(theScale.x);
         transform.localScale = theScale;
-        barrelRotator.isCharacterFlipped = isFacingRight;   // flip the Barrel Rotator
+        barrelRotator.playerDirection = faceDirection;   // flip the Barrel Rotator
     }
 
    

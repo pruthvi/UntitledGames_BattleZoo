@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class BarrelRotator : MonoBehaviour {
+public class BarrelRotator : NetworkBehaviour {
     
     public float minAngle;
     public float maxAngle;
@@ -14,23 +14,20 @@ public class BarrelRotator : MonoBehaviour {
     // Transform of the Barrel;
     public Transform barrel;
 
+    public int playerDirection;
+
     void Start()
     {
     }
 
 	// Update is called once per frame
 	void Update () {
-
-        if (!isCharacterFlipped)
+        if (!hasAuthority)
         {
-            BarrelRotation(1);
+            return;
         }
-
-        if (isCharacterFlipped)
-        {
-            BarrelRotation(-1);
-        }
-	}
+        BarrelRotation(playerDirection);
+    }
 
     void BarrelRotation(int dir)
     {
