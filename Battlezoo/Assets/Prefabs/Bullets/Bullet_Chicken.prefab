@@ -24,6 +24,8 @@ GameObject:
   - component: {fileID: 61613703606458470}
   - component: {fileID: 96430715000123368}
   - component: {fileID: 114908760875609908}
+  - component: {fileID: 114280517090301080}
+  - component: {fileID: 114174680441745874}
   m_Layer: 0
   m_Name: Bullet_Chicken
   m_TagString: Untagged
@@ -190,6 +192,59 @@ TrailRenderer:
   m_MinVertexDistance: 0.1
   m_Autodestruct: 1
   m_Emitting: 1
+--- !u!114 &114174680441745874
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1647177763510814}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1768714887, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_TransformSyncMode: 2
+  m_SendInterval: 0.1
+  m_SyncRotationAxis: 3
+  m_RotationSyncCompression: 0
+  m_SyncSpin: 0
+  m_MovementTheshold: 0.001
+  m_VelocityThreshold: 0.0001
+  m_SnapThreshold: 5
+  m_InterpolateRotation: 1
+  m_InterpolateMovement: 1
+--- !u!114 &114280517090301080
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1647177763510814}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 240
+    i1: 242
+    i2: 216
+    i3: 48
+    i4: 249
+    i5: 83
+    i6: 22
+    i7: 164
+    i8: 168
+    i9: 166
+    i10: 85
+    i11: 172
+    i12: 77
+    i13: 161
+    i14: 56
+    i15: 36
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 0
 --- !u!114 &114908760875609908
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -204,10 +259,10 @@ MonoBehaviour:
   damage: 10
   maxTravelDistance: 15
   speed: 15
-  _bulletCount: 0
+  _bulletCount: 9
   _maxAmmo: 10
   _canShootBullet: 1
-  _bulletReloadTime: 3
+  _bulletReloadTime: 0
 --- !u!212 &212410895755856754
 SpriteRenderer:
   m_ObjectHideFlags: 1

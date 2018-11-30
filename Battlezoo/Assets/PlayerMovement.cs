@@ -37,10 +37,11 @@ public class PlayerMovement : NetworkBehaviour {
 
     void Start ()
 	{
-        rBody = this.GetComponent<Rigidbody2D>();
-        anim = this.GetComponent<Animator>();
-        //barrelRotator = gameObject.GetComponent<BarrelRotator>();
+        // This is the physical charater avatar of the player
+     //   GameObject character = transform.GetChild(0).gameObject;
 
+        rBody = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
     }
 
     void Update()

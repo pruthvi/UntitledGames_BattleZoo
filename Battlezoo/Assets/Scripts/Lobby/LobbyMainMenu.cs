@@ -13,9 +13,7 @@ namespace UntitledGames.Lobby
         public InputField ipInput;
 
         public void OnClickJoin()
-        {
-            
-            
+        {   
             lobbyManager.networkAddress = ipInput.text;
 
             lobbyManager.StartClient();

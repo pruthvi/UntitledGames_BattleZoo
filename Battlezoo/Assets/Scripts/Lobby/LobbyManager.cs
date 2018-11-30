@@ -43,12 +43,17 @@ namespace UntitledGames.Lobby
 
         protected LobbyHook _lobbyHooks;
 
+        private bool isInGame;
+
+        public int characterIndex;
+
         [HideInInspector]
         public bool requestCancelMatch;
 
         void Start()
         {
             instance = this;
+            _lobbyHooks = GetComponent<LobbyHook>();
             currentPanel = mainMenuPanel;
 
             DontDestroyOnLoad(gameObject);
@@ -94,6 +99,7 @@ namespace UntitledGames.Lobby
             }
             else
             {
+                background.gameObject.SetActive(false);
                 SwitchPanel(null);
 
                 //Destroy(GameObject.Find("MainMenuUI(Clone)"));
@@ -160,6 +166,32 @@ namespace UntitledGames.Lobby
 
             return obj;
         }
+
+        public void BackToSetup()
+        {
+            SwitchPanel(mainMenuPanel);
+        }
+
+        public override GameObject OnLobbyServerCreateGamePlayer(NetworkConnection conn, short playerControllerId)
+        {
+            GameObject obj = Instantiate(gamePlayerPrefab.gameObject) as GameObject;
+            
+            return obj;
+        }
+       
+
+        public override bool OnLobbyServerSceneLoadedForPlayer(GameObject lobbyPlayer, GameObject gamePlayer)
+        {
+            //This hook allows you to apply state data from the lobby-player to the game-player
+            if (_lobbyHooks)
+            {
+                _lobbyHooks.OnLobbyServerSceneLoadedForPlayer(this, lobbyPlayer, gamePlayer);
+            }
+               
+
+            return true;
+        }
+
 
         // --- Countdown management
 
@@ -228,7 +260,7 @@ namespace UntitledGames.Lobby
             }
             else
             {
-                background.gameObject.SetActive(false);
+                isInGame = true;
                 ServerChangeScene(playScene);
             }
         }

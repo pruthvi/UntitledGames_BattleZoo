@@ -23,6 +23,8 @@ namespace UntitledGames.Lobby
         [SyncVar(hook = "OnMyCharacter")]
         public int characterIndex;
 
+        private int playerId;
+
         void Start()
         {
             // Get the player list panel and set the ready button
@@ -38,7 +40,6 @@ namespace UntitledGames.Lobby
             }
 
             LobbyPlayerList._instance.AddPlayer(this);
-
             if (isLocalPlayer)
             {
                 SetupLocalPlayer();
@@ -194,8 +195,6 @@ namespace UntitledGames.Lobby
             LobbyManager.instance.countdownPanel.gameObject.SetActive(countdown != 0);
         }
 
-        //====== Server Command
-
         [Command]
         public void CmdCharacterChange(int index)
         {
@@ -218,10 +217,8 @@ namespace UntitledGames.Lobby
 
         public void OnMyCharacter(int newCharacterIndex)
         {
-            characterIndex = newCharacterIndex;
-            CharacterSelectionInfo info = CharacterSelectionList.instance.characters[characterIndex];
+            CharacterSelectionInfo info = CharacterSelectionList.instance.characters[newCharacterIndex];
             playerAvatar.sprite = info.playerListIcon;
-            LobbyManager.instance.gamePlayerPrefab = info.gamePrefab;
         }
 
         // ========================

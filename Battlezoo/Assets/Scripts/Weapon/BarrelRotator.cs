@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
 public class BarrelRotator : MonoBehaviour {
     
@@ -9,7 +10,14 @@ public class BarrelRotator : MonoBehaviour {
 
     // Private Variables
     public bool isCharacterFlipped = true;    // check if Character is Flipped
-	
+
+    // Transform of the Barrel;
+    public Transform barrel;
+
+    void Start()
+    {
+    }
+
 	// Update is called once per frame
 	void Update () {
 
@@ -26,7 +34,7 @@ public class BarrelRotator : MonoBehaviour {
 
     void BarrelRotation(int dir)
     {
-        Vector2 direction = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+        Vector2 direction = Camera.main.ScreenToWorldPoint(Input.mousePosition) - barrel.transform.position;
         float angle = Mathf.Atan2(direction.y, (dir) * direction.x) * Mathf.Rad2Deg;
         Quaternion rotation = Quaternion.AngleAxis(angle, Vector3.forward);
         rotation.eulerAngles = new Vector3(0, 0, Mathf.Clamp(rotation.eulerAngles.z, minAngle, maxAngle));
@@ -46,7 +54,7 @@ public class BarrelRotator : MonoBehaviour {
         {
             rotation = Quaternion.Inverse(rotation);
         }
-        transform.rotation = rotation;
+        barrel.transform.rotation = rotation;
     }
 
 }

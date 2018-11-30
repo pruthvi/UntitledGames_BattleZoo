@@ -12,6 +12,7 @@ namespace UntitledGames.Lobby
 
         protected VerticalLayoutGroup _layout;
         protected List<LobbyPlayer> _players = new List<LobbyPlayer>();
+        protected List<int> _selectedCharacter = new List<int>();
         public void OnEnable()
         {
             _instance = this;
@@ -26,6 +27,7 @@ namespace UntitledGames.Lobby
             }
 
             _players.Add(player);
+            _selectedCharacter.Add(0);
             player.transform.SetParent(playerListContentTransform, false);
 
             //PlayerListModified();
