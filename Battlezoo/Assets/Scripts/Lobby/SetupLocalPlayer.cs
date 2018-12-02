@@ -8,6 +8,9 @@ namespace UntitledGames.Lobby
 {
     public class SetupLocalPlayer : NetworkBehaviour
     {
+        [Header("Selectable Characters")]
+        public CharacterSelectionInfo[] characterList;
+
         [SyncVar]
         public string playerName;
 
@@ -19,7 +22,7 @@ namespace UntitledGames.Lobby
         // Use this for initialization
         void Start()
         {
-            GameObject go = Instantiate(CharacterSelectionList.instance.characters[characterIndex].gamePrefab, transform.position, transform.rotation);
+            GameObject go = Instantiate(characterList[characterIndex].gamePrefab, transform.position, transform.rotation);
             go.transform.parent = transform;
 
             //Set the Camera to follow this player

@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 857793eac69701747abe7e047df6abdb, type: 3}
+  m_Name: Chicken
+  m_EditorClassIdentifier: 
+  characterName: Chicken
+  description: 
+  playerListIcon: {fileID: 21300000, guid: 8b55e70e9de2c7b48a46190ad713d83c, type: 3}
+  characterSelectionIcon: {fileID: 21300000, guid: 8b55e70e9de2c7b48a46190ad713d83c,
+    type: 3}
+  gamePrefab: {fileID: 1800719584108512, guid: 8f55232e59f62f2488a122a3089b7c18, type: 2}

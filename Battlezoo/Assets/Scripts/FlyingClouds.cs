@@ -25,7 +25,7 @@ public class FlyingClouds : MonoBehaviour {
         float speed = Random.Range(0.0f, 2.0f);
         Vector2 movement = new Vector2(-1, 0);
 
-        this.GetComponent<Rigidbody2D>().velocity = movement * speed;
+        rb.velocity = movement * speed;
 
         //        Debug.Log("Cloud Speed :" + speed);
 

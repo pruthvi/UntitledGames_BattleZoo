@@ -107,7 +107,6 @@ GameObject:
   - component: {fileID: 4071710809825092}
   - component: {fileID: 95115948388771924}
   - component: {fileID: 50703984061938510}
-  - component: {fileID: 114725834250785360}
   - component: {fileID: 114056961567042952}
   - component: {fileID: 114786183460643272}
   - component: {fileID: 114923479469754550}
@@ -129,7 +128,7 @@ GameObject:
   m_Layer: 0
   m_Name: Groundcheck
   m_TagString: Untagged
-  m_Icon: {fileID: -1412012063857583412, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -867,30 +866,6 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &114725834250785360
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1228431491071070}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 27996aa5c80a18944892e61980483bf7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  whatIsGround:
-    serializedVersion: 2
-    m_Bits: 512
-  groundCheck: {fileID: 4062565605232412}
-  isGrounded: 0
-  jumpForce: 10
-  jumpFall: 2.5
-  jumpLowFall: 2
-  speed: 10
-  bulletPrefab: {fileID: 0}
-  _bulletSpeed: 10
-  bulletSpawnPoint: {fileID: 0}
-  barrelRotator: {fileID: 0}
 --- !u!114 &114756252869578050
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -988,6 +963,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2778cb38752f1124084eff366d33b5fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterList: []
   playerName: 
   characterIndex: 0
 --- !u!212 &212071947933147184

@@ -30,7 +30,7 @@ namespace UntitledGames.Lobby
             _selectedCharacter.Add(0);
             player.transform.SetParent(playerListContentTransform, false);
 
-            //PlayerListModified();
+            PlayerListModified();
         }
 
         public void PlayerListModified()
@@ -38,9 +38,15 @@ namespace UntitledGames.Lobby
             int i = 0;
             foreach(LobbyPlayer p in _players)
             {
-                //p.OnPlayerListChanged(i);
+                p.OnPlayerListChanged(i);
                 i++;
             }
+        }
+
+        public void RemovePlayer(LobbyPlayer player)
+        {
+            _players.Remove(player);
+            PlayerListModified();
         }
     }
 }

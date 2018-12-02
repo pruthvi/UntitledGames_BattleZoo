@@ -3,9 +3,9 @@ using UnityEngine;
 
 namespace UntitledGames.Lobby
 {
-    public class CharacterSelectionInfo : MonoBehaviour
+    [CreateAssetMenu(fileName = "Character", menuName = "Character/Character", order = 1)]
+    public class CharacterSelectionInfo : ScriptableObject
     {
-
         [Header("Info")]
         public string characterName;
         [TextArea]
@@ -13,13 +13,6 @@ namespace UntitledGames.Lobby
         public Sprite playerListIcon;
         public Sprite characterSelectionIcon;
         public GameObject gamePrefab;
-
-        //Setting Up the UI for this character
-        void Start()
-        {
-            transform.GetChild(0).GetComponent<Text>().text = characterName;
-            transform.GetComponent<Image>().sprite = characterSelectionIcon;
-        }
     }
 }
 

@@ -75,6 +75,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2778cb38752f1124084eff366d33b5fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterList:
+  - {fileID: 11400000, guid: 544bcb1ccbfc4fc4d958eddaddab0a83, type: 2}
+  - {fileID: 11400000, guid: da64d0be6ba102c4b89b315a19fb689a, type: 2}
   playerName: 
   characterIndex: 0
 --- !u!114 &114231554665821976

@@ -18,9 +18,7 @@ public class PlayerController : NetworkBehaviour {
     // Private Variables
     private Rigidbody2D rBody;
     private Animator anim;
-    private bool isJump;
-    
-    private bool isFacingRight;
+    private bool isJumping;
 
     private BarrelRotator barrelRotator;
 
@@ -103,25 +101,6 @@ public class PlayerController : NetworkBehaviour {
         {
             rBody.velocity += Vector2.up * Physics2D.gravity.y * (jumpLowFall - 1) * Time.deltaTime;
         }
-    }
-
-    private void Flip(float horizontal)
-    {
-        Debug.Log(isFacingRight);
-        bool currentFacingRight = isFacingRight;
-        Debug.Log(currentFacingRight);
-        if (currentFacingRight != horizontal < 0)
-        {
-            OnFacingChanged(horizontal < 0);
-        }
-
-       
-        //if (horizontal > 0 & isFacingRight || horizontal < 0 && !isFacingRight)
-        //{
-        //    isFacingRight = !isFacingRight;
-
-        //    OnCharacterFacingChanged(isFacingRight);
-        //}
     }
 
     private void ChangeDirection(int dir)
