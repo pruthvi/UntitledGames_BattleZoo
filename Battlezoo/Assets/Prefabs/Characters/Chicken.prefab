@@ -131,6 +131,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1856439617856004
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4622703060137370}
+  - component: {fileID: 70540162633251552}
+  m_Layer: 0
+  m_Name: PowerUpMagnet
+  m_TagString: PowerUpMagnet
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!4 &4005055332126306
 Transform:
   m_ObjectHideFlags: 1
@@ -197,6 +213,19 @@ Transform:
   m_Father: {fileID: 4800836000741798}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4622703060137370
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1856439617856004}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4800836000741798}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4739526611397822
 Transform:
   m_ObjectHideFlags: 1
@@ -225,6 +254,7 @@ Transform:
   - {fileID: 4546501212409344}
   - {fileID: 4581414286376260}
   - {fileID: 4739526611397822}
+  - {fileID: 4622703060137370}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -369,6 +399,21 @@ PolygonCollider2D:
       - {x: 0.79499996, y: -1.2099999}
       - {x: 1.115, y: -0.93}
       - {x: 1.305, y: -0.17999999}
+--- !u!70 &70540162633251552
+CapsuleCollider2D:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1856439617856004}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 12, y: 3}
+  m_Direction: 1
 --- !u!95 &95061456955091018
 Animator:
   serializedVersion: 3

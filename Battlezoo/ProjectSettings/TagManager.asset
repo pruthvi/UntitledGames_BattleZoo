@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Platform
   - Scientist
+  - PowerUpMagnet
+  - PowerUp
   layers:
   - Default
   - TransparentFX

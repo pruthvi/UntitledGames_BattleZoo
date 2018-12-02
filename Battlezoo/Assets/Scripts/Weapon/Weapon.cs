@@ -12,7 +12,6 @@ public class Weapon : MonoBehaviour {
     public Transform fireBarrel;
 
     [Header("Bullet Info")]
-    private Vector3 bulletStartPoint;
     private int _bulletCount = 0;        // Storing the number of Fire Shoot
     public bool _canShootBullet = true;       // can player shoot the bullet
 
@@ -23,7 +22,6 @@ public class Weapon : MonoBehaviour {
     // Use this for initialization
     void Start () {
         anim = gameObject.GetComponent<Animator>();
-        bulletStartPoint= transform.position;
         _bulletCount = 0;
     }
 	
