@@ -12,15 +12,19 @@ public class Weapon : MonoBehaviour {
     public Transform fireBarrel;
 
     [Header("Bullet Info")]
-    public GameObject bullet;
+    private Vector3 bulletStartPoint;
+    private int _bulletCount = 0;        // Storing the number of Fire Shoot
+    public bool _canShootBullet = true;       // can player shoot the bullet
 
-    // Private Variable
     private Animator anim;
-    public BulletController bulletController;
+    //public BulletController bulletController;
+    public BulletControllerScriptableObject bulletScriptable;
 
     // Use this for initialization
     void Start () {
         anim = gameObject.GetComponent<Animator>();
+        bulletStartPoint= transform.position;
+        _bulletCount = 0;
     }
 	
 	// Update is called once per frame
@@ -30,41 +34,52 @@ public class Weapon : MonoBehaviour {
             Vector2 direction = fireBarrel.position - transform.position;
             float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 
-            if (bulletController._canShootBullet)
+    
+            if (_canShootBullet)
             {
                 // Incrementing the Bullet Fired Counter
-                bulletController._bulletCount++;
-                Debug.Log(bulletController._bulletCount);
+                _bulletCount++;
+                //Debug.Log(bulletController._bulletCount);
 
                 // Check Magazine and Reload, if needed
-                ReloadBullet(bulletController._bulletReloadTime);
+                ReloadBullet(bulletScriptable._bulletReloadTime);
 
                 // Instantiating Bullet in the barrel's direction
-                var objBullet = Instantiate(bullet, fireBarrel.position, Quaternion.AngleAxis(angle, Vector3.forward)) as GameObject;
+                var objBullet = Instantiate(bulletScriptable.bullet, fireBarrel.position, Quaternion.AngleAxis(angle, Vector3.forward)) as GameObject;
+                Destroy(objBullet, bulletScriptable.bulletLifeTime/2);
                 switch (travelMode)
                 {
                     case BulletTravelMode.Linear:
-                        objBullet.GetComponent<Rigidbody2D>().velocity = direction * bulletController.speed;
+                        objBullet.GetComponent<Rigidbody2D>().velocity = direction * bulletScriptable.speed;
                         break;
                     case BulletTravelMode.WithForce:
-                        bulletController.ApplyForce(direction * bulletController.speed, 3);
+                        //bulletController.ApplyForce(direction * bulletScriptable.speed, 3);
                         break;
                 }
                 anim.SetBool("IsFiring", true);
-
+                
+                
             }
+           
         }
         else
         {
             anim.SetBool("IsFiring", false);
         }
-	}
+
+        // Destroying the bullet
+        //if (Vector3.Distance(bulletStartPoint, bulletScriptable.bullet.transform.position) >= bulletScriptable.maxTravelDistance)
+        //{
+        //    Destroy(objBullet);
+        //}
+
+    }
 
 
     //------------- Reloading Bullet Count--------------------//
     public void ReloadBullet(float _bulletReloadTime)
     {
-        if (bulletController._bulletCount >= bulletController._maxAmmo)
+        if (_bulletCount >= bulletScriptable._maxAmmo)
         {
             // Recharge the Ammo
             StartCoroutine(ReloadBulletTimmer(_bulletReloadTime));
@@ -72,10 +87,10 @@ public class Weapon : MonoBehaviour {
     }
     IEnumerator ReloadBulletTimmer(float _bulletReloadTime)
     {
-        bulletController._canShootBullet = false;                // Player cannot Shoot any bullet
-        bulletController._bulletCount = 0;                       // Magazine Reloaded
+        _canShootBullet = false;                // Player cannot Shoot any bullet
+        _bulletCount = 0;                       // Magazine Reloaded
         yield return new WaitForSeconds(_bulletReloadTime);
-        bulletController._canShootBullet = true;                 // Player can Shoot bullets
+        _canShootBullet = true;                 // Player can Shoot bullets
     }
 }
 

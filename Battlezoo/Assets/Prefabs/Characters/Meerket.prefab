@@ -110,7 +110,7 @@ GameObject:
   m_Layer: 0
   m_Name: Groundcheck
   m_TagString: Untagged
-  m_Icon: {fileID: -1412012063857583412, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -854,7 +854,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   travelMode: 0
   fireBarrel: {fileID: 4402619558235376}
-  bullet: {fileID: 1359049200021862, guid: 7673acd67bde0be4facc7fef3558f04d, type: 2}
+  _canShootBullet: 1
+  bulletScriptable: {fileID: 0}
 --- !u!114 &114725834250785360
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -26,6 +26,7 @@ public class GameManager : MonoBehaviour {
     public GameObject turtle;
 
     public Transform spawnPoint1;
+
     #endregion
 
 

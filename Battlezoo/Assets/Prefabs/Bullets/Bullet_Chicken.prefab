@@ -201,13 +201,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 691aef0cbccc5b246b2dfb058bdcbc94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 10
-  maxTravelDistance: 15
-  speed: 15
-  _bulletCount: 0
-  _maxAmmo: 10
-  _canShootBullet: 1
-  _bulletReloadTime: 3
+  isEnemyKilled: 0
+  bulletScriptable: {fileID: 11400000, guid: f3b65ca6c1dfc954db79b64dfba4591d, type: 2}
+  powerup: {fileID: 11400000, guid: 98934f0695a92d8429f410ec115ec83e, type: 2}
+  powerUps:
+  - {fileID: 1863344922621952, guid: 2684f39ab59a72043803a7d1f020ee5f, type: 2}
+  - {fileID: 1969733183969870, guid: 974d8201f24170f47afcadd2488725df, type: 2}
+  - {fileID: 1295716270623836, guid: b83c91630944c344eacdec35b29f31ab, type: 2}
 --- !u!212 &212410895755856754
 SpriteRenderer:
   m_ObjectHideFlags: 1

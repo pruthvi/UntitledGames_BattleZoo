@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e9531bb4d45fae489f8abf92e777569, type: 3}
+  m_Name: Chicken
+  m_EditorClassIdentifier: 
+  bullet: {fileID: 1647177763510814, guid: f0f2d830f95316a4a8a655ac4da13824, type: 2}
+  damage: 10
+  bulletLifeTime: 3.5
+  speed: 10
+  _maxAmmo: 10
+  _bulletReloadTime: 3
+  powerUpManager: {fileID: 114975294350767120, guid: 72286f0c1a3efce45ba0eec304287918,
+    type: 2}
+  enemyDied: 0

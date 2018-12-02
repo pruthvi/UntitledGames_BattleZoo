@@ -683,9 +683,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   travelMode: 0
   fireBarrel: {fileID: 4245762689803024}
-  bullet: {fileID: 1359049200021862, guid: 7673acd67bde0be4facc7fef3558f04d, type: 2}
-  bulletController: {fileID: 114284516834205804, guid: 7673acd67bde0be4facc7fef3558f04d,
-    type: 2}
+  _canShootBullet: 1
+  bulletScriptable: {fileID: 0}
 --- !u!114 &114246316395682880
 MonoBehaviour:
   m_ObjectHideFlags: 1
