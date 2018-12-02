@@ -3,59 +3,57 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
+using UntitledGames.Lobby.Menu;
 
 namespace UntitledGames.Lobby
 {
     public class LobbyManager : NetworkLobbyManager
     {
 
-        static public LobbyManager instance;
+        public static LobbyManager instance;
 
         [Header("UI Reference")]
-        public RectTransform background;
-        public RectTransform mainMenuPanel;
-        public RectTransform lobbyPanel;
-        public CountdownPanel countdownPanel;
+        public RectTransform backgroundPanel;
+        public LobbyMainMenu mainMenuPanel;
+        public LobbySettingsMenu settingsPanel;
+        public LobbySetupMenu setupPanel;
+        public LobbyCharacterSelectionMenu characterSelectionPanel;
+        public LobbyInfoPanel lobbyInfoPanel;
+        public InGameMenu inGameMenuPanel;
 
-        public PlayerInfoPanel playerInfoPanel;
+        protected LobbyMenuPanel currentPanel;
 
-        protected RectTransform currentPanel;
-
-
-        [Header("Unity UI Lobby")]
+        [Header("Match Info")]
         [Tooltip("Time in second between all players ready & match start")]
         public float prematchCountdown = 5.0f;
-
-
 
         //Client numPlayers from NetworkManager is always 0, so we count (throught connect/destroy in LobbyPlayer) the number
         //of players, so that even client know how many player there is.
         [HideInInspector]
         public int _playerNumber = 0;
 
-        //used to disconnect a client properly when exiting the matchmaker
-        [HideInInspector]
-        public bool _isMatchmaking = false;
-
-        protected bool _disconnectServer = false;
-
-        protected ulong _currentMatchID;
-
         protected LobbyHook _lobbyHooks;
-
-        private bool isInGame;
-
-        public int characterIndex;
 
         [HideInInspector]
         public bool requestCancelMatch;
 
-        void Start()
+        void OnEnable()
         {
             instance = this;
-            _lobbyHooks = GetComponent<LobbyHook>();
-            currentPanel = mainMenuPanel;
+        }
 
+        void Start()
+        {
+            _lobbyHooks = GetComponent<LobbyHook>();
+            // Disable all panels
+            settingsPanel.gameObject.SetActive(false);
+            setupPanel.gameObject.SetActive(false);
+            characterSelectionPanel.gameObject.SetActive(false);
+            inGameMenuPanel.gameObject.SetActive(false);
+            lobbyInfoPanel.gameObject.SetActive(false);
+            // Set default panel
+            currentPanel = mainMenuPanel;
+            SwitchPanel(mainMenuPanel);
             DontDestroyOnLoad(gameObject);
         }
 
@@ -63,74 +61,67 @@ namespace UntitledGames.Lobby
         {
             if (SceneManager.GetSceneAt(0).name == lobbyScene)
             {
-                //if (topPanel.isInGame)
-                //{
-                //    ChangeTo(lobbyPanel);
-                //    if (_isMatchmaking)
-                //    {
-                //        if (conn.playerControllers[0].unetView.isServer)
-                //        {
-                //            backDelegate = StopHostClbk;
-                //        }
-                //        else
-                //        {
-                //            backDelegate = StopClientClbk;
-                //        }
-                //    }
-                //    else
-                //    {
-                //        if (conn.playerControllers[0].unetView.isClient)
-                //        {
-                //            backDelegate = StopHostClbk;
-                //        }
-                //        else
-                //        {
-                //            backDelegate = StopClientClbk;
-                //        }
-                //    }
-                //}
-                //else
-                //{
-                //    ChangeTo(mainMenuPanel);
-                //}
-
-                //topPanel.ToggleVisibility(true);
-                //topPanel.isInGame = false;
+                if (inGameMenuPanel.isInGame)
+                {
+                    SwitchPanel(setupPanel);
+                    // TODO: UNet online match making
+                    //    if (_isMatchmaking)
+                    //    {
+                    //        if (conn.playerControllers[0].unetView.isServer)
+                    //        {
+                    //            backDelegate = StopHostClbk;
+                    //        }
+                    //        else
+                    //        {
+                    //            backDelegate = StopClientClbk;
+                    //        }
+                    //    }
+                    //    else
+                    //    {
+                    //        if (conn.playerControllers[0].unetView.isClient)
+                    //        {
+                    //            backDelegate = StopHostClbk;
+                    //        }
+                    //        else
+                    //        {
+                    //            backDelegate = StopClientClbk;
+                    //        }
+                    //    }
+                }
+                else
+                {
+                    SwitchPanel(mainMenuPanel);
+                }
+                inGameMenuPanel.isInGame = false;
             }
             else
             {
-                background.gameObject.SetActive(false);
+                backgroundPanel.gameObject.SetActive(false);
                 SwitchPanel(null);
-
-                //Destroy(GameObject.Find("MainMenuUI(Clone)"));
-
-                //backDelegate = StopGameClbk;
-                //topPanel.isInGame = true;
-                //topPanel.ToggleVisibility(false);
             }
         }
-
-        //allow to handle the (+) button to add/remove player
-        public void OnPlayersNumberModified(int count)
-        {
-            //TODO add this function
-            _playerNumber += count;
-        }
-
+        
         public override void OnStartHost()
         {
             base.OnStartHost();
-
-            SwitchPanel(lobbyPanel);
-            //backDelegate = StopHostClbk;
-            //SetServerInfo("Hosting", networkAddress);
+            SwitchPanel(characterSelectionPanel);
+            // Set the backDelegate to StopHostCallback so that when back button clicked it will stop host
+            backDelegate = StopHostCallback;
         }
 
-        public void SwitchPanel(RectTransform newPanel)
+        public void SwitchPanel(LobbyMenuPanel newPanel)
         {
             if (currentPanel != null)
             {
                 currentPanel.gameObject.SetActive(false);
+                if (newPanel != inGameMenuPanel)
+                {
+                    inGameMenuPanel.previousPanel = currentPanel;
+                }
+                else
+                {
+                    inGameMenuPanel.previousPanel = null;
+                }
             }
 
             if (newPanel != null)
@@ -142,6 +133,14 @@ namespace UntitledGames.Lobby
                 currentPanel.gameObject.SetActive(false);
             }
             currentPanel = newPanel;
+            if (currentPanel != mainMenuPanel && inGameMenuPanel.isInGame == false)
+            {
+                inGameMenuPanel.gameObject.SetActive(true);
+            }
+            else
+            {
+                inGameMenuPanel.gameObject.SetActive(false);
+            }
         }
 
         //we want to disable the button Ready if we don't have enough player
@@ -150,34 +149,28 @@ namespace UntitledGames.Lobby
         {
             GameObject obj = Instantiate(lobbyPlayerPrefab.gameObject) as GameObject;
 
-            LobbyPlayer newPlayer = obj.GetComponent<LobbyPlayer>();
-            newPlayer.ToggleReadyButton(numPlayers + 1 >= minPlayers);
+            //LobbyPlayer newPlayer = obj.GetComponent<LobbyPlayer>();
+            //newPlayer.ToggleReadyButton(numPlayers + 1 >= minPlayers);
 
+            //for (int i = 0; i < lobbySlots.Length; ++i)
+            //{
+            //    LobbyPlayer p = lobbySlots[i] as LobbyPlayer;
 
-            for (int i = 0; i < lobbySlots.Length; ++i)
-            {
-                LobbyPlayer p = lobbySlots[i] as LobbyPlayer;
-
-                if (p != null)
-                {
-                    p.ToggleReadyButton(numPlayers + 1 >= minPlayers);
-                }
-            }
+            //    if (p != null)
+            //    {
+            //        p.ToggleReadyButton(numPlayers + 1 >= minPlayers);
+            //    }
+            //}
 
             return obj;
         }
 
-        public void BackToSetup()
-        {
-            SwitchPanel(mainMenuPanel);
-        }
-
-        public override GameObject OnLobbyServerCreateGamePlayer(NetworkConnection conn, short playerControllerId)
-        {
-            GameObject obj = Instantiate(gamePlayerPrefab.gameObject) as GameObject;
+        //public override GameObject OnLobbyServerCreateGamePlayer(NetworkConnection conn, short playerControllerId)
+        //{
+        //    GameObject obj = Instantiate(gamePlayerPrefab.gameObject) as GameObject;
             
-            return obj;
-        }
+        //    return obj;
+        //}
        
 
         public override bool OnLobbyServerSceneLoadedForPlayer(GameObject lobbyPlayer, GameObject gamePlayer)
@@ -187,21 +180,21 @@ namespace UntitledGames.Lobby
             {
                 _lobbyHooks.OnLobbyServerSceneLoadedForPlayer(this, lobbyPlayer, gamePlayer);
             }
-               
 
             return true;
         }
 
-
-        // --- Countdown management
-
+        // When all players ready start countdown
         public override void OnLobbyServerPlayersReady()
         {
             bool allready = true;
             for (int i = 0; i < lobbySlots.Length; ++i)
             {
+                // Check the slot before accessing
                 if (lobbySlots[i] != null)
+                {
                     allready &= lobbySlots[i].readyToBegin;
+                }
             }
 
             if (allready)
@@ -231,39 +224,92 @@ namespace UntitledGames.Lobby
                 int newFloorTime = Mathf.FloorToInt(remainingTime);
 
                 if (newFloorTime != floorTime)
-                {//to avoid flooding the network of message, we only send a notice to client when the number of plain seconds change.
+                {
+                    //to avoid flooding the network of message, we only send a notice to client when the number of plain seconds change.
                     floorTime = newFloorTime;
 
                     for (int i = 0; i < lobbySlots.Length; ++i)
                     {
                         if (lobbySlots[i] != null)
-                        {//there is maxPlayer slots, so some could be == null, need to test it before accessing!
+                        {
+                            //there is maxPlayer slots, so some could be == null, need to test it before accessing!
                             (lobbySlots[i] as LobbyPlayer).RpcUpdateCountdown(floorTime);
                         }
                     }
-                    
-                }
-
-                
-            }
-
-            for (int i = 0; i < lobbySlots.Length; ++i)
-            {
-                if (lobbySlots[i] != null)
-                {
-                    (lobbySlots[i] as LobbyPlayer).RpcUpdateCountdown(0);
                 }
             }
+
+            //for (int i = 0; i < lobbySlots.Length; ++i)
+            //{
+            //    if (lobbySlots[i] != null)
+            //    {
+            //        (lobbySlots[i] as LobbyPlayer).RpcUpdateCountdown(0);
+            //    }
+            //}
             if (requestCancelMatch)
             {
                 requestCancelMatch = false;
             }
             else
             {
-                isInGame = true;
+                inGameMenuPanel.isInGame = true;
                 ServerChangeScene(playScene);
             }
         }
 
+        public void DisplayIsConnecting()
+        {
+            characterSelectionPanel.gameObject.SetActive(false);
+            lobbyInfoPanel.Display("Connecting...", "Cancel", () => { BackToSetup(); });
+        }
+
+        // ----------------- Client callbacks ------------------
+
+        public override void OnClientConnect(NetworkConnection conn)
+        {
+            base.OnClientConnect(conn);
+
+            lobbyInfoPanel.gameObject.SetActive(false);
+
+            if (!NetworkServer.active)
+            {
+                //only to do on pure client (not self hosting client)
+                SwitchPanel(characterSelectionPanel);
+                backDelegate = StopClientCallback;
+            }
+        }
+
+        public override void OnClientDisconnect(NetworkConnection conn)
+        {
+            base.OnClientDisconnect(conn);
+            lobbyInfoPanel.Display("Disconnected due to time out", "OK", () => { BackToSetup(); });
+        }
+
+        // Back Button
+
+        public delegate void BackButtonDelegate();
+        public BackButtonDelegate backDelegate;
+
+        // This is the listener that Back button listen to
+        public void BackToSetup()
+        {
+            Debug.Log("trigged");
+            backDelegate();
+            characterSelectionPanel.ResetControls();
+            setupPanel.previousPanel = mainMenuPanel;
+            SwitchPanel(setupPanel);
+        }
+
+        // Stop the server, this is set in the StartHost and called in BackToSetup()
+        public void StopHostCallback()
+        {
+            StopHost();
+        }
+
+        // Stop the client, this will be set when Client click the Join button in SetUp Panel, and called in BackToSetup()
+        public void StopClientCallback()
+        {
+            StopClient();
+        }
     }
 }
