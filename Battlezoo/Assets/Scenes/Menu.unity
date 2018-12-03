@@ -274,26 +274,31 @@ GameObject:
   m_Component:
   - component: {fileID: 275084644}
   - component: {fileID: 275084645}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: game_name
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &275084644
-Transform:
+--- !u!224 &275084644
+RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 275084643}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -197, y: 18, z: -5163.75}
+  m_LocalPosition: {x: 0, y: 0, z: 90}
   m_LocalScale: {x: 21.512182, y: 21.512182, z: 21.512182}
   m_Children: []
   m_Father: {fileID: 801692658}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 315, y: -322.5}
+  m_SizeDelta: {x: 21.23999, y: 5.4600067}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!212 &275084645
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -375,7 +380,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -172.00012, y: -335}
+  m_AnchoredPosition: {x: -220, y: -389}
   m_SizeDelta: {x: 307.99, y: 57.75}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!95 &506219568
@@ -930,7 +935,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -172.00006, y: -255}
+  m_AnchoredPosition: {x: -220, y: -309}
   m_SizeDelta: {x: 307.99, y: 57.75}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!95 &1034069499
@@ -1286,7 +1291,7 @@ ParticleSystemRenderer:
   m_ReflectionProbeUsage: 0
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 10301, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 207f067df0e317a4bbec53267da9bd60, type: 2}
   - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -6087,7 +6092,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -172, y: -184}
+  m_AnchoredPosition: {x: -220, y: -238}
   m_SizeDelta: {x: 307.99, y: 57.75}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1739368961
@@ -6203,26 +6208,31 @@ GameObject:
   m_Component:
   - component: {fileID: 1961487571}
   - component: {fileID: 1961487572}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Top_panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1961487571
-Transform:
+--- !u!224 &1961487571
+RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1961487570}
   m_LocalRotation: {x: -0, y: -0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 138.3, y: 20, z: -5163.75}
+  m_LocalPosition: {x: 0, y: 0, z: 90}
   m_LocalScale: {x: 7.458753, y: 1.2188176, z: 57.375}
   m_Children: []
   m_Father: {fileID: 801692658}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 117, y: -3}
+  m_SizeDelta: {x: 53.24, y: 3}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!212 &1961487572
 SpriteRenderer:
   m_ObjectHideFlags: 0
