@@ -39,9 +39,12 @@ namespace UntitledGames.Lobby
             {
                 SetupOtherPlayer();
             }
-            
+
             OnMyName(playerName);
-            OnMyCharacter(0);
+            OnMyCharacter(characterIndex);
+            OnClientReady(readyToBegin);
+
+            LobbyManager.instance.requestCancelMatch = true;
         }
 
         public override void OnStartAuthority()
@@ -109,6 +112,7 @@ namespace UntitledGames.Lobby
 
         public void OnBackClicked()
         {
+           // CmdRequestCancelMatch();
             LobbyManager.instance.BackToSetup();
             // Add the back to previous listener again
             backButton.onClick.RemoveAllListeners();
@@ -119,7 +123,7 @@ namespace UntitledGames.Lobby
 
         // Note that those handler use Command function, as we need to change the value on the server not locally
         // so that all client get the new value throught syncvar
-        
+
         // This handles the Ready States of the player
         public override void OnClientReady(bool readyState)
         {
@@ -176,6 +180,22 @@ namespace UntitledGames.Lobby
             playerNameText.text = playerName;
         }
 
+        // Unlock the selection when another player join and all player is ready
+        [ClientRpc]
+        public void RpcCancelMatch()
+        {
+            LobbyManager.instance.requestCancelMatch = true;
+            SendNotReadyToBeginMessage();
+            LobbyManager.instance.characterSelectionPanel.CancelMatch();
+        }
+       
+        //[Command]
+        //public void CmdRequestCancelMatch()
+        //{
+        //    LobbyManager.instance.requestCancelMatch = true;
+        //    LobbyManager.instance.characterSelectionPanel.CancelMatch();
+        //}
+
         // Countdown
 
         [ClientRpc]
@@ -191,7 +211,6 @@ namespace UntitledGames.Lobby
         public override void OnClientExitLobby()
         {
             base.OnClientExitLobby();
-            LobbyManager.instance.requestCancelMatch = true;
         }
         public void OnDestroy()
         {

@@ -238,16 +238,16 @@ namespace UntitledGames.Lobby
                     }
                 }
             }
-
-            //for (int i = 0; i < lobbySlots.Length; ++i)
-            //{
-            //    if (lobbySlots[i] != null)
-            //    {
-            //        (lobbySlots[i] as LobbyPlayer).RpcUpdateCountdown(0);
-            //    }
-            //}
             if (requestCancelMatch)
             {
+                for (int i = 0; i < lobbySlots.Length; ++i)
+                {
+                    if (lobbySlots[i] != null)
+                    {
+                        // Set everyone's lockin to false;
+                        (lobbySlots[i] as LobbyPlayer).RpcCancelMatch();
+                    }
+                }
                 requestCancelMatch = false;
             }
             else
@@ -278,7 +278,6 @@ namespace UntitledGames.Lobby
                 SwitchPanel(characterSelectionPanel);
                 backDelegate = StopClientCallback;
             }
-
         }
 
         public override void OnClientDisconnect(NetworkConnection conn)

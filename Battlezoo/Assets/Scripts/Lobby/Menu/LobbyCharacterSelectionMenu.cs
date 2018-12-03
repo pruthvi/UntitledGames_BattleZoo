@@ -31,7 +31,18 @@ namespace UntitledGames.Lobby.Menu
                 characterButtons[i].interactable = !lockIn;
             }
             playerNameInputField.interactable = !lockIn;
-            countdownPanel.gameObject.SetActive(lockIn);
+            lobbyManager.inGameMenuPanel.gameObject.SetActive(!lockIn);
+        }
+
+        public void CancelMatch()
+        {
+            readyButton.transform.GetChild(0).GetComponent<Text>().text = "Ready";
+            for (int i = 0; i < characterButtons.Length; i++)
+            {
+                characterButtons[i].interactable = true;
+            }
+            playerNameInputField.interactable = true;
+            countdownPanel.gameObject.SetActive(false);
         }
 
         // Reset the UI
