@@ -26,7 +26,7 @@ GameObject:
   - component: {fileID: 114908760875609908}
   m_Layer: 0
   m_Name: Bullet_Chicken
-  m_TagString: Untagged
+  m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -155,7 +155,7 @@ TrailRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 1, g: 0.23925427, b: 0, a: 0}
+      key0: {r: 1, g: 1, b: 1, a: 0}
       key1: {r: 1, g: 1, b: 1, a: 1}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
@@ -201,13 +201,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 691aef0cbccc5b246b2dfb058bdcbc94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isEnemyKilled: 0
   bulletScriptable: {fileID: 11400000, guid: f3b65ca6c1dfc954db79b64dfba4591d, type: 2}
-  powerup: {fileID: 11400000, guid: 98934f0695a92d8429f410ec115ec83e, type: 2}
-  powerUps:
-  - {fileID: 1863344922621952, guid: 2684f39ab59a72043803a7d1f020ee5f, type: 2}
-  - {fileID: 1969733183969870, guid: 974d8201f24170f47afcadd2488725df, type: 2}
-  - {fileID: 1295716270623836, guid: b83c91630944c344eacdec35b29f31ab, type: 2}
 --- !u!212 &212410895755856754
 SpriteRenderer:
   m_ObjectHideFlags: 1

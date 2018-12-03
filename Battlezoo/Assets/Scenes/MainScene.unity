@@ -325,6 +325,12 @@ Prefab:
       propertyPath: _leftPos
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114597010039102900, guid: 72e69427fa9c1b34f88be04281d5175a,
+        type: 2}
+      propertyPath: powerup
+      value: 
+      objectReference: {fileID: 11400000, guid: 98934f0695a92d8429f410ec115ec83e,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 72e69427fa9c1b34f88be04281d5175a, type: 2}
   m_IsPrefabAsset: 0
@@ -388,7 +394,7 @@ SpriteRenderer:
   m_Size: {x: 22.123682, y: 3.4902067}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &39939790
@@ -479,7 +485,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4872978884387550, guid: cce0d87687a0f6a4f91a805bbc45be8d, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 1.0837
+      value: 1.2
       objectReference: {fileID: 0}
     - target: {fileID: 4872978884387550, guid: cce0d87687a0f6a4f91a805bbc45be8d, type: 2}
       propertyPath: m_LocalRotation.x
@@ -501,39 +507,12 @@ Prefab:
       propertyPath: m_RootOrder
       value: 12
       objectReference: {fileID: 0}
-    - target: {fileID: 70108269076761460, guid: cce0d87687a0f6a4f91a805bbc45be8d,
+    - target: {fileID: 114955081563135978, guid: cce0d87687a0f6a4f91a805bbc45be8d,
         type: 2}
-      propertyPath: m_IsTrigger
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1239186475887850, guid: cce0d87687a0f6a4f91a805bbc45be8d, type: 2}
-      propertyPath: m_Layer
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1093748549823080, guid: cce0d87687a0f6a4f91a805bbc45be8d, type: 2}
-      propertyPath: m_Layer
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1684739219970906, guid: cce0d87687a0f6a4f91a805bbc45be8d, type: 2}
-      propertyPath: m_Layer
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1723196077244562, guid: cce0d87687a0f6a4f91a805bbc45be8d, type: 2}
-      propertyPath: m_Layer
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1379175510434552, guid: cce0d87687a0f6a4f91a805bbc45be8d, type: 2}
-      propertyPath: m_Layer
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1482320286732142, guid: cce0d87687a0f6a4f91a805bbc45be8d, type: 2}
-      propertyPath: m_Layer
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1844850690458632, guid: cce0d87687a0f6a4f91a805bbc45be8d, type: 2}
-      propertyPath: m_Layer
-      value: 0
-      objectReference: {fileID: 0}
+      propertyPath: powerup
+      value: 
+      objectReference: {fileID: 11400000, guid: 98934f0695a92d8429f410ec115ec83e,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cce0d87687a0f6a4f91a805bbc45be8d, type: 2}
   m_IsPrefabAsset: 0
@@ -1969,7 +1948,7 @@ SpriteRenderer:
   m_Size: {x: 0.74, y: 0.37}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &661926132
@@ -2164,7 +2143,7 @@ SpriteRenderer:
   m_Size: {x: 50.148186, y: 2.5581298}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!95 &738025029
@@ -2510,7 +2489,7 @@ SpriteRenderer:
   m_Size: {x: 22.123682, y: 3.4902067}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &879071264
@@ -2543,7 +2522,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4872978884387550, guid: cce0d87687a0f6a4f91a805bbc45be8d, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 1.0837
+      value: 1.2
       objectReference: {fileID: 0}
     - target: {fileID: 4872978884387550, guid: cce0d87687a0f6a4f91a805bbc45be8d, type: 2}
       propertyPath: m_LocalRotation.x
@@ -2607,6 +2586,12 @@ Prefab:
       propertyPath: m_Layer
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114955081563135978, guid: cce0d87687a0f6a4f91a805bbc45be8d,
+        type: 2}
+      propertyPath: powerup
+      value: 
+      objectReference: {fileID: 11400000, guid: 98934f0695a92d8429f410ec115ec83e,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cce0d87687a0f6a4f91a805bbc45be8d, type: 2}
   m_IsPrefabAsset: 0
@@ -7621,7 +7606,7 @@ SpriteRenderer:
   m_Size: {x: 22.123682, y: 3.4902067}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &1538345376
@@ -7847,7 +7832,7 @@ SpriteRenderer:
   m_Size: {x: 19.2, y: 10.8}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &1798615427

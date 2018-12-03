@@ -1,6 +1,7 @@
 ﻿/*  Copyright (c) Pruthvi  |  http://pruthv.com  */
 
 using UnityEngine;
+using System.Collections;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerMovement : MonoBehaviour {
@@ -16,7 +17,7 @@ public class PlayerMovement : MonoBehaviour {
     public float jumpFall;
     public float jumpLowFall;
 
-    public float speed = 2.0f;
+    public float speed = 10.0f;
     //public float x;
 
     [Header("Bullet")]
@@ -29,9 +30,12 @@ public class PlayerMovement : MonoBehaviour {
     private Animator anim;
     private bool isJump;
     private bool isFacingRight;
+    private float originalSpeed;
 
     [SerializeField]
     private BarrelRotator barrelRotator; // Getting Refernce of BarrekRotator Script
+
+    public bool isModifierApplied = false;
     #endregion
 
     void Start ()
@@ -40,6 +44,12 @@ public class PlayerMovement : MonoBehaviour {
         anim = this.GetComponent<Animator>();
         //barrelRotator = gameObject.GetComponent<BarrelRotator>();
 
+        Initialize();
+    }
+
+    private void Initialize()
+    {
+        originalSpeed = speed;
     }
 
     void Update()
@@ -113,24 +123,12 @@ public class PlayerMovement : MonoBehaviour {
             isGrounded = false;
         }
 
-        // Shooting
-        if (Input.GetButtonDown("Fire1"))
+        if (isModifierApplied)
         {
-            //Shoot();
+            StartCoroutine(TimeToLast(10));
         }
 
 
-
-        //Flip Side
-        //if (x < 0)
-        //{
-        //    //transform.localRotation = Quaternion.Euler(0, 180, 0);
-        //}
-
-        //else
-        //{
-        //    //transform.localRotation = Quaternion.Euler(0, 0, 0);
-        //}
     }
 
     private void FixedUpdate()
@@ -163,4 +161,18 @@ public class PlayerMovement : MonoBehaviour {
         }
     }
 
+    public void SpeedModifier(float speedModifier, float modifierTimeToLast)
+    {
+        speed += speedModifier;
+        StartCoroutine(TimeToLast(modifierTimeToLast));
+    }
+
+    // Start Coroutine for PowerUp Modifier
+    IEnumerator TimeToLast(float modifierTimeToLast)
+    {
+        Debug.Log("Timmer Started");
+        yield return new WaitForSeconds(modifierTimeToLast);
+        speed = originalSpeed;
+
+    }
 }

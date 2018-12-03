@@ -4,13 +4,7 @@ using UnityEngine;
 
 public class BulletController : MonoBehaviour {
 
-    private bool isEnemyKilled = false;
-    private int _randomPowerUp;
-
-    public float _powerupLife = 10.0f;
     public BulletControllerScriptableObject bulletScriptable;
-    public PowerUpManager powerup;
-
 
     //void Update()
     //{
@@ -27,7 +21,7 @@ public class BulletController : MonoBehaviour {
     //        rb.AddForce(forceToAdd);
     //    }
     //}
- 
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.tag == "Player")
@@ -38,32 +32,7 @@ public class BulletController : MonoBehaviour {
         }
 
 
-        if (other.gameObject.tag == "Scientist")
-        {
-            Destroy(other.gameObject);      // Destroy Scientist
-            Destroy(gameObject);            // Destroy Bullet
-            isEnemyKilled = true;
-            SpawnPowerUp();
-        }
-
     }
-
-    private void SpawnPowerUp()
-    {
-        Vector2 position = transform.position;
-        if (powerup.powerUp.Length != 0)
-        {
-            // Spawn Random PowerUp
-            _randomPowerUp = Random.Range(1, powerup.powerUp.Length);
-            var randomPowerUp = powerup.powerUp[_randomPowerUp].Object;
-            var powerupInstantiate = Instantiate(randomPowerUp, position, Quaternion.identity);
-
-            isEnemyKilled = false;
-            Destroy(powerupInstantiate, _powerupLife);        // PowerUp Will Destroy in Certain Time
-        }
-
-    }
-
 
 
     //public void ApplyForce(Vector2 force, float time)

@@ -8,6 +8,7 @@ TagManager:
   - Scientist
   - PowerUpMagnet
   - PowerUp
+  - Bullet
   layers:
   - Default
   - TransparentFX

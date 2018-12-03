@@ -14,6 +14,7 @@ public class Magnet : MonoBehaviour {
     {
         player = GameObject.FindGameObjectWithTag("Player");
         rb = GetComponent<Rigidbody2D>();
+        //modifier = GetComponent<AbilityModifier>();
     }
 
     // Update is called once per frame
