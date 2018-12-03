@@ -4,7 +4,8 @@ using UnityEngine;
 
 //[RequireComponent(typeof(PolygonCollider2D))]
 //[RequireComponent(typeof(Rigidbody2D))]
-public class NPC_Movement : MonoBehaviour {
+public class Scientist : MonoBehaviour
+{
 
     // Public Variables
     public float _walkingSpeed = 15f;           // Walking Speed
@@ -23,15 +24,20 @@ public class NPC_Movement : MonoBehaviour {
     public float _powerupLife = 10.0f;
     public PowerUpManager powerup;
 
+    private Transform sprites;
+
     // Use this for initialization
-    void Start () {
+    void Start()
+    {
 
         // Storing Players original Positon
         this._originalPos = this.transform.position.x;
-	}
-	
-	// Update is called once per frame
-	void Update () {
+        sprites = transform.GetChild(0);
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
 
         // NPC walks at a constant Speed
         walkDirection.x = _walkingSpeed * Time.deltaTime;
@@ -49,18 +55,18 @@ public class NPC_Movement : MonoBehaviour {
         }
 
         transform.Translate(walkDirection);
-	}
+    }
 
     void FlipNPC()
     {
         // Moving in Opposite Direction
-        _walkingSpeed = -_walkingSpeed;                 
+        _walkingSpeed = -_walkingSpeed;
 
         // Flipping the GameObject
         Vector3 theScale = transform.localScale;
         theScale.x *= -1;
-        transform.localScale = theScale;
-  
+        sprites.transform.localScale = theScale;
+
     }
 
     private void OnTriggerEnter2D(Collider2D other)
