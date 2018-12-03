@@ -18,11 +18,6 @@ namespace UntitledGames.Lobby.Menu
         {
             if (previousPanel != null)
             {
-                if (previousPanel == lobbyManager.setupPanel)
-                {
-                    lobbyManager.BackToSetup();
-                    return;
-                }
                 lobbyManager.SwitchPanel(previousPanel);
             }
         }

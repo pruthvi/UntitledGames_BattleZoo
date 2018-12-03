@@ -11,6 +11,8 @@ namespace UntitledGames.Lobby
         public InputField inputPlayerName;
         public Button buttonReady;
 
+        public Button backButton;
+
         public Image playerAvatar;
         public Text playerNameText;
         public Text playerStatusText;
@@ -83,7 +85,13 @@ namespace UntitledGames.Lobby
             buttonReady = LobbyManager.instance.characterSelectionPanel.readyButton;
             buttonReady.onClick.RemoveAllListeners();
             buttonReady.onClick.AddListener(OnReadyClicked);
+
+            backButton = LobbyManager.instance.inGameMenuPanel.backButton;
+            backButton.onClick.RemoveAllListeners();
+            backButton.onClick.AddListener(OnBackClicked);
         }
+
+        // Button handlers
        
         public void OnReadyClicked()
         {
@@ -97,6 +105,14 @@ namespace UntitledGames.Lobby
                 SendReadyToBeginMessage();
                 LobbyManager.instance.characterSelectionPanel.LockInCharacterSelection(true);
             }
+        }
+
+        public void OnBackClicked()
+        {
+            LobbyManager.instance.BackToSetup();
+            // Add the back to previous listener again
+            backButton.onClick.RemoveAllListeners();
+            backButton.onClick.AddListener(LobbyManager.instance.inGameMenuPanel.BackToPreviousPanel);
         }
 
         //===== UI Handler

@@ -260,6 +260,7 @@ namespace UntitledGames.Lobby
         public void DisplayIsConnecting()
         {
             characterSelectionPanel.gameObject.SetActive(false);
+            inGameMenuPanel.gameObject.SetActive(false);
             lobbyInfoPanel.Display("Connecting...", "Cancel", () => { BackToSetup(); });
         }
 
@@ -277,6 +278,7 @@ namespace UntitledGames.Lobby
                 SwitchPanel(characterSelectionPanel);
                 backDelegate = StopClientCallback;
             }
+
         }
 
         public override void OnClientDisconnect(NetworkConnection conn)
@@ -293,11 +295,11 @@ namespace UntitledGames.Lobby
         // This is the listener that Back button listen to
         public void BackToSetup()
         {
-            Debug.Log("trigged");
             backDelegate();
+            inGameMenuPanel.gameObject.SetActive(true);
             characterSelectionPanel.ResetControls();
-            setupPanel.previousPanel = mainMenuPanel;
             SwitchPanel(setupPanel);
+            inGameMenuPanel.previousPanel = mainMenuPanel;
         }
 
         // Stop the server, this is set in the StartHost and called in BackToSetup()
