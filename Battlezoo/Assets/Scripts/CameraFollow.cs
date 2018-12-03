@@ -24,7 +24,7 @@ public class CameraFollow : MonoBehaviour {
 
 
     // Player game object
-    public GameObject target;
+    public Transform target;
 
     // Distance between player and camera
     private Vector3 offset = new Vector3(0, 0, -10);

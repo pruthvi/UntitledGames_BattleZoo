@@ -2516,9 +2516,12 @@ MonoBehaviour:
   m_OfflineScene: MainMenu
   m_OnlineScene: 
   m_SpawnPrefabs:
-  - {fileID: 1960317363914088, guid: 5647c39ba79a913418526428bb5baf60, type: 2}
+  - {fileID: 1556743522744200, guid: d516763a581bee9449dbb0df58970c4e, type: 2}
+  - {fileID: 1545327345389050, guid: 00e39a3ba4d33224f8c1ffd3d1d2d8d2, type: 2}
+  - {fileID: 1647177763510814, guid: f0f2d830f95316a4a8a655ac4da13824, type: 2}
   - {fileID: 1359049200021862, guid: 103866d217bdc7546b23186a725d6dde, type: 2}
   - {fileID: 1647177763510814, guid: f0f2d830f95316a4a8a655ac4da13824, type: 2}
+  - {fileID: 1194424210566418, guid: 8713e3ab2e5f47746aa27a9acfbba249, type: 2}
   m_CustomConfig: 0
   m_MaxConnections: 4
   m_ConnectionConfig:
@@ -2580,7 +2583,7 @@ MonoBehaviour:
   m_MinPlayers: 1
   m_LobbyPlayerPrefab: {fileID: 114097768426514814, guid: abc7ffc912004dc458d2e39bc607f406,
     type: 2}
-  m_GamePlayerPrefab: {fileID: 1960317363914088, guid: 5647c39ba79a913418526428bb5baf60,
+  m_GamePlayerPrefab: {fileID: 1556743522744200, guid: d516763a581bee9449dbb0df58970c4e,
     type: 2}
   m_LobbyScene: MainMenu
   m_PlayScene: MainScene

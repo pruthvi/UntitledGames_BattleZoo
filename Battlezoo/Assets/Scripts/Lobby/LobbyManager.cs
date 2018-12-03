@@ -180,7 +180,6 @@ namespace UntitledGames.Lobby
             {
                 _lobbyHooks.OnLobbyServerSceneLoadedForPlayer(this, lobbyPlayer, gamePlayer);
             }
-
             return true;
         }
 
@@ -283,6 +282,7 @@ namespace UntitledGames.Lobby
         public override void OnClientDisconnect(NetworkConnection conn)
         {
             base.OnClientDisconnect(conn);
+            backgroundPanel.gameObject.SetActive(true);
             lobbyInfoPanel.Display("Disconnected due to time out", "OK", () => { BackToSetup(); });
         }
 
