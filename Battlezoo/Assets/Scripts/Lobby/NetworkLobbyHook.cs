@@ -6,13 +6,14 @@ namespace UntitledGames.Lobby
     // This handles set up the player data when they enter the Game
     public class NetworkLobbyHook : LobbyHook
     {
-        public override void OnLobbyServerSceneLoadedForPlayer(NetworkManager manager, GameObject lobbyPlayer, GameObject gamePlayer)
+        public override void OnLobbyServerSceneLoadedForPlayer(LobbyManager manager, GameObject lobbyPlayer, GameObject gamePlayer)
         {
             LobbyPlayer lobbyP = lobbyPlayer.GetComponent<LobbyPlayer>();
-            SetupLocalPlayer localPlayer = gamePlayer.GetComponent<SetupLocalPlayer>();
+            PlayerConnection playerConnection = gamePlayer.GetComponent<PlayerConnection>();
 
-            localPlayer.playerName = lobbyP.playerName;
-            localPlayer.characterIndex = lobbyP.characterIndex;
+            playerConnection.playerName = lobbyP.playerName;
+            playerConnection.characterIndex = lobbyP.characterIndex;
+            lobbyP.connectionToClient.isReady = true;
         }
     }
 }

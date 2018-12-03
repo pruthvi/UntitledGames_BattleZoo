@@ -212,6 +212,7 @@ namespace UntitledGames.Lobby
         {
             base.OnClientExitLobby();
         }
+
         public void OnDestroy()
         {
             LobbyPlayerList._instance.RemovePlayer(this);
