@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4642032424195010}
   - component: {fileID: 212212739925859406}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: scientist_body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -36,10 +36,10 @@ GameObject:
   m_Component:
   - component: {fileID: 4872978884387550}
   - component: {fileID: 95479654873603484}
-  - component: {fileID: 114955081563135978}
   - component: {fileID: 50693303085197206}
   - component: {fileID: 70108269076761460}
-  m_Layer: 0
+  - component: {fileID: 114833295593163042}
+  m_Layer: 11
   m_Name: Scientist
   m_TagString: Scientist
   m_Icon: {fileID: 0}
@@ -54,7 +54,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4759418553234682}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: ScientistSprites
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -70,7 +70,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4023408242858808}
   - component: {fileID: 212121214167845292}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: scientist_chemical
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -86,8 +86,24 @@ GameObject:
   m_Component:
   - component: {fileID: 4988830449383230}
   - component: {fileID: 212482023589312530}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: scientist_front_hand
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1636143008028864
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4312124480566738}
+  - component: {fileID: 61208883523758980}
+  m_Layer: 11
+  m_Name: GroundCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -103,7 +119,7 @@ GameObject:
   - component: {fileID: 4314711021070530}
   - component: {fileID: 212509766526553908}
   - component: {fileID: 60606362571287438}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: scientist_leg_right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -119,7 +135,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4292098310258646}
   - component: {fileID: 212122165218780826}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: scientist_back_hand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -136,7 +152,7 @@ GameObject:
   - component: {fileID: 4991885559363512}
   - component: {fileID: 212976361068900466}
   - component: {fileID: 60362095731490000}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: scientist_leg_left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -168,6 +184,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4759418553234682}
   m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4312124480566738
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1636143008028864}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -3.39, y: -9.76, z: 0}
+  m_LocalScale: {x: 6, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4872978884387550}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4314711021070530
 Transform:
@@ -221,10 +250,11 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1239186475887850}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 8.75, y: 3.34, z: 1}
+  m_LocalPosition: {x: -31.98, y: 0.45, z: 1}
   m_LocalScale: {x: 0.15, y: 0.15, z: 1}
   m_Children:
   - {fileID: 4759418553234682}
+  - {fileID: 4312124480566738}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -478,6 +508,31 @@ PolygonCollider2D:
       - {x: -0.185, y: -2.5249999}
       - {x: -0.185, y: -2.445}
       - {x: -0.195, y: -2.2749999}
+--- !u!61 &61208883523758980
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1636143008028864}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
 --- !u!70 &70108269076761460
 CapsuleCollider2D:
   m_ObjectHideFlags: 1
@@ -502,7 +557,7 @@ Animator:
   m_GameObject: {fileID: 1239186475887850}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 0e1cff6ca0a6f66439c558363ef87cdf, type: 2}
+  m_Controller: {fileID: 0}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -511,7 +566,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &114955081563135978
+--- !u!114 &114833295593163042
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -519,15 +574,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 1239186475887850}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6357a9b155a7e544398908bb48fcc847, type: 3}
+  m_Script: {fileID: 11500000, guid: f75483418a478f847975aab0cb0136ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _walkingSpeed: 15
-  _leftPos: 0
-  _rightPos: 6
-  _dir: 1
-  _powerupLife: 10
-  powerup: {fileID: 11400000, guid: 50fd00c6a63e11849a9eeb93e473b9aa, type: 2}
+  sprites: {fileID: 0}
+  groundCheck: {fileID: 0}
+  speed: 10
+  direction: 1
+  platformMask:
+    serializedVersion: 2
+    m_Bits: 2560
 --- !u!212 &212121214167845292
 SpriteRenderer:
   m_ObjectHideFlags: 1

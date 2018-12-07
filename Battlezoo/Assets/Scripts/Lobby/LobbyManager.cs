@@ -168,10 +168,10 @@ namespace UntitledGames.Lobby
         //public override GameObject OnLobbyServerCreateGamePlayer(NetworkConnection conn, short playerControllerId)
         //{
         //    GameObject obj = Instantiate(gamePlayerPrefab.gameObject) as GameObject;
-            
+
         //    return obj;
         //}
-       
+
 
         public override bool OnLobbyServerSceneLoadedForPlayer(GameObject lobbyPlayer, GameObject gamePlayer)
         {

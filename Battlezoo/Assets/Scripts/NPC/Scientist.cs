@@ -2,98 +2,97 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-//[RequireComponent(typeof(PolygonCollider2D))]
-//[RequireComponent(typeof(Rigidbody2D))]
 public class Scientist : MonoBehaviour
 {
+    [Header("Sprite Info")]
+    public Transform sprites;
+    public Transform groundCheck;
 
-    // Public Variables
-    public float _walkingSpeed = 15f;           // Walking Speed
-    public float _leftPos = 0.0f;       // Starting Position 
-    public float _rightPos = 6.0f;      // Player can Patrol till Right Position
-    public int _dir = 1;              // 1 for right & -1 for Left (FLIPPING)
+    private float stepRange;
 
-    // Private Variables
-    private bool isWalkable;
-    private float _originalPos;         // Original Position
-    private Vector2 walkDirection;
+    [Header("NPC Info")]
+    public float speed = 15;
+    public int direction = 1;
 
-    // Power UP
-    private int _randomPowerUp;
+    private Rigidbody2D rBody;
 
-    public float _powerupLife = 10.0f;
-    public PowerUpManager powerup;
+    public LayerMask platformMask;
 
-    private Transform sprites;
+    private bool isGrounded;
+    private bool isBlocked;
 
-    // Use this for initialization
     void Start()
     {
-
-        // Storing Players original Positon
-        this._originalPos = this.transform.position.x;
+        // The sprites for the NPC, used for flipping
         sprites = transform.GetChild(0);
+        groundCheck = transform.GetChild(1);
+
+        // The size of the ground check
+        stepRange = groundCheck.GetComponent<Collider2D>().bounds.extents.x;
+
+        rBody = GetComponent<Rigidbody2D>();
     }
 
-    // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
+        // Get the edge position to check
+        Vector2 checkPoint = groundCheck.position + groundCheck.right * stepRange;
+        Debug.DrawLine(checkPoint, checkPoint + Vector2.down, Color.blue);
 
-        // NPC walks at a constant Speed
-        walkDirection.x = _walkingSpeed * Time.deltaTime;
-
-        if ((_dir == 1) && transform.position.x >= _originalPos + _rightPos)
+        isGrounded = Physics2D.Linecast(checkPoint, checkPoint + Vector2.down, platformMask);
+       // isBlocked = Physics2D.Linecast(checkPoint, checkPoint - Vector2.right * direction, platformMask);
+        // Check if it reaches edge, turn around if it does
+        if (!isGrounded)
         {
-            _dir = -1;      // Change Direction
-            FlipNPC();      // Flip NPC
-        }
-        // Walk in the opposite direction
-        else if ((_dir == -1) && transform.position.x <= _originalPos - _leftPos)
-        {
-            _dir = 1;       // Change Direction
-            FlipNPC();      // Flip NPC
-        }
-
-        transform.Translate(walkDirection);
-    }
-
-    void FlipNPC()
-    {
-        // Moving in Opposite Direction
-        _walkingSpeed = -_walkingSpeed;
-
-        // Flipping the GameObject
-        Vector3 theScale = transform.localScale;
-        theScale.x *= -1;
-        sprites.transform.localScale = theScale;
-
-    }
-
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.gameObject.tag == "Bullet")
-        {
-            Destroy(gameObject);            // Destroy Bullet
-            Destroy(other.gameObject);      // Destroy Scientist
-            SpawnPowerUp();
-        }
-    }
-
-    private void SpawnPowerUp()
-    {
-        Vector2 position = transform.position;
-        if (powerup.powerUp.Length != 0)
-        {
-            // Spawn Random PowerUp
-            _randomPowerUp = Random.Range(1, powerup.powerUp.Length);
-
-            var randomPowerUp = powerup.powerUp[_randomPowerUp].Object;
-            var powerupInstantiate = Instantiate(randomPowerUp, position, Quaternion.identity);
-
-            Destroy(powerupInstantiate, _powerupLife);        // PowerUp Will Destroy in Certain Time
+            Debug.Log("Flip");
+            Flip();
         }
 
+        Vector2 vel = rBody.velocity;
+        vel.x = speed * direction;
+        rBody.velocity = vel;
     }
+
+    void Flip()
+    {
+        // Flip the direction
+        direction *= -1;
+
+        // Flip the sprites
+        Vector3 rot = transform.eulerAngles;
+        rot.y += 180;
+        transform.eulerAngles = rot;
+
+        //Vector2 scale = sprites.localScale;
+        //scale.x *= direction;
+        //sprites.localScale = scale;
+    }
+
+    //private void OnTriggerEnter2D(Collider2D other)
+    //{
+    //    if (other.gameObject.tag == "Bullet")
+    //    {
+    //        Destroy(gameObject);            // Destroy Bullet
+    //        Destroy(other.gameObject);      // Destroy Scientist
+    //        SpawnPowerUp();
+    //    }
+    //}
+
+    //private void SpawnPowerUp()
+    //{
+    //    Vector2 position = transform.position;
+    //    if (powerup.powerUp.Length != 0)
+    //    {
+    //        // Spawn Random PowerUp
+    //        _randomPowerUp = Random.Range(1, powerup.powerUp.Length);
+
+    //        var randomPowerUp = powerup.powerUp[_randomPowerUp].Object;
+    //        var powerupInstantiate = Instantiate(randomPowerUp, position, Quaternion.identity);
+
+    //        Destroy(powerupInstantiate, _powerupLife);        // PowerUp Will Destroy in Certain Time
+    //    }
+
+    //}
 
 
 }

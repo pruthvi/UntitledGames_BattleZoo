@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
+using UntitledGames.Lobby;
 
 public class Character : NetworkBehaviour
 {
@@ -58,6 +59,9 @@ public class Character : NetworkBehaviour
 
     public string playerName;
 
+    [HideInInspector]
+    public PlayerConnection connection;
+
     void Start()
     {
         rBody = GetComponent<Rigidbody2D>();
@@ -89,7 +93,7 @@ public class Character : NetworkBehaviour
 
     void Update()
     {
-        if (!hasAuthority)
+        if (!connection.isLocalPlayer)
         {
             return;
         }
