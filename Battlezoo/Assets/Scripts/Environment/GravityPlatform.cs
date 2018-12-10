@@ -13,6 +13,7 @@ public class GravityPlatform : Platform
 
     public float speed = 5;
     public float distance = 5;
+    public PlatformState platformState = PlatformState.Idle;
     public GravityPlatformState gravityPlatformState = GravityPlatformState.Up;
 
     void Start()

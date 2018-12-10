@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class Platform : MonoBehaviour
 {
-    public PlatformState platformState;
+    protected PlatformState State { get; private set; }
     protected abstract void OnPlatformMoving();
  //   protected abstract void OnFalling();
       

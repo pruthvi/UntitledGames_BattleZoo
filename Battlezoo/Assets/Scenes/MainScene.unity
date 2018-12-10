@@ -803,11 +803,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2f02ac3102556a49be3b1f8eb0171eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  platformState: 0
   fallDistance: 5
   correctSpeed: 5
   speed: 5
   distance: 10
+  platformState: 0
   gravityPlatformState: 0
 --- !u!50 &179457706
 Rigidbody2D:
@@ -1034,11 +1034,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2f02ac3102556a49be3b1f8eb0171eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  platformState: 0
   fallDistance: 5
   correctSpeed: 5
   speed: 5
   distance: 10
+  platformState: 0
   gravityPlatformState: 0
 --- !u!50 &212406364
 Rigidbody2D:
@@ -2255,11 +2255,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2f02ac3102556a49be3b1f8eb0171eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  platformState: 0
   fallDistance: 5
   correctSpeed: 5
   speed: 5
   distance: 5
+  platformState: 0
   gravityPlatformState: 0
 --- !u!50 &782669126
 Rigidbody2D:
@@ -2927,7 +2927,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1196404322}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.63, y: 3.09, z: 0}
+  m_LocalPosition: {x: 0, y: 2.24, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1772896481}
@@ -3081,11 +3081,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2f02ac3102556a49be3b1f8eb0171eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  platformState: 0
   fallDistance: 5
   correctSpeed: 5
   speed: 5
   distance: 5
+  platformState: 0
   gravityPlatformState: 0
 --- !u!50 &1217915428
 Rigidbody2D:
@@ -3296,8 +3296,6 @@ GameObject:
   - component: {fileID: 1392059735}
   - component: {fileID: 1392059737}
   - component: {fileID: 1392059736}
-  - component: {fileID: 1392059738}
-  - component: {fileID: 1392059739}
   m_Layer: 9
   m_Name: Balance
   m_TagString: Untagged
@@ -3313,7 +3311,7 @@ Transform:
   m_GameObject: {fileID: 1392059734}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1196404323}
   m_RootOrder: 1
@@ -3329,11 +3327,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d90b0461d73af1a4e97bdd85d5948acc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  platformState: 0
-  maxTurnAngle: 30
-  rotateSpeed: 50
-  centerPoint: {x: 0, y: 0, z: 0}
-  balancePlatformState: 0
 --- !u!212 &1392059737
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3380,51 +3373,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!50 &1392059738
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1392059734}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 3
---- !u!61 &1392059739
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1392059734}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 4.86, y: 0.3}
-    newSize: {x: 4.86, y: 0.3}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 4.86, y: 0.3}
-  m_EdgeRadius: 0
 --- !u!1 &1414225860
 GameObject:
   m_ObjectHideFlags: 0
@@ -3756,11 +3704,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2f02ac3102556a49be3b1f8eb0171eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  platformState: 0
   fallDistance: 5
   correctSpeed: 5
   speed: 5
   distance: 8
+  platformState: 0
   gravityPlatformState: 0
 --- !u!50 &1559931941
 Rigidbody2D:
