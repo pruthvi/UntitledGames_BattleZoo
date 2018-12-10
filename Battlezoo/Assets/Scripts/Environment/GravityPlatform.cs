@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GravityPlatform : MonoBehaviour
+public class GravityPlatform : Platform
 {
 
     public float fallDistance = 5;
@@ -11,40 +11,30 @@ public class GravityPlatform : MonoBehaviour
 
     private Vector3 startPosition;
 
-    private bool raising = false;
-    private bool falling = false;
+    public float speed = 5;
+    public float distance = 5;
+    public PlatformState platformState = PlatformState.Idle;
+    public GravityPlatformState gravityPlatformState = GravityPlatformState.Up;
 
     void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
+        rb2d.constraints = RigidbodyConstraints2D.FreezeRotation | RigidbodyConstraints2D.FreezePositionX;
+        rb2d.isKinematic = true;
         rb2d.gravityScale = 0;
-        startPosition = transform.position;
+        startPosition = transform.localPosition;
     }
 
     void Update()
     {
-
-        float platformDistanceFromStart = startPosition.y - transform.position.y;
-
-        if ((platformDistanceFromStart >= fallDistance && falling) || (platformDistanceFromStart <= 0 && raising))
-        {
-            rb2d.bodyType = RigidbodyType2D.Static;
-            if (platformDistanceFromStart <= 0 && raising)
-            {
-                rb2d.transform.position = Vector2.MoveTowards(transform.position, startPosition, correctSpeed * Time.deltaTime);
-            }
-        }
-
+        OnPlatformMoving();
     }
 
     void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            falling = true;
-            raising = false;
-            rb2d.bodyType = RigidbodyType2D.Dynamic;
-            rb2d.gravityScale = 1;
+            platformState = PlatformState.Active;
         }
     }
 
@@ -52,11 +42,41 @@ public class GravityPlatform : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            raising = true;
-            falling = false;
-            rb2d.bodyType = RigidbodyType2D.Dynamic;
-            rb2d.gravityScale = -1;
+            platformState = PlatformState.Return;
         }
     }
 
+    protected override void OnPlatformMoving()
+    {
+        if (platformState == PlatformState.Return && Vector3.Distance(transform.localPosition, startPosition) < 0.5f)
+        {
+            platformState = PlatformState.Idle;
+            rb2d.gravityScale = 0;
+        }
+
+        // Do nothing if idle
+        if (platformState == PlatformState.Idle)
+        {
+            return;
+        }
+
+        Vector3 targetLocation = startPosition;
+
+        // If active move towards target Location based on the gravity platform state
+        if (platformState == PlatformState.Active)
+        {
+            if (gravityPlatformState == GravityPlatformState.Up)
+            {
+                targetLocation = startPosition + Vector3.up * distance;
+            }
+            else if (gravityPlatformState == GravityPlatformState.Down)
+            {
+                targetLocation = startPosition + Vector3.down * distance;
+            }
+        }
+
+        float step = speed * Time.deltaTime;
+
+        transform.localPosition = Vector3.MoveTowards(transform.localPosition, targetLocation, step);
+    }
 }

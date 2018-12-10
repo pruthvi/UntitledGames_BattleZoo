@@ -44,7 +44,6 @@ public class Scientist : MonoBehaviour
         // Check if it reaches edge, turn around if it does
         if (!isGrounded)
         {
-            Debug.Log("Flip");
             Flip();
         }
 

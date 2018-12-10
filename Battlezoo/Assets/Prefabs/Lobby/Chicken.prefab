@@ -121,7 +121,7 @@ GameObject:
   - component: {fileID: 114136272274569766}
   m_Layer: 0
   m_Name: Chicken
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -602,6 +602,7 @@ MonoBehaviour:
   announcement: 
   newMessage: 0
   playerName: 
+  connection: {fileID: 0}
 --- !u!212 &212021518503954094
 SpriteRenderer:
   m_ObjectHideFlags: 1
