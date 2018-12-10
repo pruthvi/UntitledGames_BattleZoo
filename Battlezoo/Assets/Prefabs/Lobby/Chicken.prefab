@@ -118,7 +118,7 @@ GameObject:
   - component: {fileID: 114992931810417264}
   - component: {fileID: 114013494269854754}
   - component: {fileID: 50371369777301758}
-  - component: {fileID: 114136272274569766}
+  - component: {fileID: 114419938437861108}
   m_Layer: 0
   m_Name: Chicken
   m_TagString: Player
@@ -495,27 +495,6 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
---- !u!114 &114136272274569766
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1545327345389050}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -1768714887, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_TransformSyncMode: 2
-  m_SendInterval: 0.1
-  m_SyncRotationAxis: 3
-  m_RotationSyncCompression: 0
-  m_SyncSpin: 0
-  m_MovementTheshold: 0.001
-  m_VelocityThreshold: 0.0001
-  m_SnapThreshold: 5
-  m_InterpolateRotation: 1
-  m_InterpolateMovement: 1
 --- !u!114 &114266039274938352
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -532,6 +511,23 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &114419938437861108
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1545327345389050}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e0df23450a9916419c7cc92924cb2f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  positionSync: {x: 0, y: 0, z: 0}
+  character: {fileID: 0}
+  InitialFacing: 1
+  barrelAngle: 0
+  Direction: 0
+  ammoLeft: 30
 --- !u!114 &114631746683543164
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -580,10 +576,7 @@ MonoBehaviour:
   IsGround: 0
   Speed: 10
   JumpForce: 10
-  InitialFacing: 1
-  Direction: 0
   ammoPerMagazine: 30
-  ammoLeft: 30
   reloadTime: 2
   fireRate: 0.1
   timeUntilNextShot: 0
@@ -592,7 +585,6 @@ MonoBehaviour:
     type: 2}
   barrel: {fileID: 4103548642011492}
   muzzle: {fileID: 4485411411055210}
-  barrelAngle: 0
   maxBarrelAngle: 50
   minBarrelAngle: -10
   needToReload: 0
@@ -603,6 +595,7 @@ MonoBehaviour:
   newMessage: 0
   playerName: 
   connection: {fileID: 0}
+  characterTransformSync: {fileID: 0}
 --- !u!212 &212021518503954094
 SpriteRenderer:
   m_ObjectHideFlags: 1

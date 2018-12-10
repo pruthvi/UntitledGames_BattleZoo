@@ -6,7 +6,6 @@ using UntitledGames.Lobby;
 
 public class Character : NetworkBehaviour
 {
-    public enum FaceDirection { Left = -1, Right = 1 };
 
     [Header("Player Info")]
     public Transform characterSprites;
@@ -16,16 +15,11 @@ public class Character : NetworkBehaviour
     [Header("Character Info")]
     public float Speed = 10;
     public float JumpForce = 10;
-    public FaceDirection InitialFacing = FaceDirection.Right;
-    [SyncVar(hook = ("OnDirectionChanged"))]
-    public int Direction;
     private Transform ceilingCheck;
     private Transform groundCheck;
 
     [Header("Weapon")]
     public int ammoPerMagazine = 30;
-    [SyncVar]
-    public int ammoLeft = 30;
     public float reloadTime = 2;
     public float fireRate = 0.1f; // Fire interval between bullets
     [SyncVar]
@@ -35,8 +29,6 @@ public class Character : NetworkBehaviour
 
     public Transform barrel;
     public Transform muzzle;
-    [SyncVar(hook = ("OnBarrelAngleChanged"))]
-    public float barrelAngle;
     public float maxBarrelAngle;
     public float minBarrelAngle;
     [SyncVar]
@@ -62,11 +54,12 @@ public class Character : NetworkBehaviour
     [HideInInspector]
     public PlayerConnection connection;
 
+    public CharacterTransformSync characterTransformSync;
+
     void Start()
     {
         rBody = GetComponent<Rigidbody2D>();
         //groundCheck = transform.GetChild(0);
-        Direction = (int)InitialFacing;
 
         if (barrel == null)
         {
@@ -82,6 +75,11 @@ public class Character : NetworkBehaviour
         announcementText = GameObject.FindGameObjectWithTag("Announcement").GetComponent<Text>();
 
         mainCamera = Camera.main.transform;
+
+        characterTransformSync = GetComponent<CharacterTransformSync>();
+        characterTransformSync.character = this;
+
+        connection = transform.parent.GetComponent<PlayerConnection>();
     }
 
     public override void OnStartLocalPlayer()
@@ -101,7 +99,7 @@ public class Character : NetworkBehaviour
 
         // Movement
         float movementX = Input.GetAxis("Horizontal") * Speed * Time.deltaTime;
-        transform.Translate(movementX, 0, 0);
+        characterTransformSync.OnChangingPosition(movementX, 0, 0);
 
         // Jump
         if (Input.GetKeyDown(KeyCode.Space))
@@ -156,17 +154,17 @@ public class Character : NetworkBehaviour
     [Command]
     void CmdFire()
     {
-        if (timeUntilNextShot <= 0 && !needToReload && ammoLeft > 0)
+        if (timeUntilNextShot <= 0 && !needToReload && characterTransformSync.ammoLeft > 0)
         {
-            ammoLeft--;
+            characterTransformSync.ammoLeft--;
             timeUntilNextShot = fireRate;
-            if (ammoLeft <= 0)
+            if (characterTransformSync.ammoLeft <= 0)
             {
                 needToReload = true;
             }
             // the direction of the barrel from muzzle to barrell
             Vector3 bulletDirection = (muzzle.transform.position - barrel.transform.position).normalized;
-            GameObject bullet = Instantiate(bulletPrefab, muzzle.transform.position, Quaternion.AngleAxis(barrelAngle, Vector3.forward));
+            GameObject bullet = Instantiate(bulletPrefab, muzzle.transform.position, Quaternion.AngleAxis(characterTransformSync.barrelAngle, Vector3.forward));
             // set the velocity of the bullet, the server does not have to track the bullet position it will be calcuated on the client
             bullet.GetComponent<Rigidbody2D>().velocity = bulletDirection * bulletSpeed;
             NetworkServer.Spawn(bullet);
@@ -217,56 +215,14 @@ public class Character : NetworkBehaviour
     {
         isReloading = true;
         yield return new WaitForSeconds(reloadTime);
-        ammoLeft = ammoPerMagazine;
+        characterTransformSync.ammoLeft = ammoPerMagazine;
         isReloading = false;
         needToReload = false;
     }
 
     // ===========
 
-    // Barrel Angle
-
-    void OnBarrelAngleChanged(float newAngle)
-    {
-        barrelAngle = newAngle;
-        Quaternion rotation = Quaternion.Euler(new Vector3(0f, 0f, barrelAngle));
-        barrel.transform.rotation = Direction == -1 ? Quaternion.Inverse(rotation) : rotation;
-    }
-
-    void OnChangingBarrelAngle(float newAngle)
-    {
-        CmdChangeBarrelAngle(newAngle);
-    }
-
-    [Command]
-    void CmdChangeBarrelAngle(float newAngle)
-    {
-        barrelAngle = newAngle;
-    }
-
-    // ============
-
-    // Player Direction
-
-    // Call back for SyncVar - Direction
-    // This will change the local property when Sync from the server
-    void OnDirectionChanged(int newDir)
-    {
-        Direction = newDir;
-        characterSprites.localScale = new Vector3(newDir, transform.localScale.y, transform.localScale.z);
-    }
-    // Called when change value
-    void OnChangingDirection(int newDir)
-    {
-        CmdChangeDirecion(newDir);
-    }
-    // Notice the server
-    [Command]
-    void CmdChangeDirecion(int newDir)
-    {
-        //  Debug.Log("CmdChangeDirecion | " + Direction);
-        Direction = newDir;
-    }
+    
 
     // ============
 
@@ -274,7 +230,7 @@ public class Character : NetworkBehaviour
     {
         GUI.color = Color.red;
         GUI.Label(new Rect(10, 50, 200, 30), "Need to Reload: " + (isReloading ? "Reloading" : needToReload + ""));
-        GUI.Label(new Rect(10, 70, 200, 30), "Ammo: " + ammoLeft);
+        GUI.Label(new Rect(10, 70, 200, 30), "Ammo: " + characterTransformSync.ammoLeft);
     }
 
     // Draw the firing angle on the scene view
@@ -304,9 +260,9 @@ public class Character : NetworkBehaviour
             newDirection = -1;
         }
         // Only Sync if player change direction
-        if (newDirection != Direction)
+        if (newDirection != characterTransformSync.Direction)
         {
-            OnChangingDirection(newDirection);
+            characterTransformSync.OnChangingDirection(newDirection);
         }
     }
 
@@ -315,15 +271,15 @@ public class Character : NetworkBehaviour
         // Direction from barrel(pivot point) to mouse
         Vector2 dirTowardsMouse = Camera.main.ScreenToWorldPoint(Input.mousePosition) - barrel.transform.position;
         // Angle from barrel to mouse
-        float newAngle = Mathf.Atan2(dirTowardsMouse.y, (Direction) * dirTowardsMouse.x) * Mathf.Rad2Deg;
+        float newAngle = Mathf.Atan2(dirTowardsMouse.y, (characterTransformSync.Direction) * dirTowardsMouse.x) * Mathf.Rad2Deg;
 
         // If angle changed
-        if (newAngle != barrelAngle)
+        if (newAngle != characterTransformSync.barrelAngle)
         {
             // If angle is within the max and min angle
             if (newAngle > minBarrelAngle && newAngle < maxBarrelAngle)
             {
-                OnChangingBarrelAngle(newAngle);
+                characterTransformSync.OnChangingBarrelAngle(newAngle);
             }
         }
     }
