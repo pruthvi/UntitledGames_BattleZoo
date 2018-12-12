@@ -23,7 +23,7 @@ namespace UntitledGames.Lobby
 
         void Start()
         {
-            SpawnMyCharacter();
+     //       SpawnMyCharacter();
         }
 
         void Update()

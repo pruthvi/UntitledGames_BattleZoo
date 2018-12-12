@@ -1,10 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class GravityPlatform : Platform
+using UnityEngine.Networking;
+public class GravityPlatform : NetworkBehaviour
 {
-
+    public PlatformState platformState;
     public float fallDistance = 5;
     public float correctSpeed = 5;
     private Rigidbody2D rb2d;
@@ -26,9 +26,13 @@ public class GravityPlatform : Platform
 
     void Update()
     {
-        OnPlatformMoving();
+        if (!isServer)
+        {
+            return;
+        }
+        RpcOnPlatformMoving();
     }
-
+    
     void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.CompareTag("Player"))
@@ -45,7 +49,8 @@ public class GravityPlatform : Platform
         }
     }
 
-    protected override void OnPlatformMoving()
+    [ClientRpc]
+    void RpcOnPlatformMoving()
     {
         if (platformState == PlatformState.Return && Vector3.Distance(transform.localPosition, startPosition) < 0.5f)
         {

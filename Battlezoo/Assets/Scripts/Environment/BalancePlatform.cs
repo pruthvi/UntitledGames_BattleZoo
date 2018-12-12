@@ -1,9 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class BalancePlatform : Platform {
+public class BalancePlatform : NetworkBehaviour {
 
+    public PlatformState platformState;
     public float maxTurnAngle = 30;
     public float rotateSpeed = 50;
 
@@ -26,10 +28,15 @@ public class BalancePlatform : Platform {
 	
 	// Update is called once per frame
 	void Update () {
-        OnPlatformMoving();
+        if (!isServer)
+        {
+            return;
+        }
+        RpcOnPlatformMoving();
 	}
 
-    protected override void OnPlatformMoving()
+    [ClientRpc]
+    void RpcOnPlatformMoving()
     {
         if (platformState == PlatformState.Idle)
         {

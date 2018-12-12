@@ -8,12 +8,12 @@ namespace UntitledGames.Lobby
     {
         public override void OnLobbyServerSceneLoadedForPlayer(LobbyManager manager, GameObject lobbyPlayer, GameObject gamePlayer)
         {
-            LobbyPlayer lobbyP = lobbyPlayer.GetComponent<LobbyPlayer>();
-            PlayerConnection playerConnection = gamePlayer.GetComponent<PlayerConnection>();
+            //LobbyPlayer lobbyP = lobbyPlayer.GetComponent<LobbyPlayer>();
+            //PlayerConnection playerConnection = gamePlayer.GetComponent<PlayerConnection>();
 
-            playerConnection.playerName = lobbyP.playerName;
-            playerConnection.characterIndex = lobbyP.characterIndex;
-            lobbyP.connectionToClient.isReady = true;
+            //playerConnection.playerName = lobbyP.playerName;
+            //playerConnection.characterIndex = lobbyP.characterIndex;
+            //lobbyP.connectionToClient.isReady = true;
         }
     }
 }
