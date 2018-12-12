@@ -10,7 +10,8 @@ public class Character : NetworkBehaviour
 
     [Header("Player Info")]
     public Transform characterSprites;
-    public bool IsGround;
+    public LayerMask whatIsGround;
+    public bool isGrounded;
     private Rigidbody2D rBody;
 
     [Header("Character Info")]
@@ -66,7 +67,8 @@ public class Character : NetworkBehaviour
     void Start()
     {
         rBody = GetComponent<Rigidbody2D>();
-        //groundCheck = transform.GetChild(0);
+        groundCheck = transform.GetChild(0).GetChild(0);
+        whatIsGround = LayerMask.GetMask("Platform");
         Direction = (int)InitialFacing;
 
         if (barrel == null)
@@ -105,9 +107,10 @@ public class Character : NetworkBehaviour
         transform.Translate(movementX, 0, 0);
 
         // Jump
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
             rBody.AddForce(JumpForce * Vector2.up, ForceMode2D.Impulse);
+            isGrounded = false;
         }
 
         
@@ -147,7 +150,8 @@ public class Character : NetworkBehaviour
         {
             return;
         }
-     //   IsGround = Physics.Linecast(groundCheck.position, groundCheck.position + Vector3.down, 1);
+        //isGrounded = Physics.Linecast(groundCheck.position, groundCheck.position + Vector3.down, 1);
+        isGrounded = Physics2D.OverlapPoint(groundCheck.position, whatIsGround);
     }
 
     // Weapon Related
