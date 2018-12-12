@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
+using UntitledGames.Lobby;
 
 public class Character : NetworkBehaviour
 {
@@ -26,6 +27,7 @@ public class Character : NetworkBehaviour
     [SyncVar]
     public int ammoLeft = 30;
     public float reloadTime = 2;
+    [SyncVar]
     public float fireRate = 0.1f; // Fire interval between bullets
     [SyncVar]
     public float timeUntilNextShot = 0;
@@ -58,6 +60,9 @@ public class Character : NetworkBehaviour
 
     public string playerName;
 
+    [HideInInspector]
+    public PlayerConnection connection;
+
     void Start()
     {
         rBody = GetComponent<Rigidbody2D>();
@@ -89,7 +94,7 @@ public class Character : NetworkBehaviour
 
     void Update()
     {
-        if (!hasAuthority)
+        if (!isLocalPlayer)
         {
             return;
         }
@@ -154,10 +159,12 @@ public class Character : NetworkBehaviour
     {
         if (timeUntilNextShot <= 0 && !needToReload && ammoLeft > 0)
         {
+            Debug.Log("Spawning Bullet");
             ammoLeft--;
             timeUntilNextShot = fireRate;
             if (ammoLeft <= 0)
             {
+                Debug.Log("Ammo Less than 1");
                 needToReload = true;
             }
             // the direction of the barrel from muzzle to barrell
@@ -268,9 +275,15 @@ public class Character : NetworkBehaviour
 
     void OnGUI()
     {
+        if (!isLocalPlayer)
+        {
+            return;
+        }
         GUI.color = Color.red;
-        GUI.Label(new Rect(10, 50, 200, 30), "Need to Reload: " + (isReloading ? "Reloading" : needToReload + ""));
+        GUI.Label(new Rect(10, 50, 200, 30), "is Reloading: " + isReloading);
         GUI.Label(new Rect(10, 70, 200, 30), "Ammo: " + ammoLeft);
+        GUI.Label(new Rect(10, 90, 200, 30), "Time Until next shot : " + timeUntilNextShot);
+        GUI.Label(new Rect(10, 110, 200, 30), "need to reload : " + needToReload);
     }
 
     // Draw the firing angle on the scene view

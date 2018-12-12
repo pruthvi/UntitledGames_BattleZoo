@@ -2595,7 +2595,7 @@ MonoBehaviour:
   characterSelectionPanel: {fileID: 2146941145}
   lobbyInfoPanel: {fileID: 1871204786}
   inGameMenuPanel: {fileID: 1232771702}
-  prematchCountdown: 3
+  prematchCountdown: 1
   _playerNumber: 0
   requestCancelMatch: 0
 --- !u!114 &787297143

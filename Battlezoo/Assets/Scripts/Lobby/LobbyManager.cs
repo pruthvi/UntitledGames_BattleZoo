@@ -143,35 +143,24 @@ namespace UntitledGames.Lobby
             }
         }
 
-        //we want to disable the button Ready if we don't have enough player
-        //But OnLobbyClientConnect isn't called on hosting player. So we override the lobbyPlayer creation
-        public override GameObject OnLobbyServerCreateLobbyPlayer(NetworkConnection conn, short playerControllerId)
+        public override GameObject OnLobbyServerCreateGamePlayer(NetworkConnection conn, short playerControllerId)
         {
-            GameObject obj = Instantiate(lobbyPlayerPrefab.gameObject) as GameObject;
-
-            //LobbyPlayer newPlayer = obj.GetComponent<LobbyPlayer>();
-            //newPlayer.ToggleReadyButton(numPlayers + 1 >= minPlayers);
-
-            //for (int i = 0; i < lobbySlots.Length; ++i)
-            //{
-            //    LobbyPlayer p = lobbySlots[i] as LobbyPlayer;
-
-            //    if (p != null)
-            //    {
-            //        p.ToggleReadyButton(numPlayers + 1 >= minPlayers);
-            //    }
-            //}
-
+            GameObject obj = null;
+            for (int i = 0; i < lobbySlots.Length; i++)
+            {
+                if (lobbySlots[i] != null && lobbySlots[i].connectionToClient.connectionId == conn.connectionId)
+                {
+                    obj = Instantiate(characterSelectionPanel.characters[((LobbyPlayer)lobbySlots[i]).characterIndex].gamePrefab) as GameObject;
+                    Debug.Log(conn.connectionId);
+                    Debug.Log(((LobbyPlayer)lobbySlots[i]).playerName + " - Connection Id - " + lobbySlots[i].connectionToClient.connectionId);
+                    Debug.Log(((LobbyPlayer)lobbySlots[i]).playerName + " - Controller Id - " + lobbySlots[i].playerControllerId);
+                    break;
+                }
+                
+            }
+            //GameObject avatar = Instantiate(gamePlayerPrefab.gameObject);
             return obj;
         }
-
-        //public override GameObject OnLobbyServerCreateGamePlayer(NetworkConnection conn, short playerControllerId)
-        //{
-        //    GameObject obj = Instantiate(gamePlayerPrefab.gameObject) as GameObject;
-            
-        //    return obj;
-        //}
-       
 
         public override bool OnLobbyServerSceneLoadedForPlayer(GameObject lobbyPlayer, GameObject gamePlayer)
         {

@@ -19,32 +19,26 @@ namespace UntitledGames.Lobby
 
         private NetworkStartPosition[] spawnPoints;
 
-        // Use this for initialization
+        public GameObject character;
 
         void Start()
         {
-            if (isServer)
-            {
-                SpawnMyCharacter();
-            }
+     //       SpawnMyCharacter();
         }
-        
+
         void Update()
         {
             // TODO: If player dies make them spectating
         }
 
         // Notice the server to spawn the character that represent the player
-        void SpawnMyCharacter()
+        public void SpawnMyCharacter()
         {
-            if (!isServer)
-            {
-                return;
-            }
-            GameObject character = Instantiate(characterList[characterIndex].gamePrefab, transform.position, transform.rotation);
+            character = Instantiate(characterList[characterIndex].gamePrefab, transform.position, transform.rotation);
             character.transform.parent = transform;
-            character.GetComponent<Character>().playerName = playerName;
-
+            Character c = character.GetComponent<Character>();
+            c.playerName = playerName;
+            c.connection = this;
             // Set the start position
             spawnPoints = FindObjectsOfType<NetworkStartPosition>();
 
@@ -53,7 +47,10 @@ namespace UntitledGames.Lobby
                 character.transform.position = spawnPoints[Random.Range(0, spawnPoints.Length)].transform.position;
             }
 
-            NetworkServer.SpawnWithClientAuthority(character, connectionToClient);
+            if (isServer)
+            {
+                NetworkServer.SpawnWithClientAuthority(character, connectionToClient);
+            }
         }
     }
 }
