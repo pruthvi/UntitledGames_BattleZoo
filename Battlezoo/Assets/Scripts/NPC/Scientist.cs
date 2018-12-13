@@ -67,15 +67,15 @@ public class Scientist : MonoBehaviour
         //sprites.localScale = scale;
     }
 
-    //private void OnTriggerEnter2D(Collider2D other)
-    //{
-    //    if (other.gameObject.tag == "Bullet")
-    //    {
-    //        Destroy(gameObject);            // Destroy Bullet
-    //        Destroy(other.gameObject);      // Destroy Scientist
-    //        SpawnPowerUp();
-    //    }
-    //}
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.tag == "Bullet")
+        {
+            Destroy(gameObject);            // Destroy Scientist
+            //Destroy(other.gameObject);      // Destroy Bullet
+            //SpawnPowerUp();
+        }
+    }
 
     //private void SpawnPowerUp()
     //{

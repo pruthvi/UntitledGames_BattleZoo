@@ -22,7 +22,8 @@ public class Stat : MonoBehaviour {
         currentHp -= damage;
         if (currentHp <= 0)
         {
-            Debug.Log("Killed");
+
+            Debug.Log("Player is Killed!");
         }
     }
 }

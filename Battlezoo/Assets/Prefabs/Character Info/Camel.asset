@@ -16,4 +16,4 @@ MonoBehaviour:
   playerListIcon: {fileID: 21300000, guid: aae24181333671b45aa2a9e3c3ebcf42, type: 3}
   characterSelectionIcon: {fileID: 21300000, guid: aae24181333671b45aa2a9e3c3ebcf42,
     type: 3}
-  gamePrefab: {fileID: 1510925449236270, guid: 64ed0da9eac2f8c4aa889a2d5df552d8, type: 2}
+  gamePrefab: {fileID: 1350619719227748, guid: e0f0839b5b625aa46b167d31e343702f, type: 2}
