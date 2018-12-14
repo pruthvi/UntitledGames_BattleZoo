@@ -81,6 +81,9 @@ public class Character : NetworkBehaviour
         // Movement
         float movementX = Input.GetAxis("Horizontal") * Speed * Time.deltaTime;
         transform.Translate(movementX, 0, 0);
+        if(movementX > 0){
+            data.totalDistanceTravelled += movementX;
+        }
 
         // Jump
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded)

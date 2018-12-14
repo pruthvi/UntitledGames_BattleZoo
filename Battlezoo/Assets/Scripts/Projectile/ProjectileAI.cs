@@ -47,12 +47,27 @@ public class ProjectileAI : NetworkBehaviour {
         }
 	}
 
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if(other.CompareTag("Platform")){
+            //OnContact();
+        }
+        else if(other.gameObject.CompareTag("Player"))
+        {
+            Character character = other.gameObject.GetComponent<Character>();
+            if(character != null)
+            {
+                character.stats.OnRecevieDamage(from, damage);
+            }
+        }
+        Destroy(gameObject);
+    }
+
     public void OnContact()
     {
         switch (onHit)
         {
             case OnHit.Destory:
-                damage = 0;
                 Destroy(gameObject);
                 break;
             case OnHit.Bounce:

@@ -43,65 +43,77 @@ public class PlayerStats : NetworkBehaviour
         HUDManager.instance.UpdatePlayerAmmo(ammoLeft);
     }
 
-    void OnTriggerEnter2D(Collider2D other)
+    // void OnTriggerEnter2D(Collider2D other)
+    // {
+    //     if (other.gameObject.CompareTag("Projectile"))
+    //     {
+    //         // Get the source of the projectile
+    //         GameObject source = other.gameObject;
+    //         ProjectileAI projectile = source.GetComponent<ProjectileAI>();
+    //         if(projectile != null)
+    //         {
+    //             // Apply damage based on the source
+    //             Character from = projectile.from;
+    //             //Update the damage dealt data, this can also be used to calculate 'healing on hit'
+    //             TargetOnDealDamage(from.connectionToClient, projectile.damage);
+    //             //Update the damage taken and also update the new health
+    //             TargetOnRecevieDamage(connectionToClient, projectile.damage, from.stats.playerName);
+    //             Destroy(other);
+    //             // Let the projectile decied what to do on contact
+    //             // ProjectileAI projectile = other.GetComponent<ProjectileAI>();
+    //             // if(projectile != null)
+    //             // {
+    //             //     projectile.OnContact();
+    //             // }
+    //         }
+            
+    //     }
+    // }
+
+    
+    public void OnDealDamage(Character to, float damage){
+        character.data.totalDamageDealt += damage;
+    }
+
+    public void OnRecevieDamage(Character from, float damage){
+        CmdOnRecevieDamage(from.stats.playerName, damage);
+    }
+
+    [TargetRpc]
+    public void TargetOnDealDamage(NetworkConnection conn, float damage)
     {
-        if (other.gameObject.CompareTag("Projectile"))
+        CmdOnDealDamage(damage);
+    }
+
+    [Command]
+    public void CmdOnDealDamage(float damage){
+        character.data.totalDamageDealt += damage;
+    }
+
+    [TargetRpc]
+    public void TargetOnRecevieDamage(NetworkConnection conn, float damage, string from)
+    {
+     //   CmdOnRecevieDamage(damage);
+    }
+
+    [Command]
+    public void CmdOnRecevieDamage(string from, float damage){
+        character.data.totalDamageTaken -= damage;
+        currentHP -= damage;
+        if (currentHP <= 0)
         {
-            // Get the source of the projectile
-            GameObject source = other.gameObject;
-            // Apply damage based on the source
-            OnRecevieDamage(source);
-            Destroy(other);
-            // Let the projectile decied what to do on contact
-            // ProjectileAI projectile = other.GetComponent<ProjectileAI>();
-            // if(projectile != null)
-            // {
-            //     projectile.OnContact();
-            // }
+            OnPlayerEliminated(from);
         }
     }
 
-    public void OnRecevieDamage(GameObject source)
-    {
-        // If the source is projectile
-        ProjectileAI projectile = source.GetComponent<ProjectileAI>();
-        if (projectile != null)
-        {
-            // If the projectile is 'from' player(which has character script)
-            Character c = projectile.from;
-            if (c != null)
-            {
-                // Check if projectile is from self, if yes do nothing(this is temporarily)
-                if (c.connectionToClient.connectionId == connectionToClient.connectionId)
-                {
-                    return;
-                }
-                currentHP -= projectile.damage;
-                c.data.totalDamageDealt += projectile.damage;
-                character.data.totalDamageTaken += projectile.damage;
-                if (currentHP <= 0)
-                {
-                    // ProjectileAI p = source.GetComponent<ProjectileAI>();
-                    // if(p != null)
-                    // {
-
-                    // }
-                    // Camera.main.GetComponent<CameraFollow>().target = .from.transform;
-                    OnPlayerEliminated(projectile.from);
-                }
-            }
-        }
-
-    }
-
-    public void OnPlayerEliminated(Character c)
+    public void OnPlayerEliminated(string name)
     {
         isEliminated = true;
         // Excute on server
         CmdShowStats();
-        StartCoroutine(AnnounceMessage(c.stats.playerName + " eliminated " + GetComponent<PlayerStats>().playerName, 3));
+        StartCoroutine(AnnounceMessage(name + " eliminated " + character.stats.playerName, 3));
         //HUDManager.instance.UpdateSpectatingUI(c.stats.playerName);
-        Camera.main.GetComponent<CameraFollow>().target = c.transform;
+        //Camera.main.GetComponent<CameraFollow>().target = c.transform;
     }
 
     [Command]

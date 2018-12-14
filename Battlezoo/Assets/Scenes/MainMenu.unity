@@ -2210,7 +2210,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63298abe2806f3c4fbaf81923babe047, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isInGame: 0
   btnSettings: {fileID: 1633719249}
   btnQuitGame: {fileID: 1946747030}
 --- !u!1 &587497563
@@ -3476,6 +3475,7 @@ MonoBehaviour:
   m_LobbyScene: MainMenu
   m_PlayScene: MainScene
   lobbySlots: []
+  isInGame: 0
   backgroundPanel: {fileID: 1459031901}
   mainMenuPanel: {fileID: 820195290}
   settingsPanel: {fileID: 267094014}
