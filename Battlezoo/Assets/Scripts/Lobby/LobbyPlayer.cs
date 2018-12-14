@@ -89,7 +89,7 @@ namespace UntitledGames.Lobby
             buttonReady.onClick.RemoveAllListeners();
             buttonReady.onClick.AddListener(OnReadyClicked);
 
-            backButton = LobbyManager.instance.inGameMenuPanel.backButton;
+            backButton = LobbyManager.instance.topMenuPanel.backButton;
             backButton.onClick.RemoveAllListeners();
             backButton.onClick.AddListener(OnBackClicked);
         }
@@ -116,7 +116,7 @@ namespace UntitledGames.Lobby
             LobbyManager.instance.BackToSetup();
             // Add the back to previous listener again
             backButton.onClick.RemoveAllListeners();
-            backButton.onClick.AddListener(LobbyManager.instance.inGameMenuPanel.BackToPreviousPanel);
+            backButton.onClick.AddListener(LobbyManager.instance.topMenuPanel.BackToPreviousPanel);
         }
 
         //===== UI Handler

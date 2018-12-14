@@ -9,7 +9,7 @@ namespace UntitledGames.Lobby
 {
     public class LobbyManager : NetworkLobbyManager
     {
-
+        public bool isInGame;
         public static LobbyManager instance;
 
         [Header("UI Reference")]
@@ -19,13 +19,15 @@ namespace UntitledGames.Lobby
         public LobbySetupMenu setupPanel;
         public LobbyCharacterSelectionMenu characterSelectionPanel;
         public LobbyInfoPanel lobbyInfoPanel;
-        public InGameMenu inGameMenuPanel;
+        public LobbyTopMenuPanel topMenuPanel;
+        public InGameMenuPanel inGameMenuPanel;
+        public GameResultPanel gameResultPanel;
 
         protected LobbyMenuPanel currentPanel;
 
         [Header("Match Info")]
         [Tooltip("Time in second between all players ready & match start")]
-        public float prematchCountdown = 5.0f;
+        public float prematchCountdown = 3.0f;
 
         //Client numPlayers from NetworkManager is always 0, so we count (throught connect/destroy in LobbyPlayer) the number
         //of players, so that even client know how many player there is.
@@ -49,7 +51,7 @@ namespace UntitledGames.Lobby
             settingsPanel.gameObject.SetActive(false);
             setupPanel.gameObject.SetActive(false);
             characterSelectionPanel.gameObject.SetActive(false);
-            inGameMenuPanel.gameObject.SetActive(false);
+            topMenuPanel.gameObject.SetActive(false);
             lobbyInfoPanel.gameObject.SetActive(false);
             // Set default panel
             currentPanel = mainMenuPanel;
@@ -61,7 +63,7 @@ namespace UntitledGames.Lobby
         {
             if (SceneManager.GetSceneAt(0).name == lobbyScene)
             {
-                if (inGameMenuPanel.isInGame)
+                if (isInGame)
                 {
                     SwitchPanel(setupPanel);
                     // TODO: UNet online match making
@@ -92,12 +94,13 @@ namespace UntitledGames.Lobby
                 {
                     SwitchPanel(mainMenuPanel);
                 }
-                inGameMenuPanel.isInGame = false;
+                isInGame = false;
             }
             else
             {
                 backgroundPanel.gameObject.SetActive(false);
                 SwitchPanel(null);
+                isInGame = true;
             }
         }
         
@@ -114,13 +117,13 @@ namespace UntitledGames.Lobby
             if (currentPanel != null)
             {
                 currentPanel.gameObject.SetActive(false);
-                if (newPanel != inGameMenuPanel)
+                if (newPanel != topMenuPanel)
                 {
-                    inGameMenuPanel.previousPanel = currentPanel;
+                    topMenuPanel.previousPanel = currentPanel;
                 }
                 else
                 {
-                    inGameMenuPanel.previousPanel = null;
+                    topMenuPanel.previousPanel = null;
                 }
             }
 
@@ -133,13 +136,13 @@ namespace UntitledGames.Lobby
                 currentPanel.gameObject.SetActive(false);
             }
             currentPanel = newPanel;
-            if (currentPanel != mainMenuPanel && inGameMenuPanel.isInGame == false)
+            if (currentPanel != mainMenuPanel && isInGame == false)
             {
-                inGameMenuPanel.gameObject.SetActive(true);
+                topMenuPanel.gameObject.SetActive(true);
             }
             else
             {
-                inGameMenuPanel.gameObject.SetActive(false);
+                topMenuPanel.gameObject.SetActive(false);
             }
         }
 
@@ -150,10 +153,7 @@ namespace UntitledGames.Lobby
             {
                 if (lobbySlots[i] != null && lobbySlots[i].connectionToClient.connectionId == conn.connectionId)
                 {
-                    obj = Instantiate(characterSelectionPanel.characters[((LobbyPlayer)lobbySlots[i]).characterIndex].gamePrefab) as GameObject;
-                    Debug.Log(conn.connectionId);
-                    Debug.Log(((LobbyPlayer)lobbySlots[i]).playerName + " - Connection Id - " + lobbySlots[i].connectionToClient.connectionId);
-                    Debug.Log(((LobbyPlayer)lobbySlots[i]).playerName + " - Controller Id - " + lobbySlots[i].playerControllerId);
+                    obj = Instantiate(characterSelectionPanel.characters[((LobbyPlayer)lobbySlots[i]).characterIndex].gamePrefab, GetStartPosition().position, Quaternion.identity) as GameObject;
                     break;
                 }
                 
@@ -226,6 +226,14 @@ namespace UntitledGames.Lobby
                     }
                 }
             }
+            for (int i = 0; i < lobbySlots.Length; ++i)
+            {
+                if (lobbySlots[i] != null)
+                {
+                    // Set everyone's lockin to false;
+                    (lobbySlots[i] as LobbyPlayer).RpcUpdateCountdown(0);
+                }
+            }
             if (requestCancelMatch)
             {
                 for (int i = 0; i < lobbySlots.Length; ++i)
@@ -240,7 +248,7 @@ namespace UntitledGames.Lobby
             }
             else
             {
-                inGameMenuPanel.isInGame = true;
+                isInGame = true;
                 ServerChangeScene(playScene);
             }
         }
@@ -248,7 +256,7 @@ namespace UntitledGames.Lobby
         public void DisplayIsConnecting()
         {
             characterSelectionPanel.gameObject.SetActive(false);
-            inGameMenuPanel.gameObject.SetActive(false);
+            topMenuPanel.gameObject.SetActive(false);
             lobbyInfoPanel.Display("Connecting...", "Cancel", () => { BackToSetup(); });
         }
 
@@ -284,10 +292,21 @@ namespace UntitledGames.Lobby
         public void BackToSetup()
         {
             backDelegate();
-            inGameMenuPanel.gameObject.SetActive(true);
+            backgroundPanel.gameObject.SetActive(true);
+            topMenuPanel.gameObject.SetActive(true);
             characterSelectionPanel.ResetControls();
             SwitchPanel(setupPanel);
-            inGameMenuPanel.previousPanel = mainMenuPanel;
+            topMenuPanel.previousPanel = mainMenuPanel;
+        }
+
+        public void QuitGame(){
+            backDelegate();
+            topMenuPanel.gameObject.SetActive(true);
+            characterSelectionPanel.ResetControls();
+            SwitchPanel(setupPanel);
+            topMenuPanel.previousPanel = mainMenuPanel;
+            inGameMenuPanel.ToggleVisible();
+            backgroundPanel.gameObject.SetActive(true);
         }
 
         // Stop the server, this is set in the StartHost and called in BackToSetup()

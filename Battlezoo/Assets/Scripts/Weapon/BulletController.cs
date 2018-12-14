@@ -49,8 +49,8 @@ public class BulletController : MonoBehaviour {
     {
         if (other.gameObject.tag == "Player")
         {
-            Stat stat = other.gameObject.GetComponent<Stat>();
-            stat.TakeDamage(damage);
+            //Stat stat = other.gameObject.GetComponent<Stat>();
+           // stat.TakeDamage(damage);
         }
         Destroy(gameObject);
     }
