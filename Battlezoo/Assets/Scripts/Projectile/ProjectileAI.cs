@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using UnityEngine.Networking;
 
-public class ProjectileAI : NetworkBehaviour {
+public class ProjectileAI : MonoBehaviour
+{
 
     public enum TravelMode { TimeBased, DistanceBased }
     public enum OnHit { Destory, Pass, Bounce }
@@ -18,8 +19,9 @@ public class ProjectileAI : NetworkBehaviour {
     public float damage;
     public float speed = 50;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start()
+    {
         switch (travelMode)
         {
             case TravelMode.TimeBased:
@@ -29,15 +31,17 @@ public class ProjectileAI : NetworkBehaviour {
                 startPoint = transform.position;
                 break;
         }
-	}
+    }
 
-    public void Initialize(Vector3 dir, Character fromPlayer){
+    public void Initialize(Vector3 dir, Character fromPlayer)
+    {
         GetComponent<Rigidbody2D>().velocity = dir * speed;
         from = fromPlayer;
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    void Update()
+    {
         if (travelMode == TravelMode.DistanceBased)
         {
             if (Vector2.Distance(transform.position, startPoint) >= maxDistanceToTravel)
@@ -45,22 +49,31 @@ public class ProjectileAI : NetworkBehaviour {
                 Destroy(gameObject);
             }
         }
-	}
+    }
 
-    void OnTriggerEnter2D(Collider2D other)
+    void OnCollisionEnter2D(Collision2D other)
     {
-        if(other.CompareTag("Platform")){
-            //OnContact();
+        if (other.gameObject.CompareTag("Platform") || other.gameObject.CompareTag("Boundary"))
+        {
+            Destroy(this.gameObject);
+            return;
         }
-        else if(other.gameObject.CompareTag("Player"))
+        if(other.gameObject.tag == "Player")
         {
             Character character = other.gameObject.GetComponent<Character>();
-            if(character != null)
+            if (character != null)
             {
+                // if (character.connectionToClient.connectionId == from.connectionToClient.connectionId)
+                // {
+                //     return;
+                // }
+                //character.stats.OnDealDamage(character, damage);
                 character.stats.OnRecevieDamage(from, damage);
+                damage = 0;
             }
+            Destroy(this.gameObject);
         }
-        Destroy(gameObject);
+        
     }
 
     public void OnContact()

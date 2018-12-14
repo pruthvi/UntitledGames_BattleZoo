@@ -3401,7 +3401,7 @@ MonoBehaviour:
   m_LogLevel: 2
   m_PlayerPrefab: {fileID: 0}
   m_AutoCreatePlayer: 1
-  m_PlayerSpawnMethod: 1
+  m_PlayerSpawnMethod: 0
   m_OfflineScene: MainMenu
   m_OnlineScene: 
   m_SpawnPrefabs:
@@ -3467,7 +3467,7 @@ MonoBehaviour:
   m_ShowLobbyGUI: 0
   m_MaxPlayers: 4
   m_MaxPlayersPerConnection: 1
-  m_MinPlayers: 0
+  m_MinPlayers: 2
   m_LobbyPlayerPrefab: {fileID: 114097768426514814, guid: abc7ffc912004dc458d2e39bc607f406,
     type: 2}
   m_GamePlayerPrefab: {fileID: 1545327345389050, guid: 00e39a3ba4d33224f8c1ffd3d1d2d8d2,

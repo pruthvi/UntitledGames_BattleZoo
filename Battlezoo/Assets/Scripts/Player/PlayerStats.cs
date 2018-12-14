@@ -76,7 +76,20 @@ public class PlayerStats : NetworkBehaviour
     }
 
     public void OnRecevieDamage(Character from, float damage){
-        CmdOnRecevieDamage(from.stats.playerName, damage);
+        if(!isServer)
+        {
+            return;
+        }
+        character.data.totalDamageTaken += damage;
+        currentHP -= damage;
+        Debug.Log("Take Damage");
+        if (currentHP <= 0)
+        {
+             Debug.Log("CurrentHP is less!");
+
+           // OnPlayerEliminated(from.stats.playerName);
+        }
+        //CmdOnRecevieDamage(from.stats.playerName, damage);
     }
 
     [TargetRpc]

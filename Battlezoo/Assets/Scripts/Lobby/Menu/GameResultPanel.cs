@@ -59,7 +59,7 @@ namespace UntitledGames.Lobby.Menu
                 {
                     if (dataFields[i] != null)
                     {
-                        dataFields[i].text = fields[i].ToString();
+                        dataFields[i].text = ((int)fields[i]).ToString();
                     }
                 }
             }
