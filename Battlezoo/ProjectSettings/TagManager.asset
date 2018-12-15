@@ -9,6 +9,7 @@ TagManager:
   - Scientist
   - Projectile
   - Boundary
+  - PowerUp
   layers:
   - Default
   - TransparentFX
@@ -23,8 +24,8 @@ TagManager:
   - Camera
   - NPC
   - Projectile
-  - 
-  - 
+  - GravityPlatform
+  - Player
   - 
   - 
   - 

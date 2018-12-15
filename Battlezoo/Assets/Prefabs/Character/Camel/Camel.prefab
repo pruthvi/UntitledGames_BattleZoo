@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 223998089357051960}
   - component: {fileID: 114641767741499050}
   - component: {fileID: 114508564809866776}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: NameTag
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38,7 +38,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4199584462426860}
   - component: {fileID: 212495073000857162}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: LegBL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -54,7 +54,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4004522482253892}
   - component: {fileID: 212147057820272676}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Muzzel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -69,7 +69,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4812234916868402}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: CharacterSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -85,7 +85,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4466760506467260}
   - component: {fileID: 212934216385219118}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: LegFL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -101,7 +101,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4535740448654012}
   - component: {fileID: 61969821237888550}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: FloorCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -122,7 +122,7 @@ GameObject:
   - component: {fileID: 114235835999330892}
   - component: {fileID: 50925536702738856}
   - component: {fileID: 114309608525671724}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Camel
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -138,7 +138,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4608039328784548}
   - component: {fileID: 61908895198947588}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: CeilingCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -154,7 +154,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4366817452693170}
   - component: {fileID: 212463878784927012}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: LegFR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -171,7 +171,7 @@ GameObject:
   - component: {fileID: 224210518260559996}
   - component: {fileID: 222957652344968810}
   - component: {fileID: 114502058170945658}
-  m_Layer: 5
+  m_Layer: 14
   m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -187,7 +187,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4759000298487802}
   - component: {fileID: 212476396523293748}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: LegBR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -204,7 +204,7 @@ GameObject:
   - component: {fileID: 4506497215044766}
   - component: {fileID: 212677378801443274}
   - component: {fileID: 60405113107837730}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -220,7 +220,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4452562406801956}
   - component: {fileID: 212846096238920660}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Barrel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -625,6 +625,11 @@ MonoBehaviour:
   isEliminated: 0
   maxHP: 100
   currentHP: 0
+  Speed: 10
+  JumpForce: 10
+  DamageMultiplier: 1
+  SpeedMultiplier: 1
+  JumpMultiplier: 1
   ammoPerMagazine: 10
   ammoLeft: 10
   reloadTime: 5
@@ -680,8 +685,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterSprites: {fileID: 4812234916868402}
   isGrounded: 0
-  Speed: 10
-  JumpForce: 10
   InitialFacing: 1
   Direction: 0
   barrel: {fileID: 4452562406801956}
@@ -692,7 +695,7 @@ MonoBehaviour:
   nameTag: {fileID: 114502058170945658}
   whatIsGround:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 8704
   stats: {fileID: 114174176854699754}
   data: {fileID: 114904321057327418}
 --- !u!114 &114309608525671724

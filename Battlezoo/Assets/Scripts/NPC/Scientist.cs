@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class Scientist : MonoBehaviour
+public class Scientist : NetworkBehaviour
 {
     [Header("Sprite Info")]
     public Transform sprites;
@@ -13,16 +14,23 @@ public class Scientist : MonoBehaviour
     [Header("NPC Info")]
     public float speed = 15;
     public int direction = 1;
+    public float health = 50;
 
     private Rigidbody2D rBody;
 
-    public LayerMask platformMask;
+    public LayerMask platformLayer;
 
     private bool isGrounded;
     private bool isBlocked;
 
+    public GameObject powerUpPrefab;
+
     void Start()
     {
+        if(!isServer)
+        {
+            return;
+        }
         // The sprites for the NPC, used for flipping
         sprites = transform.GetChild(0);
         groundCheck = transform.GetChild(1);
@@ -31,16 +39,25 @@ public class Scientist : MonoBehaviour
         stepRange = groundCheck.GetComponent<Collider2D>().bounds.extents.x;
 
         rBody = GetComponent<Rigidbody2D>();
+
+        // Ignore gravity platform layer
+        Physics.IgnoreLayerCollision(gameObject.layer, 13);
+        // Ignore player layer
+        Physics.IgnoreLayerCollision(gameObject.layer, 14);
+         // Ignore npc
+        Physics.IgnoreLayerCollision(gameObject.layer, gameObject.layer);
     }
 
     void FixedUpdate()
     {
+        if(!isServer)
+        {
+            return;
+        }
         // Get the edge position to check
         Vector2 checkPoint = groundCheck.position + groundCheck.right * stepRange;
-        Debug.DrawLine(checkPoint, checkPoint + Vector2.down, Color.blue);
-
-        isGrounded = Physics2D.Linecast(checkPoint, checkPoint + Vector2.down, platformMask);
-       // isBlocked = Physics2D.Linecast(checkPoint, checkPoint - Vector2.right * direction, platformMask);
+        isGrounded = Physics2D.Linecast(checkPoint, checkPoint + Vector2.down, platformLayer.value);
+        // isBlocked = Physics2D.Linecast(checkPoint, checkPoint - Vector2.right * direction, platformMask);
         // Check if it reaches edge, turn around if it does
         if (!isGrounded)
         {
@@ -67,31 +84,32 @@ public class Scientist : MonoBehaviour
         //sprites.localScale = scale;
     }
 
-    //private void OnTriggerEnter2D(Collider2D other)
-    //{
-    //    if (other.gameObject.tag == "Bullet")
-    //    {
-    //        Destroy(gameObject);            // Destroy Bullet
-    //        Destroy(other.gameObject);      // Destroy Scientist
-    //        SpawnPowerUp();
-    //    }
-    //}
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.tag == "Projectile")
+        {
+            Projectile projectile = other.gameObject.GetComponent<Projectile>();
+            if (projectile != null)
+            {
+                health -= projectile.damage;
+                Destroy(other.gameObject);
+                if (health <= 0)
+                {
+                    SpawnPowerUp();
+                    Destroy(this.gameObject);
+                }
+            }
 
-    //private void SpawnPowerUp()
-    //{
-    //    Vector2 position = transform.position;
-    //    if (powerup.powerUp.Length != 0)
-    //    {
-    //        // Spawn Random PowerUp
-    //        _randomPowerUp = Random.Range(1, powerup.powerUp.Length);
+        }
+    }
 
-    //        var randomPowerUp = powerup.powerUp[_randomPowerUp].Object;
-    //        var powerupInstantiate = Instantiate(randomPowerUp, position, Quaternion.identity);
-
-    //        Destroy(powerupInstantiate, _powerupLife);        // PowerUp Will Destroy in Certain Time
-    //    }
-
-    //}
+    public void SpawnPowerUp()
+    {
+        GameObject powerup = Instantiate(powerUpPrefab, transform.position, Quaternion.identity);
+        NetworkServer.Spawn(powerup);
+        powerup.GetComponent<Rigidbody2D>().AddForce(Vector2.up * 2, ForceMode2D.Impulse);
+        Destroy(powerup, 10);
+    }
 
 
 }

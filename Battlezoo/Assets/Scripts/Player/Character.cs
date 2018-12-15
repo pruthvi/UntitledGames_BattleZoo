@@ -12,10 +12,6 @@ public class Character : NetworkBehaviour
     public Transform characterSprites;
     public bool isGrounded;
     private Rigidbody2D rBody;
-
-    [Header("Character Info")]
-    public float Speed = 10;
-    public float JumpForce = 10;
     public FaceDirection InitialFacing = FaceDirection.Right;
     [SyncVar(hook = ("OnDirectionChanged"))]
     public int Direction;
@@ -79,7 +75,7 @@ public class Character : NetworkBehaviour
         }
 
         // Movement
-        float movementX = Input.GetAxis("Horizontal") * Speed * Time.deltaTime;
+        float movementX = Input.GetAxis("Horizontal") * stats.Speed * stats.SpeedMultiplier * Time.deltaTime;
         transform.Translate(movementX, 0, 0);
         if(movementX > 0){
             data.totalDistanceTravelled += movementX;
@@ -88,7 +84,7 @@ public class Character : NetworkBehaviour
         // Jump
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
-            rBody.AddForce(JumpForce * Vector2.up, ForceMode2D.Impulse);
+            rBody.AddForce(stats.JumpForce * stats.JumpMultiplier * Vector2.up, ForceMode2D.Impulse);
         }
 
         // Reload
@@ -134,8 +130,8 @@ public class Character : NetworkBehaviour
             
             var projectile = (GameObject)Instantiate(stats.projectilePrefab, muzzle.transform.position, Quaternion.AngleAxis(barrelAngle, Vector3.forward));
             // set the velocity of the projectile, the server does not have to track the projectile position it will be calcuated on the client
-            projectile.GetComponent<ProjectileAI>().Initialize(projectileDirection, this);
-            NetworkServer.Spawn(projectile);
+            projectile.GetComponent<Projectile>().Initialize(projectileDirection, this, stats.DamageMultiplier);
+            NetworkServer.SpawnWithClientAuthority(projectile, connectionToClient);
         }
     }
     // =============
@@ -151,6 +147,7 @@ public class Character : NetworkBehaviour
     IEnumerator Reloadprojectile()
     {
         stats.isReloading = true;
+        HUDManager.instance.ShowReloading();
         yield return new WaitForSeconds(stats.reloadTime);
         stats.ammoLeft = stats.ammoPerMagazine;
         stats.isReloading = false;

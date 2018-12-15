@@ -39,6 +39,8 @@ GameObject:
   - component: {fileID: 50693303085197206}
   - component: {fileID: 70108269076761460}
   - component: {fileID: 114833295593163042}
+  - component: {fileID: 114963069783775126}
+  - component: {fileID: 114819062143402620}
   m_Layer: 11
   m_Name: Scientist
   m_TagString: Scientist
@@ -250,8 +252,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1239186475887850}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -31.98, y: 0.45, z: 1}
-  m_LocalScale: {x: 0.15, y: 0.15, z: 1}
+  m_LocalPosition: {x: -79.3, y: 2.03, z: 1}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 1}
   m_Children:
   - {fileID: 4759418553234682}
   - {fileID: 4312124480566738}
@@ -542,7 +544,7 @@ CapsuleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -3.8, y: -2.35}
@@ -566,6 +568,27 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &114819062143402620
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1239186475887850}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1768714887, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_TransformSyncMode: 2
+  m_SendInterval: 0.1
+  m_SyncRotationAxis: 3
+  m_RotationSyncCompression: 0
+  m_SyncSpin: 0
+  m_MovementTheshold: 0.001
+  m_VelocityThreshold: 0.0001
+  m_SnapThreshold: 5
+  m_InterpolateRotation: 1
+  m_InterpolateMovement: 1
 --- !u!114 &114833295593163042
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -577,13 +600,48 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f75483418a478f847975aab0cb0136ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sprites: {fileID: 0}
-  groundCheck: {fileID: 0}
+  sprites: {fileID: 4759418553234682}
+  groundCheck: {fileID: 4312124480566738}
   speed: 10
   direction: 1
-  platformMask:
+  health: 50
+  platformLayer:
     serializedVersion: 2
-    m_Bits: 2560
+    m_Bits: 512
+  powerUpPrefab: {fileID: 1118463333787560, guid: f4373acf4c93b74458e6d1b6ac9b1928,
+    type: 2}
+--- !u!114 &114963069783775126
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1239186475887850}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 204
+    i1: 224
+    i2: 216
+    i3: 118
+    i4: 135
+    i5: 160
+    i6: 246
+    i7: 164
+    i8: 249
+    i9: 26
+    i10: 128
+    i11: 91
+    i12: 188
+    i13: 69
+    i14: 190
+    i15: 141
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 0
 --- !u!212 &212121214167845292
 SpriteRenderer:
   m_ObjectHideFlags: 1

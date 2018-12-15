@@ -21,7 +21,7 @@ public class NPC_Movement : MonoBehaviour {
     private int _randomPowerUp;
 
     public float _powerupLife = 10.0f;
-    public PowerUpManager powerup;
+  //  public PowerUpManager powerup;
 
     // Use this for initialization
     void Start () {
@@ -69,25 +69,25 @@ public class NPC_Movement : MonoBehaviour {
         {
             Destroy(gameObject);            // Destroy Bullet
             Destroy(other.gameObject);      // Destroy Scientist
-            SpawnPowerUp();
+        //    SpawnPowerUp();
         }
     }
 
-    private void SpawnPowerUp()
-    {
-        Vector2 position = transform.position;
-        if (powerup.powerUp.Length != 0)
-        {
-            // Spawn Random PowerUp
-            _randomPowerUp = Random.Range(1, powerup.powerUp.Length);
+    // private void SpawnPowerUp()
+    // {
+    //     Vector2 position = transform.position;
+    //     if (powerup.powerUp.Length != 0)
+    //     {
+    //         // Spawn Random PowerUp
+    //         _randomPowerUp = Random.Range(1, powerup.powerUp.Length);
 
-            var randomPowerUp = powerup.powerUp[_randomPowerUp].Object;
-            var powerupInstantiate = Instantiate(randomPowerUp, position, Quaternion.identity);
+    //         var randomPowerUp = powerup.powerUp[_randomPowerUp].Object;
+    //         var powerupInstantiate = Instantiate(randomPowerUp, position, Quaternion.identity);
 
-            Destroy(powerupInstantiate, _powerupLife);        // PowerUp Will Destroy in Certain Time
-        }
+    //         Destroy(powerupInstantiate, _powerupLife);        // PowerUp Will Destroy in Certain Time
+    //     }
 
-    }
+    // }
 
 
 }

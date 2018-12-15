@@ -26,7 +26,6 @@ GameObject:
   - component: {fileID: 61191810913078496}
   - component: {fileID: 114797545546171546}
   - component: {fileID: 114397243917900570}
-  - component: {fileID: 114308513591328708}
   m_Layer: 0
   m_Name: ProjectileCamel
   m_TagString: Projectile
@@ -76,7 +75,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -193,24 +192,6 @@ TrailRenderer:
   m_MinVertexDistance: 0.1
   m_Autodestruct: 0
   m_Emitting: 1
---- !u!114 &114308513591328708
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1198479873026200}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d8f825b9fa2b7b247aace903a75875b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  travelMode: 0
-  onHit: 0
-  maxTimeTravel: 2
-  maxDistanceToTravel: 10
-  from: {fileID: 0}
-  damage: 1
-  speed: 50
 --- !u!114 &114397243917900570
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -272,7 +253,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1198479873026200}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d8f825b9fa2b7b247aace903a75875b4, type: 3}
+  m_Script: {fileID: 11500000, guid: 9d87a9c0703d0114596683e400731bc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   travelMode: 0

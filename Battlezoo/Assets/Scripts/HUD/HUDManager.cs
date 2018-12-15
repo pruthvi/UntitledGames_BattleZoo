@@ -16,22 +16,23 @@ public class HUDManager : MonoBehaviour
     public GameObject spectatingPanel;
     public Text txtSpectating;
 
-	public static HUDManager instance;
+    public static HUDManager instance;
 
-	void Start()
-	{
-		instance = this;
-	}
+    void Start()
+    {
+        instance = this;
+    }
 
     public void UpdatePlayerHP(float newHP)
     {
         if (stats != null)
         {
-            if(stats.isEliminated)
+            if (stats.isEliminated)
             {
                 updateHUDText(hudHP, "-/-");
             }
-            else{
+            else
+            {
                 updateHUDText(hudHP, newHP + "/" + stats.maxHP);
             }
         }
@@ -41,21 +42,43 @@ public class HUDManager : MonoBehaviour
     {
         if (stats != null)
         {
-            if(stats.isEliminated)
+            if (stats.isEliminated)
             {
                 updateHUDText(hudAmmo, "-/-");
             }
-            else{
+            else
+            {
                 updateHUDText(hudAmmo, newAmmo + "/" + stats.ammoPerMagazine);
             }
         }
     }
 
-    private void updateHUDText(Text uiText, string text){
-        if(uiText != null)
+    public void QuickAnnouncement(string message, float time, Color color)
+    {
+        StartCoroutine(StartQuickAnnouncement(message, time, color));
+    }
+
+    IEnumerator StartQuickAnnouncement(string message, float time, Color color)
+    {
+        Color originalColor = Announcement.color;
+        Announcement.color = color;
+        Announcement.text = message;
+        yield return new WaitForSeconds(time);
+        Announcement.color = originalColor;
+        Announcement.text = "";
+    }
+
+    private void updateHUDText(Text uiText, string text)
+    {
+        if (uiText != null)
         {
             uiText.text = text;
         }
+    }
+
+    public void ShowReloading()
+    {
+        hudAmmo.text += "(Reloading...)";
     }
 
     public void ToggleTopPanel(bool visible)

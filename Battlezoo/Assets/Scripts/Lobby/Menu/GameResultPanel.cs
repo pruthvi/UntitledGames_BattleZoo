@@ -19,6 +19,9 @@ namespace UntitledGames.Lobby.Menu
 
         public string[] labels = { "Total Damage Dealt:", "Total Damage Taken:", "Total Distance Travelled:", "Total Score Earned:" };
         public Text[] dataFields;
+
+        private Transform killer;
+
         void Start()
         {
             //SetupPanel();
@@ -43,10 +46,11 @@ namespace UntitledGames.Lobby.Menu
             // }
         }
 
-        public void ShowStats(Character c, bool win)
+        public void ShowStats(Character c, bool win, Character from)
         {
             HUDManager.instance.ToggleTopPanel(false);
             gameObject.SetActive(true);
+            killer = from.transform;
             if (c.data != null)
             {
                 if (txtGameResult != null)
@@ -75,7 +79,7 @@ namespace UntitledGames.Lobby.Menu
         void OnSpectatingClicked()
         {
             gameObject.SetActive(false);
-            HUDManager.instance.Spectating();
+            Camera.main.GetComponent<CameraFollow>().target = killer;
         }
     }
 }
