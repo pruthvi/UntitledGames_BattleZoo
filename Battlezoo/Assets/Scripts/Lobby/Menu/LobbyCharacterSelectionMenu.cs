@@ -31,7 +31,7 @@ namespace UntitledGames.Lobby.Menu
                 characterButtons[i].interactable = !lockIn;
             }
             playerNameInputField.interactable = !lockIn;
-            lobbyManager.inGameMenuPanel.gameObject.SetActive(!lockIn);
+            lobbyManager.topMenuPanel.gameObject.SetActive(!lockIn);
         }
 
         public void CancelMatch()

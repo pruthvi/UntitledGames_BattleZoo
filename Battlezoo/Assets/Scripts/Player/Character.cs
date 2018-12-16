@@ -2,35 +2,21 @@
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
-
+using UntitledGames.Lobby;
+using System.Collections.Generic;
 public class Character : NetworkBehaviour
 {
     public enum FaceDirection { Left = -1, Right = 1 };
 
     [Header("Player Info")]
     public Transform characterSprites;
-    public bool IsGround;
-    private Rigidbody2D rBody;
-
-    [Header("Character Info")]
-    public float Speed = 10;
-    public float JumpForce = 10;
+    public bool isGrounded;
+    public Rigidbody2D rBody;
     public FaceDirection InitialFacing = FaceDirection.Right;
     [SyncVar(hook = ("OnDirectionChanged"))]
     public int Direction;
     private Transform ceilingCheck;
     private Transform groundCheck;
-
-    [Header("Weapon")]
-    public int ammoPerMagazine = 30;
-    [SyncVar]
-    public int ammoLeft = 30;
-    public float reloadTime = 2;
-    public float fireRate = 0.1f; // Fire interval between bullets
-    [SyncVar]
-    public float timeUntilNextShot = 0;
-    public float bulletSpeed = 20;
-    public GameObject bulletPrefab;
 
     public Transform barrel;
     public Transform muzzle;
@@ -38,30 +24,36 @@ public class Character : NetworkBehaviour
     public float barrelAngle;
     public float maxBarrelAngle;
     public float minBarrelAngle;
-    [SyncVar]
-    public bool needToReload;
-    [SyncVar]
-    public bool isReloading;
 
     [Header("HUD")]
     public Text nameTag;
-    public Text announcementText;
-    // [SyncVar(hook = ("OnAnnouncementChanged"))]
-    [SyncVar]
-    public string announcement;
-    [SyncVar]
-    public bool newMessage;
 
-    private Transform mainCamera;
+    public LayerMask whatIsGround;
 
-    private Vector3 offset = new Vector3(0, 0, -1);
+    public PlayerStats stats;
+    public PlayerData data;
 
-    public string playerName;
+    public SpriteRenderer[] spriteRenderers;
+
+    public Dictionary<int, Character> alivePlayers;
+
+    public int NumberOfPlayers
+    {
+        get
+        {
+            return LobbyManager.instance._playerNumber;
+        }
+    }
 
     void Start()
     {
+        // if (isServer)
+        // {
+        //     alivePlayers = new Dictionary<int, Character>();
+        //     alivePlayers.Add(connectionToClient.connectionId, this);
+        // }
         rBody = GetComponent<Rigidbody2D>();
-        //groundCheck = transform.GetChild(0);
+        groundCheck = transform.GetChild(0).GetChild(0).transform;
         Direction = (int)InitialFacing;
 
         if (barrel == null)
@@ -73,47 +65,62 @@ public class Character : NetworkBehaviour
             }
         }
 
-        nameTag.text = playerName;
-
-        announcementText = GameObject.FindGameObjectWithTag("Announcement").GetComponent<Text>();
-
-        mainCamera = Camera.main.transform;
+        if (isLocalPlayer)
+        {
+            // Disable self name tag
+            nameTag.gameObject.SetActive(false);
+            Camera.main.GetComponent<CameraFollow>().target = gameObject.transform;
+        }
     }
 
-    public override void OnStartLocalPlayer()
+    public void SetNameTag(string name)
     {
-        base.OnStartLocalPlayer();
-        // Disable self name tag
-        nameTag.gameObject.SetActive(false);
+        nameTag.text = name;
     }
 
-    void Update()
+    void FixedUpdate()
     {
-        if (!hasAuthority)
+        if (isServer)
+        {
+            // Fire interval check has to be done in server otherwise the time on client will not match
+            if (stats.timeUntilNextShot >= 0)
+            {
+                stats.timeUntilNextShot -= Time.deltaTime;
+            }
+        }
+        if (!isLocalPlayer || stats.isEliminated)
         {
             return;
         }
-        mainCamera.position = transform.position + offset;
 
         // Movement
-        float movementX = Input.GetAxis("Horizontal") * Speed * Time.deltaTime;
+        float movementX = Input.GetAxis("Horizontal") * stats.Speed * stats.SpeedMultiplier * Time.deltaTime;
         transform.Translate(movementX, 0, 0);
-
-        // Jump
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (movementX > 0)
         {
-            rBody.AddForce(JumpForce * Vector2.up, ForceMode2D.Impulse);
+            data.totalDistanceTravelled += movementX;
         }
 
-        
+        // Jump
+        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
+        {
+            rBody.AddForce(stats.JumpForce * stats.JumpMultiplier * Vector2.up, ForceMode2D.Impulse);
+        }
 
         // Reload
         if (Input.GetKeyUp(KeyCode.R))
         {
-            if (needToReload && !isReloading)
+            if (stats.needToReload && !stats.isReloading)
             {
                 CmdReload();
             }
+        }
+
+
+        // Fire
+        if (Input.GetButton("Fire1"))
+        {
+            CmdFire();
         }
 
         // Update the facing direction
@@ -121,84 +128,33 @@ public class Character : NetworkBehaviour
         // Update the barrel rotation
         RotateBarrelByMousePosition();
 
-        // Update the shot interval
-        if (timeUntilNextShot > 0)
-        {
-            timeUntilNextShot -= Time.deltaTime;
-        }
-        
-
-        // Fire
-        if (Input.GetMouseButton(0))
-        {
-            CmdFire();
-        }
-
+        isGrounded = Physics2D.OverlapCircle(groundCheck.position, 1f, whatIsGround);
     }
-
-    void FixedUpdate()
-    {
-        if (!hasAuthority)
-        {
-            return;
-        }
-     //   IsGround = Physics.Linecast(groundCheck.position, groundCheck.position + Vector3.down, 1);
-    }
-
     // Weapon Related
-    
+
     // Firing
 
     [Command]
     void CmdFire()
     {
-        if (timeUntilNextShot <= 0 && !needToReload && ammoLeft > 0)
+        if (stats.timeUntilNextShot <= 0 && !stats.needToReload && stats.ammoLeft > 0)
         {
-            ammoLeft--;
-            timeUntilNextShot = fireRate;
-            if (ammoLeft <= 0)
+            stats.ammoLeft--;
+            stats.timeUntilNextShot = stats.fireRate;
+            if (stats.ammoLeft <= 0)
             {
-                needToReload = true;
+                stats.needToReload = true;
             }
             // the direction of the barrel from muzzle to barrell
-            Vector3 bulletDirection = (muzzle.transform.position - barrel.transform.position).normalized;
-            GameObject bullet = Instantiate(bulletPrefab, muzzle.transform.position, Quaternion.AngleAxis(barrelAngle, Vector3.forward));
-            // set the velocity of the bullet, the server does not have to track the bullet position it will be calcuated on the client
-            bullet.GetComponent<Rigidbody2D>().velocity = bulletDirection * bulletSpeed;
-            NetworkServer.Spawn(bullet);
+            Vector3 projectileDirection = (muzzle.transform.position - barrel.transform.position).normalized;
+
+            var projectile = (GameObject)Instantiate(stats.projectilePrefab, muzzle.transform.position, Quaternion.AngleAxis(barrelAngle, Vector3.forward));
+            Projectile p = projectile.GetComponent<Projectile>();
+            // set the velocity of the projectile, the server does not have to track the projectile position it will be calcuated on the client
+            p.Initialize(projectileDirection, stats.playerName, p.Damage, stats.DamageMultiplier, stats);
+            NetworkServer.Spawn(projectile);
         }
     }
-
-    // Announcement
-
-    [ClientRpc]
-    void RpcBroadcastAll(string message, float time)
-    {
-        StartCoroutine(BroadcastWithTime(message, time));
-        newMessage = true; // Set this after so that 
-    }
-
-    IEnumerator BroadcastWithTime(string message, float time)
-    {
-        // Check if server announce new message
-        if (newMessage && announcement != message)
-        {
-            newMessage = false;
-            yield break;
-        }
-        announcement = message;
-        announcementText.text = announcement;
-        yield return new WaitForSeconds(time);
-        announcement = "";
-        announcementText.text = announcement;
-    }
-
-    //void OnAnnouncementChanged(string message)
-    //{
-    //    newMessage = true;
-        
-    //}
-
     // =============
 
     // Reloading
@@ -206,16 +162,17 @@ public class Character : NetworkBehaviour
     [Command]
     void CmdReload()
     {
-        StartCoroutine("ReloadBullet");
+        StartCoroutine("Reloadprojectile");
     }
 
-    IEnumerator ReloadBullet()
+    IEnumerator Reloadprojectile()
     {
-        isReloading = true;
-        yield return new WaitForSeconds(reloadTime);
-        ammoLeft = ammoPerMagazine;
-        isReloading = false;
-        needToReload = false;
+        stats.isReloading = true;
+        HUDManager.instance.ShowReloading();
+        yield return new WaitForSeconds(stats.reloadTime);
+        stats.ammoLeft = stats.ammoPerMagazine;
+        stats.isReloading = false;
+        stats.needToReload = false;
     }
 
     // ===========
@@ -265,20 +222,6 @@ public class Character : NetworkBehaviour
     }
 
     // ============
-
-    void OnGUI()
-    {
-        GUI.color = Color.red;
-        GUI.Label(new Rect(10, 50, 200, 30), "Need to Reload: " + (isReloading ? "Reloading" : needToReload + ""));
-        GUI.Label(new Rect(10, 70, 200, 30), "Ammo: " + ammoLeft);
-    }
-
-    // Draw the firing angle on the scene view
-    void OnDrawGizmos()
-    {
-     //   Debug.DrawLine(barrel.transform.position, barrel.transform.position + (new Vector3(Mathf.Cos(minBarrelAngle * Mathf.Deg2Rad), Mathf.Sin(minBarrelAngle * Mathf.Deg2Rad))) * 5 * Direction);
-     //   Debug.DrawLine(barrel.transform.position, barrel.transform.position + (new Vector3(Mathf.Cos(maxBarrelAngle * Mathf.Deg2Rad), Mathf.Sin(maxBarrelAngle * Mathf.Deg2Rad))) * 5 * Direction);
-    }
 
     // ============ Helper Functions
 

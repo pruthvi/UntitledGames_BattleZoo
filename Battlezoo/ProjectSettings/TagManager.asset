@@ -6,6 +6,10 @@ TagManager:
   tags:
   - Platform
   - Announcement
+  - Scientist
+  - Projectile
+  - Boundary
+  - PowerUp
   layers:
   - Default
   - TransparentFX
@@ -18,10 +22,10 @@ TagManager:
   - Playable
   - Platform
   - Camera
-  - 
-  - 
-  - 
-  - 
+  - NPC
+  - Projectile
+  - GravityPlatform
+  - Player
   - 
   - 
   - 
