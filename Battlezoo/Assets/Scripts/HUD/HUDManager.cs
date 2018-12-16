@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using UnityEngine.Networking;
 public class HUDManager : MonoBehaviour
 {
     public PlayerStats stats;

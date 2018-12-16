@@ -27,7 +27,7 @@ public class Scientist : NetworkBehaviour
 
     void Start()
     {
-        if(!isServer)
+        if (!isServer)
         {
             return;
         }
@@ -44,16 +44,21 @@ public class Scientist : NetworkBehaviour
         Physics.IgnoreLayerCollision(gameObject.layer, 13);
         // Ignore player layer
         Physics.IgnoreLayerCollision(gameObject.layer, 14);
-         // Ignore npc
+        // Ignore npc
         Physics.IgnoreLayerCollision(gameObject.layer, gameObject.layer);
     }
 
     void FixedUpdate()
     {
-        if(!isServer)
+        if (!isServer)
         {
             return;
         }
+        //UpdateMovement();
+    }
+
+    void UpdateMovement()
+    {
         // Get the edge position to check
         Vector2 checkPoint = groundCheck.position + groundCheck.right * stepRange;
         isGrounded = Physics2D.Linecast(checkPoint, checkPoint + Vector2.down, platformLayer.value);
@@ -91,7 +96,7 @@ public class Scientist : NetworkBehaviour
             Projectile projectile = other.gameObject.GetComponent<Projectile>();
             if (projectile != null)
             {
-                health -= projectile.damage;
+                health -= projectile.Damage;
                 Destroy(other.gameObject);
                 if (health <= 0)
                 {
@@ -105,6 +110,10 @@ public class Scientist : NetworkBehaviour
 
     public void SpawnPowerUp()
     {
+        if (!isServer)
+        {
+            return;
+        }
         GameObject powerup = Instantiate(powerUpPrefab, transform.position, Quaternion.identity);
         NetworkServer.Spawn(powerup);
         powerup.GetComponent<Rigidbody2D>().AddForce(Vector2.up * 2, ForceMode2D.Impulse);

@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
 using UntitledGames.Lobby;
-
+using System.Collections.Generic;
 public class Character : NetworkBehaviour
 {
     public enum FaceDirection { Left = -1, Right = 1 };
@@ -11,7 +11,7 @@ public class Character : NetworkBehaviour
     [Header("Player Info")]
     public Transform characterSprites;
     public bool isGrounded;
-    private Rigidbody2D rBody;
+    public Rigidbody2D rBody;
     public FaceDirection InitialFacing = FaceDirection.Right;
     [SyncVar(hook = ("OnDirectionChanged"))]
     public int Direction;
@@ -32,8 +32,26 @@ public class Character : NetworkBehaviour
 
     public PlayerStats stats;
     public PlayerData data;
+
+    public SpriteRenderer[] spriteRenderers;
+
+    public Dictionary<int, Character> alivePlayers;
+
+    public int NumberOfPlayers
+    {
+        get
+        {
+            return LobbyManager.instance._playerNumber;
+        }
+    }
+
     void Start()
     {
+        // if (isServer)
+        // {
+        //     alivePlayers = new Dictionary<int, Character>();
+        //     alivePlayers.Add(connectionToClient.connectionId, this);
+        // }
         rBody = GetComponent<Rigidbody2D>();
         groundCheck = transform.GetChild(0).GetChild(0).transform;
         Direction = (int)InitialFacing;
@@ -47,7 +65,7 @@ public class Character : NetworkBehaviour
             }
         }
 
-        if(isLocalPlayer)
+        if (isLocalPlayer)
         {
             // Disable self name tag
             nameTag.gameObject.SetActive(false);
@@ -62,7 +80,8 @@ public class Character : NetworkBehaviour
 
     void FixedUpdate()
     {
-        if(isServer){
+        if (isServer)
+        {
             // Fire interval check has to be done in server otherwise the time on client will not match
             if (stats.timeUntilNextShot >= 0)
             {
@@ -77,7 +96,8 @@ public class Character : NetworkBehaviour
         // Movement
         float movementX = Input.GetAxis("Horizontal") * stats.Speed * stats.SpeedMultiplier * Time.deltaTime;
         transform.Translate(movementX, 0, 0);
-        if(movementX > 0){
+        if (movementX > 0)
+        {
             data.totalDistanceTravelled += movementX;
         }
 
@@ -90,7 +110,7 @@ public class Character : NetworkBehaviour
         // Reload
         if (Input.GetKeyUp(KeyCode.R))
         {
-            if(stats.needToReload && !stats.isReloading)
+            if (stats.needToReload && !stats.isReloading)
             {
                 CmdReload();
             }
@@ -102,7 +122,7 @@ public class Character : NetworkBehaviour
         {
             CmdFire();
         }
-        
+
         // Update the facing direction
         UpdateDirectionByMousePosition();
         // Update the barrel rotation
@@ -127,11 +147,12 @@ public class Character : NetworkBehaviour
             }
             // the direction of the barrel from muzzle to barrell
             Vector3 projectileDirection = (muzzle.transform.position - barrel.transform.position).normalized;
-            
+
             var projectile = (GameObject)Instantiate(stats.projectilePrefab, muzzle.transform.position, Quaternion.AngleAxis(barrelAngle, Vector3.forward));
+            Projectile p = projectile.GetComponent<Projectile>();
             // set the velocity of the projectile, the server does not have to track the projectile position it will be calcuated on the client
-            projectile.GetComponent<Projectile>().Initialize(projectileDirection, this, stats.DamageMultiplier);
-            NetworkServer.SpawnWithClientAuthority(projectile, connectionToClient);
+            p.Initialize(projectileDirection, stats.playerName, p.Damage, stats.DamageMultiplier, stats);
+            NetworkServer.Spawn(projectile);
         }
     }
     // =============

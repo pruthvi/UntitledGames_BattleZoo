@@ -103,7 +103,7 @@ namespace UntitledGames.Lobby
                 isInGame = true;
             }
         }
-        
+
         public override void OnStartHost()
         {
             base.OnStartHost();
@@ -156,7 +156,7 @@ namespace UntitledGames.Lobby
                     obj = Instantiate(characterSelectionPanel.characters[((LobbyPlayer)lobbySlots[i]).characterIndex].gamePrefab, GetStartPosition().position, Quaternion.identity) as GameObject;
                     break;
                 }
-                
+
             }
             //GameObject avatar = Instantiate(gamePlayerPrefab.gameObject);
             return obj;
@@ -171,6 +171,7 @@ namespace UntitledGames.Lobby
             }
             return true;
         }
+
 
         // When all players ready start countdown
         public override void OnLobbyServerPlayersReady()
@@ -190,7 +191,7 @@ namespace UntitledGames.Lobby
                 requestCancelMatch = false;
                 StartCoroutine(ServerCountdownCoroutine());
             }
-               
+
         }
 
         public IEnumerator ServerCountdownCoroutine()
@@ -268,6 +269,7 @@ namespace UntitledGames.Lobby
 
             lobbyInfoPanel.gameObject.SetActive(false);
 
+
             if (!NetworkServer.active)
             {
                 //only to do on pure client (not self hosting client)
@@ -299,7 +301,8 @@ namespace UntitledGames.Lobby
             topMenuPanel.previousPanel = mainMenuPanel;
         }
 
-        public void QuitGame(){
+        public void QuitGame()
+        {
             backDelegate();
             topMenuPanel.gameObject.SetActive(true);
             characterSelectionPanel.ResetControls();

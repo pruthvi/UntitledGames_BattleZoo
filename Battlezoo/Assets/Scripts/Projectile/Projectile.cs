@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.Networking;
 
-public class Projectile : NetworkBehaviour
+public class Projectile : NetworkBehaviour, IDamageSource
 {
 
     public enum TravelMode { TimeBased, DistanceBased }
@@ -14,12 +14,52 @@ public class Projectile : NetworkBehaviour
     public float maxDistanceToTravel = 10;
     private Vector2 startPoint;
 
-    public Character from;
+    public IDamageSource from;
 
-    public float damage;
+    [SerializeField]
+    private float damage;
     public float speed = 50;
 
-    // Use this for initialization
+    public float Damage
+    {
+        get
+        {
+            return this.damage;
+        }
+        set
+        {
+            if (value >= 0)
+            {
+                damage = value;
+            }
+        }
+    }
+
+    private string weaponName;
+    public string Name
+    {
+        get
+        {
+            return weaponName;
+        }
+    }
+
+    public Transform Transform
+    {
+        get
+        {
+            return from.Transform;
+        }
+    }
+
+    public DamageSourceType DamageSourceType
+    {
+        get
+        {
+            return DamageSourceType.Player;
+        }
+    }
+
     void Start()
     {
         switch (travelMode)
@@ -33,10 +73,11 @@ public class Projectile : NetworkBehaviour
         }
     }
 
-    public void Initialize(Vector3 dir, Character fromPlayer, float damageMultiplier)
+    public void Initialize(Vector3 dir, string weaponName, float damage, float damageMultiplier, IDamageSource damageSource)
     {
         GetComponent<Rigidbody2D>().velocity = dir * speed;
-        from = fromPlayer;
+        from = damageSource;
+        this.damage = damage;
         damage *= damageMultiplier;
     }
 

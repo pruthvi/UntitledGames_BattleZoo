@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Networking;
 using UntitledGames.Lobby;
-public class PlayerStats : NetworkBehaviour
+public class PlayerStats : NetworkBehaviour, IDamageSource
 {
     [Header("Stats")]
     [SyncVar]
@@ -40,7 +40,41 @@ public class PlayerStats : NetworkBehaviour
 
     public Character character;
 
-    private Character killer;
+    private IDamageSource killer;
+
+    private bool enableCheckVictory;
+
+    public Transform Transform
+    {
+        get
+        {
+            return transform;
+        }
+    }
+
+    public DamageSourceType DamageSourceType
+    {
+        get
+        {
+            return DamageSourceType.Player;
+        }
+    }
+
+    public float Damage
+    {
+        get
+        {
+            return 0;
+        }
+    }
+
+    public string Name
+    {
+        get
+        {
+            return playerName;
+        }
+    }
 
     void Start()
     {
@@ -58,6 +92,49 @@ public class PlayerStats : NetworkBehaviour
         HUDManager.instance.UpdatePlayerAmmo(ammoLeft);
     }
 
+    void FixedUpdate()
+    {
+        if (!isServer)
+        {
+            return;
+        }
+
+        // if (Input.GetKeyUp(KeyCode.Tab))
+        // {
+        //     foreach (Character c in character.alivePlayers.Values)
+        //     {
+        //         Debug.Log(c.stats.playerName);
+        //     }
+        // }
+        // Check Winning
+        //if (character.alivePlayers.Values.Count == 1)
+        //{
+        //    CmdShowStats(true);
+        //}
+        // If player inside gas zone
+        if (transform.position.x < GameManager.instance.poisonZone.gasZoneStartPositionLeft.position.x || transform.position.x > GameManager.instance.poisonZone.gasZoneStartPositionRight.position.x)
+        {
+            if (GameManager.instance.poisonZone.enableDamage)
+            {
+                // Add a small relative force to show that it is receiving damage
+                if (character.rBody != null)
+                {
+                    if (character.isGrounded)
+                    {
+                        // No force on x to prevent player AFK and go in to safezone
+                        Vector2 direction = new Vector2(0, Random.Range(0, 6));
+                        character.rBody.AddRelativeForce(direction, ForceMode2D.Impulse);
+                    }
+                }
+                if (currentHP > 0)
+                {
+                    OnRecevieDamage(GameManager.instance.poisonZone, GameManager.instance.poisonZone.Damage);
+                }
+
+            }
+        }
+    }
+
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Projectile"))
@@ -67,21 +144,17 @@ public class PlayerStats : NetworkBehaviour
             Projectile projectile = source.GetComponent<Projectile>();
             if (projectile != null)
             {
-                if (projectile.connectionToClient.connectionId == connectionToClient.connectionId)
-                {
-                    return;
-                }
                 // Apply damage based on the source
-                Character from = projectile.from;
+                IDamageSource from = projectile.from;
                 //Update the damage dealt data, this can also be used to calculate 'healing on hit'
                 //TargetOnDealDamage(from.connectionToClient, projectile.damage);
                 //Update the damage taken and also update the new health
                 //TargetOnRecevieDamage(connectionToClient, projectile.damage, from.stats.playerName);
-                if (from != null)
-                {
-                    from.stats.OnDealDamage(projectile.damage);
-                }
-                OnRecevieDamage(from, projectile.damage);
+                // if (from != null)
+                // {
+                //     from.OnDealDamage(projectile.Damage);
+                // }
+                OnRecevieDamage(from, projectile.Damage);
                 Destroy(other.gameObject);
                 // Let the projectile decied what to do on contact
                 // ProjectileAI projectile = other.GetComponent<ProjectileAI>();
@@ -107,24 +180,48 @@ public class PlayerStats : NetworkBehaviour
         }
     }
 
-
     public void OnDealDamage(float damage)
     {
         character.data.totalDamageDealt += damage;
     }
 
-    public void OnRecevieDamage(Character from, float damage)
+    IEnumerator ShowDamageEffect()
     {
-        character.data.totalDamageTaken += damage;
-        currentHP -= damage;
+        foreach (SpriteRenderer r in character.spriteRenderers)
+        {
+            if (r != null)
+            {
+                r.color = new Color(r.color.r, r.color.g, r.color.b, 0.5f);
+            }
+        }
+        yield return new WaitForSeconds(1);
+        foreach (SpriteRenderer r in character.spriteRenderers)
+        {
+            if (r != null)
+            {
+                r.color = new Color(r.color.r, r.color.g, r.color.b, 1);
+            }
+        }
+    }
+
+    public void OnRecevieDamage(IDamageSource from, float damage)
+    {
+        StartCoroutine(ShowDamageEffect());
+        if (currentHP > 0)
+        {
+            character.data.totalDamageTaken += damage;
+            currentHP -= damage;
+        }
         if (currentHP <= 0)
         {
             OnPlayerEliminated(from);
+            //CmdRemovePlayerFromAlivePlayers(connectionToClient.connectionId);
         }
-        //CmdOnRecevieDamage(from.stats.playerName, damage);
     }
 
-    public void OnPlayerEliminated(Character from)
+
+
+    public void OnPlayerEliminated(IDamageSource from)
     {
         isEliminated = true;
         // Excute on server
@@ -133,9 +230,16 @@ public class PlayerStats : NetworkBehaviour
         {
             killer = from;
             // Tell the target client to show the game result;
-            CmdShowStats();
+            CmdShowStats(false);
         }
-        StartCoroutine(AnnounceMessage(from.stats.playerName + " eliminated " + character.stats.playerName, 3));
+        if (from.DamageSourceType == DamageSourceType.PoisonZone)
+        {
+            AnnounceMessage(character.stats.playerName + " died outside the safe zone", 3);
+        }
+        else if (from.DamageSourceType == DamageSourceType.Player)
+        {
+            AnnounceMessage(from.Name + " eliminated " + character.stats.playerName, 3);
+        }
     }
 
     public void OnApplyPowerUp(PowerUpInfo powerUp)
@@ -209,20 +313,38 @@ public class PlayerStats : NetworkBehaviour
 
 
     [Command]
-    public void CmdShowStats()
+    public void CmdShowStats(bool isVictory)
     {
-        TargetShowStats(connectionToClient);
+        TargetShowStats(connectionToClient, isVictory);
+    }
+
+    [Command]
+    void CmdRemovePlayerFromAlivePlayers(int connectionId)
+    {
+        RpcRemovePlayerFromAlivePlayers(connectionId);
+    }
+
+    [ClientRpc]
+    void RpcRemovePlayerFromAlivePlayers(int connectionId)
+    {
+        if (character.alivePlayers.ContainsKey(connectionId))
+        {
+            character.alivePlayers.Remove(connectionId);
+        }
     }
 
     [TargetRpc]
-    public void TargetShowStats(NetworkConnection conn)
+    public void TargetShowStats(NetworkConnection conn, bool isVictory)
     {
         if (character.data != null)
         {
-            // Set to null so that camera stays on where player died
-            Camera.main.GetComponent<CameraFollow>().target = null;
-            LobbyManager.instance.gameResultPanel.ShowStats(character, false, killer);
-            CmdDisablePlayer();
+            if (!isVictory)
+            {
+                // Set to null so that camera stays on where player died
+                Camera.main.GetComponent<CameraFollow>().target = null;
+                CmdDisablePlayer();
+            }
+            LobbyManager.instance.gameResultPanel.ShowStats(character, isVictory, killer);
         }
     }
 

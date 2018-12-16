@@ -46,16 +46,20 @@ namespace UntitledGames.Lobby.Menu
             // }
         }
 
-        public void ShowStats(Character c, bool win, Character from)
+        public void ShowStats(Character c, bool isVictory, IDamageSource from)
         {
             HUDManager.instance.ToggleTopPanel(false);
             gameObject.SetActive(true);
-            killer = from.transform;
+
             if (c.data != null)
             {
                 if (txtGameResult != null)
                 {
-                    txtGameResult.text = win ? "You Win!" : "You Lose!";
+                    txtGameResult.text = isVictory ? "Victory" : "Defeat";
+                    if (isVictory)
+                    {
+                        btnSpectating.gameObject.SetActive(false);
+                    }
                 }
                 float[] fields = { c.data.totalDamageDealt, c.data.totalDamageTaken, c.data.totalDistanceTravelled, calculateScore(c.data) };
 
@@ -67,6 +71,19 @@ namespace UntitledGames.Lobby.Menu
                     }
                 }
             }
+
+            if (from != null)
+            {
+                if (from.DamageSourceType == DamageSourceType.Player)
+                {
+                    killer = from.Transform;
+                }
+                else if (from.DamageSourceType == DamageSourceType.PoisonZone)
+                {
+                    btnSpectating.gameObject.SetActive(false);
+                }
+            }
+
         }
 
         private float calculateScore(PlayerData data)

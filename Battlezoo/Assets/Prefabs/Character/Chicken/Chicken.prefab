@@ -614,6 +614,7 @@ MonoBehaviour:
   projectilePrefab: {fileID: 1194424210566418, guid: 8713e3ab2e5f47746aa27a9acfbba249,
     type: 2}
   character: {fileID: 114992931810417264}
+  onDamageEffect: {fileID: 0}
 --- !u!114 &114992931810417264
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -627,6 +628,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterSprites: {fileID: 4344258363593868}
   isGrounded: 0
+  rBody: {fileID: 0}
   InitialFacing: 1
   Direction: 0
   barrel: {fileID: 4103548642011492}
@@ -640,6 +642,12 @@ MonoBehaviour:
     m_Bits: 8704
   stats: {fileID: 114705208714417328}
   data: {fileID: 114084514712226844}
+  spriteRenderers:
+  - {fileID: 212021518503954094}
+  - {fileID: 212659128240012540}
+  - {fileID: 212418110541120586}
+  - {fileID: 212692626330303826}
+  - {fileID: 212741722089225164}
 --- !u!212 &212021518503954094
 SpriteRenderer:
   m_ObjectHideFlags: 1
